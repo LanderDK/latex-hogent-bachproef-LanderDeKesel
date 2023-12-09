@@ -4,7 +4,7 @@
 docker build -t bpimg -f docker/Dockerfile .
 
 @REM build the proposal
-docker run --rm -v %cd%:/bp bpimg sh /bp/docker/render_thesis.sh bachproef
+docker run --rm -v "C:\Users\Lander\Documents\HoGent\3de Jaar\BP\latex-hogent-bachproef-LanderDeKesel:/bp" bpimg sh /bp/docker/render_thesis.sh bachproef
 
 @REM keep window open after run
 pause
