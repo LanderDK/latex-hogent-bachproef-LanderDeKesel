@@ -1,72 +1,153 @@
 %---------- Inleiding ---------------------------------------------------------
 
+
 \section{Introductie}%
 \label{sec:introductie}
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
-
+Deze bachelorproef richt zich op het verbeteren van de authenticatie en autorisatie in applicatieontwikkeling, met een specifieke focus op het 
+vereenvoudigen van deze processen voor developers. Het startpunt van deze bachelorproef komt voort uit mijn ervaring als IT'er en ontwikkelaar, 
+waar ik aanvankelijk moeite ondervond met het beveiligen en beschikbaar stellen van applicaties voor gebruikers zonder ongeautoriseerde toegang.
+\newline
+\newline
+De doelgroep van deze bachelorproef bestaat uit IT professionals en ontwikkelaars die betrokken zijn bij het ontwerp en de ontwikkeling van
+applicaties. De doelgroep heeft een basiskennis van applicatieontwikkeling en beveiliging, maar heeft mogelijk geen ervaring met het ontwikkelen
+van een eigen authenticatie- en autorisatiesysteem en heeft dus behoefte aan een oplossing die gemakkelijk te implementeren is in hun applicaties.
+\newline
+\newline
+De centrale probleemstelling van dit onderzoek is het identificeren van de moeilijkheden die ontwikkelaars ondervinden bij het implementeren van
+een eigen authenticatie- en autorisatiesysteem in hun applicaties. De onderzoeksvragen die hieruit voortvloeien zijn:
 \begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
+  \item Wat zijn de moeilijkheden die ontwikkelaars ondervinden bij het implementeren van een eigen authenticatie- en autorisatiesysteem in hun applicaties?
+  \item Welke oplossingen kunnen worden geïdentificeerd om deze moeilijkheden te verhelpen?
+  \item Hoe kunnen deze oplossingen worden geïmplementeerd in een functioneel systeem?
 \end{itemize}
-
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
-
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
-
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+Hieruit volgt de onderzoeksvraag: "De moeilijkheid van Authenticatie en Autorisatie in applicatieontwikkeling, hoe kunnen we dit makkelijk aanbieden: 
+Een diepgaande analyse en implementatie".
+\newline
+\newline
+De onderzoeksdoelstelling is het identificeren van praktische oplossingen en het implementeren van een verbeterd authenticatie- en autorisatiesysteem 
+dat gemakkelijk toegankelijk is voor ontwikkelaars. Het concrete eindresultaat van dit onderzoek is een functioneel systeem met een Node.js API-backend 
+en een React.js-frontend, evenals een rapport met aanbevelingen en best practices voor ontwikkelaars.
+\newline
+\newline
+Door deze bachelorproef als succesvol te beschouwen, zou het ontwikkelde systeem niet alleen moeten voldoen aan de verwachtingen van gebruikers, 
+maar ook aantoonbaar bijdragen aan het vereenvoudigen en optimaliseren van het proces van authenticatie en autorisatie in applicatieontwikkeling.
 
 %---------- Stand van zaken ---------------------------------------------------
 
-\section{State-of-the-art}%
+\section{Stand van Zaken}%
 \label{sec:state-of-the-art}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+Het huidige onderzoeksdomein van authenticatie en autorisatie in applicatieontwikkeling is van cruciaal belang, aangezien het de basis vormt voor het
+waarborgen van de beveiliging en privacy van gebruikers. In deze sectie wordt de state of the art rondom dit onderwerp onderzocht, met een focus op
+relevante literatuur en bestaande oplossingen.
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
+\subsection{Authenticatie en Autorisatie in Applicatieontwikkeling}
 
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+Authenticatie en autorisatie zijn twee essentiële stappen in het toegangsbeheer proces van een applicatie. Authenticatie verifieert de identiteit van
+een gebruiker, terwijl autorisatie bepaalt welke acties een geauthenticeerd gebruiker mag uitvoeren. Verschillende methoden en protocollen worden
+gebruikt voor deze processen, waaronder gebruikersnaam/wachtwoord, OAuth 2.0 en OpenID Connect~\autocite{Hardt2012}.
 
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
+\subsection{Huidige Uitdagingen}
 
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
+Ondanks de beschikbaarheid van verschillende authenticatie- en autorisatiemethoden, blijven er uitdagingen bestaan. Gebruikerservaring, beheer van
+gebruikersidentiteiten, en de implementatie van sterke beveiligingsmaatregelen zijn enkele van de voornaamste aandachtspunten. Bovendien kunnen de
+complexiteit en de diversiteit van applicaties het proces voor ontwikkelaars bemoeilijken.
 
-% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
-% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
-%   geen onderdeel is van de zin.
-% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
-%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
-%   ...'')
+\subsection{Bestaande Oplossingen}
 
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
+Diverse oplossingen en frameworks zijn ontwikkeld om ontwikkelaars te ondersteunen bij het implementeren van veilige authenticatie- en autorisatiesystemen.
+Populaire frameworks zoals Firebase Authentication, Auth0, en Keycloak bieden diensten aan die specifiek gericht zijn op het vereenvoudigen van deze
+processen. Deze oplossingen variëren in functies, integraties, en ondersteunde authenticatiemethoden.
 
-%---------- Methodologie ------------------------------------------------------
+\subsection{Toekomstige Ontwikkelingen}
+
+Met de voortdurende evolutie van applicatieontwikkeling worden nieuwe uitdagingen en kansen geïdentificeerd. Toekomstige ontwikkelingen kunnen zich
+richten op verbeterde methoden voor biometrische authenticatie, naadloze integratie van verschillende authenticatiemiddelen, en de toepassing van
+artificial intelligence voor het detecteren van ongebruikelijke activiteiten en het voorkomen van ongeautoriseerde toegang.
+
+\subsection{Open Vragen en Onderzoeksdomeinen}
+
+Ondanks de vooruitgang in authenticatie- en autorisatietechnologieën blijven er open vragen en onderzoeksdomeinen bestaan. Hoe kunnen ontwikkelaars
+eenvoudigere, maar toch veilige, systemen implementeren? Welke methoden bieden een optimale balans tussen beveiliging en gebruikersgemak? Hoe kan
+het proces van authenticatie en autorisatie geoptimaliseerd worden voor verschillende soorten applicaties?
+
+Deze vragen dienen als basis voor de verdere uitwerking van dit onderzoek en zullen bijdragen aan het identificeren van praktische oplossingen en
+best practices voor ontwikkelaars.
+
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+De methodologie voor dit onderzoek omvat verschillende stappen, variërend van literatuurstudie tot de ontwikkeling en evaluatie van een verbeterd 
+authenticatie- en autorisatiesysteem. Hieronder worden de belangrijkste methoden en stappen beschreven:
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+\subsection{Literatuurstudie}
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+Een grondige literatuurstudie zal de basis vormen van dit onderzoek. Hierbij wordt uitgebreid onderzocht wat de huidige stand van zaken is op het 
+gebied van authenticatie en autorisatie in applicatieontwikkeling. De literatuurstudie zal zich richten op bestaande methoden, protocollen, frameworks, 
+en technologieën die worden gebruikt in vergelijkbare contexten. Relevante wetenschappelijke artikelen, boeken en online bronnen zullen worden 
+geraadpleegd om een volledig begrip te krijgen van de uitdagingen en oplossingen in dit domein.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+\subsection{Requirements analyse}
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
+Om de behoeften van de doelgroep in kaart te brengen, zal een requirements analyse worden uitgevoerd. Dit omvat mogelijk interviews met ontwikkelaars 
+en IT professionals die betrokken zijn bij applicatieontwikkeling. De analyse zal zich richten op de vereisten voor een verbeterd authenticatie- en 
+autorisatiesysteem, met specifieke aandacht voor gebruiksvriendelijkheid, beveiliging, en integratiemogelijkheden.
 
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+\subsection{Proof-of-Concept (PoC) Ontwikkeling}
 
-%---------- Verwachte resultaten ----------------------------------------------
-\section{Verwacht resultaat, conclusie}%
+Op basis van de bevindingen uit de literatuurstudie en requirements analyse zal een Proof-of-Concept (PoC) worden ontwikkeld. Dit omvat de implementatie 
+van een verbeterd authenticatie- en autorisatiesysteem met behulp van Node.js voor de backend en React.js voor de frontend. Tijdens de ontwikkeling zal 
+rekening worden gehouden met best practices en beveiligingsrichtlijnen.
+
+\subsection{Implementatie Evaluatie}
+
+De ontwikkelde PoC zal worden geëvalueerd in een realistische omgeving. Dit omvat het testen van het systeem in verschillende scenario's, waaronder 
+verschillende soorten applicaties (desktop, web, mobiel). De evaluatie zal zich richten op prestaties, gebruiksvriendelijkheid en beveiliging. 
+Mogelijke verbeteringen zullen worden geïdentificeerd.
+
+\subsection{Rapportage en Aanbevelingen}
+
+Het onderzoek zal worden afgesloten met de rapportage van de bevindingen en aanbevelingen. Het rapport zal een gedetailleerde beschrijving bevatten 
+van het ontwikkelde systeem, de evaluatieresultaten, en praktische aanbevelingen voor ontwikkelaars. Het doel is om een waardevolle bijdrage te leveren 
+aan de bestaande kennis in het vakgebied en concrete richtlijnen te bieden voor de implementatie van verbeterde authenticatie- en autorisatiesystemen.
+
+\subsection{Tijdschatting}
+
+\begin{itemize}
+\item Literatuurstudie: 4 weken
+\item Requirements analyse: 2 weken
+\item PoC Ontwikkeling: 8 weken
+\item Implementatie Evaluatie: 4 weken
+\item Rapportage en Aanbevelingen: 6 weken
+\end{itemize}
+
+Deze tijdschatting is indicatief en kan tijdens het onderzoek worden aangepast op basis van de voortgang en eventuele onverwachte uitdagingen.
+
+\section{Verwachte Resultaten, Conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+De verwachte resultaten van dit onderzoek omvatten:
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+\begin{enumerate}
+    \item \textbf{Een verbeterd Authenticatie- en Autorisatiesysteem:} 
+    De ontwikkeling van een Proof-of-Concept (PoC) dat aantoont hoe een verbeterd authenticatie- en autorisatiesysteem kan worden geïmplementeerd met 
+    behulp van Node.js voor de backend en React.js voor de frontend.
 
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+    \item \textbf{Optimalisatie van gebruikerservaring:} 
+    Verwacht wordt dat het geïmplementeerde systeem zal bijdragen aan een verbeterde gebruikerservaring door middel van intuïtieve interfaces en 
+    vlotte authenticatieprocessen.
 
+    \item \textbf{Verbeterde beveiliging:} 
+    Het verwachte resultaat omvat een verbeterde beveiliging door implementatie van best practices en richtlijnen voor authenticatie- en 
+    autorisatieprocessen.
+
+    \item \textbf{Praktische aanbevelingen:}
+    Het onderzoeksrapport zal concrete aanbevelingen bevatten voor ontwikkelaars over hoe ze verbeterde authenticatie- en autorisatiesystemen kunnen 
+    implementeren in diverse applicaties.
+\end{enumerate}
+
+De doelgroep van dit onderzoek, bestaande uit IT professionals en ontwikkelaars, zal profiteren van de verwachte resultaten door toegang te krijgen 
+tot een praktisch implementeerbaar systeem en waardevolle richtlijnen. De meerwaarde van deze bachelorproef ligt in het bieden van tastbare 
+oplossingen voor de uitdagingen rondom authenticatie en autorisatie, waardoor ontwikkelaars in staat worden gesteld veilige en gebruiksvriendelijke 
+applicaties te ontwerpen.
