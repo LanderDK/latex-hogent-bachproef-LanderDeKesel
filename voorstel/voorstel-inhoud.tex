@@ -4,9 +4,9 @@
 \section{Introductie}%
 \label{sec:introductie}
 
-Deze bachelorproef richt zich op het verbeteren van de authenticatie en autorisatie in applicatieontwikkeling, met een specifieke focus op het 
-vereenvoudigen van deze processen voor developers. Het startpunt van deze bachelorproef komt voort uit mijn ervaring als IT'er en ontwikkelaar, 
-waar ik aanvankelijk moeite ondervond met het beveiligen en beschikbaar stellen van applicaties voor gebruikers zonder ongeautoriseerde toegang.
+Deze bachelorproef richt zich op authenticatie en autorisatie in applicatieontwikkeling, met een specifieke focus op het 
+vereenvoudigen van deze processen voor developers. De aanleiding voor deze bachelorproef komt voort uit ervaring als IT'er en ontwikkelaar, 
+waar aanvankelijk uitdagingen werden ondervonden bij het beveiligen en beschikbaar stellen van applicaties voor gebruikers zonder ongeautoriseerde toegang.
 \newline
 \newline
 De doelgroep van deze bachelorproef bestaat uit IT professionals en ontwikkelaars die betrokken zijn bij het ontwerp en de ontwikkeling van
@@ -21,13 +21,12 @@ een eigen authenticatie- en autorisatiesysteem in hun applicaties. De onderzoeks
   \item Welke oplossingen kunnen worden geïdentificeerd om deze moeilijkheden te verhelpen?
   \item Hoe kunnen deze oplossingen worden geïmplementeerd in een functioneel systeem?
 \end{itemize}
-Hieruit volgt de onderzoeksvraag: "De moeilijkheid van Authenticatie en Autorisatie in applicatieontwikkeling, hoe kunnen we dit makkelijk aanbieden: 
-Een diepgaande analyse en implementatie".
+Hieruit volgt de onderzoeksvraag: "Authenticatie en Autorisatie in applicatieontwikkeling, hoe kan dit makkelijk worden aangeboden: Een diepgaande analyse en implementatie".
 \newline
 \newline
-De onderzoeksdoelstelling is het identificeren van praktische oplossingen en het implementeren van een verbeterd authenticatie- en autorisatiesysteem 
-dat gemakkelijk toegankelijk is voor ontwikkelaars. Het concrete eindresultaat van dit onderzoek is een functioneel systeem met een Node.js API-backend 
-en een React.js-frontend, evenals een rapport met aanbevelingen en best practices voor ontwikkelaars.
+De onderzoeksdoelstelling is het identificeren van praktische oplossingen en het implementeren van een authenticatie- en autorisatiesysteem 
+dat gemakkelijk toegankelijk is voor ontwikkelaars. Het concrete eindresultaat van dit onderzoek is een functioneel systeem met een API-backend 
+en een dashboard-frontend, evenals een rapport met aanbevelingen en best practices voor ontwikkelaars.
 \newline
 \newline
 Door deze bachelorproef als succesvol te beschouwen, zou het ontwikkelde systeem niet alleen moeten voldoen aan de verwachtingen van gebruikers, 
@@ -78,39 +77,48 @@ best practices voor ontwikkelaars.
 \section{Methodologie}%
 \label{sec:methodologie}
 
-De methodologie voor dit onderzoek omvat verschillende stappen, variërend van literatuurstudie tot de ontwikkeling en evaluatie van een verbeterd 
+De methodologie voor dit onderzoek omvat verschillende stappen, variërend van literatuurstudie tot de ontwikkeling en evaluatie van een 
 authenticatie- en autorisatiesysteem. Hieronder worden de belangrijkste methoden en stappen beschreven:
 
 \subsection{Literatuurstudie}
 
-Een grondige literatuurstudie zal de basis vormen van dit onderzoek. Hierbij wordt uitgebreid onderzocht wat de huidige stand van zaken is op het 
-gebied van authenticatie en autorisatie in applicatieontwikkeling. De literatuurstudie zal zich richten op bestaande methoden, protocollen, frameworks, 
-en technologieën die worden gebruikt in vergelijkbare contexten. Relevante wetenschappelijke artikelen, boeken en online bronnen zullen worden 
-geraadpleegd om een volledig begrip te krijgen van de uitdagingen en oplossingen in dit domein.
+De literatuurstudie vormt het fundament van dit onderzoek. Hierbij wordt diepgaand onderzoek gedaan naar de actuele stand van zaken op het gebied 
+van authenticatie en autorisatie in applicatieontwikkeling. De literatuurstudie richt zich specifiek op bestaande methoden, protocollen, frameworks, 
+en technologieën die binnen vergelijkbare contexten van authenticatiesystemen worden toegepast. Concrete voorbeelden van dergelijke methoden en 
+technologieën omvatten OAuth 2.0, OpenID Connect, JSON Web Tokens (JWT), One Time Passwords (OTP), SAML (Security Assertion Markup Language), en 
+biometrische authenticatie. 
+Door relevante wetenschappelijke artikelen, boeken en onlinebronnen te raadplegen, beoogt deze literatuurstudie een volledig begrip te verkrijgen 
+van de specifieke uitdagingen en oplossingen binnen het domein van authenticatie en autorisatie. Hierbij zal extra aandacht worden besteed aan de 
+keuze voor een eigen authenticatiemechanisme, waarbij de bestaande oplossingen als referentiekader dienen.
 
 \subsection{Requirements analyse}
 
 Om de behoeften van de doelgroep in kaart te brengen, zal een requirements analyse worden uitgevoerd. Dit omvat mogelijk interviews met ontwikkelaars 
-en IT professionals die betrokken zijn bij applicatieontwikkeling. De analyse zal zich richten op de vereisten voor een verbeterd authenticatie- en 
+en IT professionals die betrokken zijn bij applicatieontwikkeling. De analyse zal zich richten op de vereisten voor een authenticatie- en 
 autorisatiesysteem, met specifieke aandacht voor gebruiksvriendelijkheid, beveiliging, en integratiemogelijkheden.
 
 \subsection{Proof-of-Concept (PoC) Ontwikkeling}
 
-Op basis van de bevindingen uit de literatuurstudie en requirements analyse zal een Proof-of-Concept (PoC) worden ontwikkeld. Dit omvat de implementatie 
-van een verbeterd authenticatie- en autorisatiesysteem met behulp van Node.js voor de backend en React.js voor de frontend. Tijdens de ontwikkeling zal 
-rekening worden gehouden met best practices en beveiligingsrichtlijnen.
+Op basis van de bevindingen uit de literatuurstudie en requirements analyse zal een Proof-of-Concept (PoC) worden ontwikkeld. Hierbij zal de focus 
+liggen op het onderzoeken van de implementatie van een authenticatie- en autorisatiesysteem, met specifieke aandacht voor het aspect van 
+het zelf opzetten van een eigen authenticatiesysteem.
+De technologische keuzes voor de ontwikkeling van de PoC zullen niet vooraf worden vastgesteld, maar zullen het resultaat zijn van het onderzoek 
+naar de eenvoudigheid van het opzetten van een op maat gemaakt authenticatiesysteem. De implementatie kan gebruikmaken van verschillende frameworks 
+en technologieën, en tijdens de ontwikkelingsfase zal aandacht worden besteed aan het volgen van best practices en beveiligingsrichtlijnen.
 
 \subsection{Implementatie Evaluatie}
 
-De ontwikkelde PoC zal worden geëvalueerd in een realistische omgeving. Dit omvat het testen van het systeem in verschillende scenario's, waaronder 
-verschillende soorten applicaties (desktop, web, mobiel). De evaluatie zal zich richten op prestaties, gebruiksvriendelijkheid en beveiliging. 
-Mogelijke verbeteringen zullen worden geïdentificeerd.
+De ontwikkelde Proof-of-Concept (PoC) zal grondig worden geëvalueerd in een realistische omgeving. Deze evaluatie omvat het testen van het systeem in 
+diverse scenario's, waaronder verschillende types applicaties zoals desktop-, web- en mobiele apps. De evaluatie zal specifiek gericht zijn op meetbare 
+criteria zoals prestaties, gebruiksvriendelijkheid en beveiliging. Concreet worden parameters zoals responstijd, laadtijden, en gebruiksgemak gemeten en 
+geanalyseerd. Daarnaast zullen beveiligingsaspecten, zoals de robuustheid tegen mogelijke aanvallen, ook worden beoordeeld. De resultaten van deze 
+evaluatie zullen dienen als basis voor het identificeren van mogelijke verbeteringen aan het systeem.
 
 \subsection{Rapportage en Aanbevelingen}
 
 Het onderzoek zal worden afgesloten met de rapportage van de bevindingen en aanbevelingen. Het rapport zal een gedetailleerde beschrijving bevatten 
 van het ontwikkelde systeem, de evaluatieresultaten, en praktische aanbevelingen voor ontwikkelaars. Het doel is om een waardevolle bijdrage te leveren 
-aan de bestaande kennis in het vakgebied en concrete richtlijnen te bieden voor de implementatie van verbeterde authenticatie- en autorisatiesystemen.
+aan de bestaande kennis in het vakgebied en concrete richtlijnen te bieden voor de implementatie van authenticatie- en autorisatiesystemen.
 
 \subsection{Tijdschatting}
 
@@ -130,9 +138,9 @@ Deze tijdschatting is indicatief en kan tijdens het onderzoek worden aangepast o
 De verwachte resultaten van dit onderzoek omvatten:
 
 \begin{enumerate}
-    \item \textbf{Een verbeterd Authenticatie- en Autorisatiesysteem:} 
-    De ontwikkeling van een Proof-of-Concept (PoC) dat aantoont hoe een verbeterd authenticatie- en autorisatiesysteem kan worden geïmplementeerd met 
-    behulp van Node.js voor de backend en React.js voor de frontend.
+    \item \textbf{Een Authenticatie- en Autorisatiesysteem:} 
+    De ontwikkeling van een Proof-of-Concept (PoC) dat aantoont hoe een authenticatie- en autorisatiesysteem kan worden geïmplementeerd met 
+    behulp van een ontwikkelde front- en backend.
 
     \item \textbf{Optimalisatie van gebruikerservaring:} 
     Verwacht wordt dat het geïmplementeerde systeem zal bijdragen aan een verbeterde gebruikerservaring door middel van intuïtieve interfaces en 
@@ -143,7 +151,7 @@ De verwachte resultaten van dit onderzoek omvatten:
     autorisatieprocessen.
 
     \item \textbf{Praktische aanbevelingen:}
-    Het onderzoeksrapport zal concrete aanbevelingen bevatten voor ontwikkelaars over hoe ze verbeterde authenticatie- en autorisatiesystemen kunnen 
+    Het onderzoeksrapport zal concrete aanbevelingen bevatten voor ontwikkelaars over hoe ze authenticatie- en autorisatiesystemen kunnen 
     implementeren in diverse applicaties.
 \end{enumerate}
 
