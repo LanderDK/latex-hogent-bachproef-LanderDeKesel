@@ -6,7 +6,111 @@
 % bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+\
+\section{Auth technologieën}%
+\label{sec:auth-technologieën}
+Als eerste onderzoek werd er bekeken welke huidge technologieën er vandaag de dag bestaan en welke de meest gebruikte zijn. Dit omdat er eerst een goede kennis
+moet worden gevolgd van de huidige technologieën vooraleer er kan worden overgegaan naar de volgende stappen.
 
+
+\subsection{OAuth 2.0}%
+\label{subsec:oauth-2.0}
+OAuth 2.0 wordt gebruikt om toegang tot bronnen te delegeren zonder gebruikersreferenties te delen. Het is een autorisatie framework en wordt dus niet gebruikt voor het authenticeren van gebruikers. Vaak gebruikt om Single Sign On (SSO) en toegangsdelegatie in te schakelen. Kan worden gebruikt in web- en mobiele applicaties en ondersteunt verschillende authenticatiemechanismen.
+Dit moet worden geïmplementeerd omdat de service een API gaat aanbieden die toegankelijk is voor applicaties van derden en dus wordt gebruikt voor authentificatie.
+
+\subsubsection{Access Tokens}%
+\label{subsubsec:access-tokens}
+Access Tokens zijn inloggegevens die worden gebruikt om toegang te krijgen tot bronnen. Access Tokens worden door de autorisatieserver aan de client uitgegeven en worden door de client gebruikt om toegang te krijgen tot bronnen die worden beschermd door de autorisatieserver. Access Tokens zijn bedoeld voor gebruik met bronservers en worden nooit naar autorisatieservers verzonden.
+
+\subsubsection{Refresh Tokens}%
+\label{subsubsec:refresh-tokens}
+Refresh Tokens zijn inloggegevens die worden gebruikt om Access Tokens te verkrijgen. Refresh Tokens worden door de autorisatieserver aan de client uitgegeven en worden gebruikt om een nieuw Access Tokens te verkrijgen wanneer het huidige Access Token ongeldig wordt of verloopt, of om extra Access Tokens met een identiek of beperkter bereik te verkrijgen. Het uitgeven van een Refresh Tokens is optioneel, ter beoordeling van de autorisatieserver. Als de autorisatieserver een Refresh Token afgeeft, wordt deze meegenomen bij de uitgifte van een Access Token. In tegenstelling tot Access Tokens zijn Refresh Tokens alleen bedoeld voor gebruik met autorisatieservers en worden ze nooit naar bronservers verzonden.
+Dit zou kunnen worden geïmplementeerd met een kortere vervaldatum van het Access Token in plaats van een Access Token met een zeer lange vervaldatum, maar toch de black list met Access Tokens gebruiken.
+\subsubsection{Client Authentication}
+De client MOET bij elk verzoek NIET meer dan één authenticatiemethode gebruiken.
+
+\subsubsection{Endpoints}%
+\label{subsubsec:endpoints}
+\begin{enumerate}[label=\textbf{-}]
+    \item Authorization Endpoint: \\
+    Dit endpoint wordt door de clienttoepassing gebruikt om autorisatie van de resource-eigenaar te verkrijgen. Meestal houdt dit in dat de gebruiker wordt omgeleid naar het autorisatie-endpoint van de autorisatieserver, waar hij/zij kan inloggen en machtigingen kan verlenen aan de clienttoepassing. Na het verlenen van autorisatie leidt de autorisatieserver de gebruiker terug naar de clienttoepassing met een autorisatiecode of toegangstoken.
+  
+    \item Token Endpoint (optioneel?): \\
+    Na het verkrijgen van autorisatie van de eigenaar van de bron, wisselt de clienttoepassing de autorisatiecode uit voor een toegangstoken door een verzoek naar het token endpoint te sturen. Dit eindpunt is verantwoordelijk voor het authenticeren van de client en het uitwisselen van de autorisatiecode voor een toegangstoken. Het token endpoint wordt door de client gebruikt om een toegangstoken te verkrijgen door het autorisatietoekennings- of vernieuwingstoken te presenteren.
+  
+    \item Redirection Endpoint: \\
+    Dit is niet bepaald een endpoint, maar het is een cruciaal onderdeel van de OAuth-stroom. Het is de URI waar de autorisatieserver de user-agent (meestal een webbrowser) omleidt nadat de resource-eigenaar toegang tot de clienttoepassing heeft verleend/geweigerd. De omleidings-URI bevat doorgaans parameters zoals de autorisatiecode of het toegangstoken. Wanneer een omleidings-URI is opgenomen in een autorisatieverzoek, MOET de autorisatieserver de ontvangen waarde vergelijken en matchen met ten minste één van de geregistreerde omleidings-URI's(of URI-componenten), als er omleidings-URI's zijn geregistreerd. Als de clientregistratie de volledige omleidings-URI bevatte, MOET de autorisatieserver de twee URI's vergelijken met behulp van eenvoudige tekenreeksvergelijking. Als de validatie van een autorisatieverzoek mislukt vanwege een ontbrekende, ongeldige of niet-overeenkomende omleidings-URI, MOET de autorisatieserver de eigenaar van de bron op de hoogte stellen van de fout en MOET de user-agent NIET automatisch worden omgeleid naar de ongeldige omleidings-URI.
+  \end{enumerate}
+
+\subsubsection{Authorization request}%
+\label{subsubsec:authorization-request}
+De client maakt een verzoek naar de autorisatieserver om autorisatie te verkrijgen. Het verzoek bevat de volgende parameters:
+\begin{enumerate}[label=\textbf{-}]
+    \item response type: \\
+    Dit parameter geeft het gewenste responstype aan. De waarde MOET zijn "code" voor autorisatiecode of "token" voor toegangstoken.
+  
+    \item client id: \\
+    Dit parameter geeft de client-ID van de clienttoepassing aan. De waarde MOET overeenkomen met de geregistreerde client-ID van de clienttoepassing.
+  
+    \item redirect uri: \\
+    Dit parameter geeft de URI aan waar de autorisatieserver de gebruiker na autorisatie moet omleiden. De waarde MOET overeenkomen met een van de geregistreerde omleidings-URI's van de clienttoepassing.
+  
+    \item scope: \\
+    Dit parameter geeft de machtigingen aan die de clienttoepassing wil verkrijgen. De waarde MOET een spatiegescheiden lijst van machtigingen zijn.
+  
+    \item state: \\
+    Dit parameter geeft een willekeurige, niet-voorspelbare waarde aan die door de clienttoepassing wordt gegenereerd. De waarde MOET worden gebruikt om CSRF-aanvallen te voorkomen.
+  \end{enumerate}
+  En kan er als volgt uitzien:
+  \begin{verbatim}
+  GET /authorize?response_type=code&client_id=s6BhdRkqt3&state=xyz&redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1
+  Host: server.example.com
+  \end{verbatim}
+
+\subsubsection{Authorization reponse}%
+\label{subsubsec:authorization-reponse}
+De autorisatieserver verleent autorisatie aan de clienttoepassing en leidt de gebruiker terug naar de clienttoepassing met een autorisatiecode of toegangstoken. Het antwoord bevat de volgende parameters:
+\begin{enumerate}[label=\textbf{-}]
+    \item code: \\
+    Dit parameter geeft de autorisatiecode aan die door de autorisatieserver is gegenereerd. De autorisatiecode wordt gebruikt door de clienttoepassing om een toegangstoken te verkrijgen.
+  
+    \item state: \\
+    Dit parameter geeft de waarde van de state-parameter van het autorisatieverzoek aan. De waarde MOET overeenkomen met de waarde die door de clienttoepassing is verstrekt.
+  \end{enumerate}
+  En kan er als volgt uitzien:
+  \begin{verbatim}
+    HTTP/1.1 302 Found
+    Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA&state=xyz
+  \end{verbatim}
+
+\subsubsection{Error response}%
+\label{subsubsec:error-response}
+Als het verzoek mislukt vanwege een ontbrekende, ongeldige of niet-overeenkomende omleidings-URI, of als de client-ID ontbreekt of ongeldig is, MOET de autorisatieserver de eigenaar van de bron op de hoogte stellen van de fout en MOET de user-agent NIET automatisch omleiden naar de ongeldige omleiding URI.
+
+\subsubsection{Een Access Token vernieuwen}%
+\label{subsubsec:een-access-token-vernieuwen}
+Als de autorisatieserver een Refresh Token aan de client heeft uitgegeven, doet de cliënt een vernieuwingsverzoek aan het token endpoint.
+Indien geldig en geautoriseerd, geeft de autorisatieserver een Access Token uit. Als de verificatie van het verzoek is mislukt of ongeldig is, retourneert de autorisatieserver een foutreactie.
+De autorisatieserver KAN een nieuw Refresh Token uitgeven, in welk geval de cliënt het oude Refresh Token MOET weggooien en vervangen door het nieuwe Refresh Token. De autorisatieserver KAN het oude Refresh Token intrekken nadat een nieuw Refresh Token aan de client is uitgegeven. Als er een nieuw Refresh Token wordt uitgegeven, MOET het bereik van het Refresh Token identiek zijn aan dat van het Refresh Token dat door de client in de aanvraag is opgenomen.
+
+\subsubsection{Beveiligingsoverwegingen}
+\label{subsubsec:beveiligingsoverwegingen}
+\begin{enumerate}[label=\textbf{-}]
+    \item Client Impersonation: \\
+    Een kwaadwillende client kan zich voordoen als een andere client en toegang krijgen tot beschermde bronnen als de nagebootste client er niet in slaagt of niet in staat is zijn clientreferenties vertrouwelijk te houden.
+
+    \item Access Tokens: \\
+    De autorisatieserver MOET ervoor zorgen dat Access Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden om geldige toegangstokens te produceren.
+
+    \item Refresh Tokens: \\
+    De autorisatieserver MOET de binding tussen het Refresh Token en de clientidentiteit verifiëren wanneer de clientidentiteit kan worden geverifieerd. Wanneer clientauthenticatie niet mogelijk is, MOET de autorisatieserver andere middelen inzetten om misbruik van Refresh Token te detecteren. De autorisatieserver zou bijvoorbeeld Refresh Token rotatie kunnen gebruiken, waarbij een nieuw Refresh Token wordt uitgegeven bij elke vernieuwingsreactie van het toegangstoken. Het vorige Refresh Token wordt ongeldig gemaakt, maar behouden door de autorisatieserver. Als een Refresh Token wordt aangetast en vervolgens door zowel de aanvaller als de legitieme client wordt gebruikt, zal een van hen een ongeldig Refresh Token presenteren, dat de autorisatieserver op de hoogte stelt van de inbreuk. De autorisatieserver MOET ervoor zorgen dat Refresh Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden dat ze geldige Refresh Tokens produceren.
+
+    \item Request Confidentiality: \\
+    Access Tokens, Refresh Tokens, wachtwoorden voor resource-eigenaren en klantreferenties MOETEN NIET openbaar worden verzonden. De parameters "state" en "scope" MOETEN GEEN gevoelige klant- of resource-eigenaarinformatie in platte tekst bevatten, omdat deze via onveilige kanalen kunnen worden verzonden of onveilig kunnen worden opgeslagen.
+\end{enumerate}
+
+\newline
+\newline
 Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
 
 Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bv.~bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
