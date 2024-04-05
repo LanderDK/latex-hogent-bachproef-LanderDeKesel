@@ -42,10 +42,10 @@ De client MOET bij elk verzoek NIET meer dan één authenticatiemethode gebruike
 \label{subsubsec:endpoints}
 \begin{enumerate}[label=\textbf{-}]
     \item Authorization Endpoint: \\
-    Dit endpoint wordt door de clienttoepassing gebruikt om autorisatie van de resource-eigenaar te verkrijgen. Meestal houdt dit in dat de gebruiker wordt omgeleid naar het autorisatie-endpoint van de autorisatieserver, waar hij/zij kan inloggen en machtigingen kan verlenen aan de clienttoepassing. Na het verlenen van autorisatie leidt de autorisatieserver de gebruiker terug naar de clienttoepassing met een autorisatiecode of toegangstoken.
+    Dit endpoint wordt door de clienttoepassing gebruikt om autorisatie van de resource-eigenaar te verkrijgen. Meestal houdt dit in dat de gebruiker wordt omgeleid naar het autorisatie-endpoint van de autorisatieserver, waar hij/zij kan inloggen en machtigingen kan verlenen aan de clienttoepassing. Na het verlenen van autorisatie leidt de autorisatieserver de gebruiker terug naar de clienttoepassing met een autorisatiecode of Access Token.
   
     \item Token Endpoint (optioneel?): \\
-    Na het verkrijgen van autorisatie van de eigenaar van de bron, wisselt de clienttoepassing de autorisatiecode uit voor een toegangstoken door een verzoek naar het token endpoint te sturen. Dit endpoint is verantwoordelijk voor het authenticeren van de client en het uitwisselen van de autorisatiecode voor een Access Token. Het token endpoint wordt door de client gebruikt om een Access Token te verkrijgen door de Authorization Grant of Refresh Token te presenteren.
+    Na het verkrijgen van autorisatie van de eigenaar van de bron, wisselt de clienttoepassing de autorisatiecode uit voor een Access Token door een verzoek naar het token endpoint te sturen. Dit endpoint is verantwoordelijk voor het authenticeren van de client en het uitwisselen van de autorisatiecode voor een Access Token. Het token endpoint wordt door de client gebruikt om een Access Token te verkrijgen door de Authorization Grant of Refresh Token te presenteren.
   
     \item Redirection Endpoint: \\
     Dit is niet bepaald een endpoint, maar het is een cruciaal onderdeel van de OAuth-stroom. Het is de URI waar de autorisatieserver de user-agent (meestal een webbrowser) omleidt nadat de resource-eigenaar toegang tot de clienttoepassing heeft verleend/geweigerd. De redirect-URI bevat doorgaans parameters zoals de autorisatiecode of het Access Token. Wanneer een redirect-URI is opgenomen in een autorisatieverzoek, MOET de autorisatieserver de ontvangen waarde vergelijken en matchen met ten minste één van de geregistreerde redirect-URI's(of URI-componenten), als er redirect-URI's zijn geregistreerd. Als de clientregistratie de volledige redirect-URI bevatte, MOET de autorisatieserver de twee URI's vergelijken met behulp van eenvoudige string vergelijking. Als de validatie van een autorisatieverzoek mislukt vanwege een ontbrekende, ongeldige of niet-overeenkomende redirect-URI, MOET de autorisatieserver de eigenaar van de bron op de hoogte stellen van de fout en MOET de user-agent NIET automatisch worden omgeleid naar de ongeldige redirect-URI.
@@ -78,10 +78,10 @@ De client maakt een verzoek naar de autorisatieserver om autorisatie te verkrijg
 
 \subsubsection{Authorization reponse}%
 \label{subsubsec:authorization-reponse}
-De autorisatieserver verleent autorisatie aan de clienttoepassing en leidt de gebruiker terug naar de clienttoepassing met een autorisatiecode of toegangstoken. Het antwoord bevat de volgende parameters:
+De autorisatieserver verleent autorisatie aan de clienttoepassing en leidt de gebruiker terug naar de clienttoepassing met een autorisatiecode of Access Token. Het antwoord bevat de volgende parameters:
 \begin{enumerate}[label=\textbf{-}]
     \item code: \\
-    Deze parameter geeft de autorisatiecode aan die door de autorisatieserver is gegenereerd. De autorisatiecode wordt gebruikt door de clienttoepassing om een toegangstoken te verkrijgen.
+    Deze parameter geeft de autorisatiecode aan die door de autorisatieserver is gegenereerd. De autorisatiecode wordt gebruikt door de clienttoepassing om een Access Token te verkrijgen.
   
     \item state: \\
     Deze parameter geeft de waarde van de state-parameter van het autorisatieverzoek aan. De waarde MOET overeenkomen met de waarde die door de clienttoepassing is verstrekt.
@@ -109,7 +109,7 @@ De autorisatieserver KAN een nieuw Refresh Token uitgeven, in welk geval de cli�
     Een kwaadwillende client kan zich voordoen als een andere client en toegang krijgen tot beschermde bronnen als de nagebootste client er niet in slaagt of niet in staat is zijn clientreferenties vertrouwelijk te houden.
 
     \item Access Tokens: \\
-    De autorisatieserver MOET ervoor zorgen dat Access Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden om geldige toegangstokens te produceren.
+    De autorisatieserver MOET ervoor zorgen dat Access Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden om geldige Access Tokens te produceren.
 
     \item Refresh Tokens: \\
     De autorisatieserver MOET de binding tussen het Refresh Token en de clientidentiteit verifiëren wanneer de clientidentiteit kan worden geverifieerd. Wanneer clientauthenticatie niet mogelijk is, MOET de autorisatieserver andere middelen inzetten om misbruik van Refresh Token te detecteren. De autorisatieserver zou bijvoorbeeld Refresh Token rotatie kunnen gebruiken, waarbij een nieuw Refresh Token wordt uitgegeven bij elke vernieuwingsreactie van het Access Token. Het vorige Refresh Token wordt ongeldig gemaakt, maar behouden door de autorisatieserver. Als een Refresh Token wordt aangetast en vervolgens door zowel de aanvaller als de legitieme client wordt gebruikt, zal een van hen een ongeldig Refresh Token presenteren, dat de autorisatieserver op de hoogte stelt van de inbreuk. De autorisatieserver MOET ervoor zorgen dat Refresh Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden dat ze geldige Refresh Tokens produceren.
@@ -162,154 +162,155 @@ Ten slotte wordt aanbevolen om expliciete karakterisering te gebruiken als versc
 \subsection{OpenID Connect}%
 \label{subsec:openid-connect}
 OpenID Connect is een authenticatielaag bovenop OAuth 2.0, een identiteitslaag. Hiermee kunnen klanten de identiteit van de eindgebruiker verifiëren. Definieert een reeks standaardclaims om informatie over de gebruiker over te brengen (overbrengen). Dit moet samen met OAuth 2.O worden gebruikt voor een complete identiteits- en autorisatieoplossing.
-
+\newline
 OpenID Connect 1.0 voegt identiteitsverificatie toe aan OAuth 2.0 voor clienttoepassingen.
 Het maakt het mogelijk om gebruikersinformatie op een veilige en gestandaardiseerde manier te verkrijgen.
-
+\newline
 Samenvatting: OpenID Connect verifieert identiteiten en biedt veilig basisprofielinformatie via OAuth 2.
-
-Dit document \autocite{Sakimura2014} geeft een uitgebreid overzicht van het OpenID Connect-protocol, dat wordt gebruikt voor gebruikersauthenticatie in webapplicaties. Het begint met het definiëren van de belangrijkste termen en notaties voordat het zich verdiept in verschillende methoden voor gebruikersauthenticatie met behulp van verschillende stromen zoals Autorisatiecodestroom, Impliciete stroom en Hybride stroom. Het proces omvat onder meer stappen als het valideren van verzoeken op autorisatie-eindpunten, het verkrijgen van toestemming van gebruikers en tokenvalidatie op token-eindpunten.
-
-Het document behandelt ook onderwerpen die verband houden met het veilig doorgeven van verzoekparameters, evenals privacyoverwegingen met betrekking tot persoonlijk identificeerbare informatie (PII) en het monitoren van gegevenstoegang. Daarnaast bevat het secties over clientauthenticatiemechanismen; handtekeningen en encryptietechnieken voor het beveiligen van communicatie; offline toegangsbeheer via vernieuwingstokens; serialisatieformaten zoals JSON of querystring enz.; implementatierichtlijnen inclusief verplichte functies voor alle OpenID-providers en vertrouwende partijen.
-
+\newline
+Dit document \autocite{Sakimura2014} geeft een uitgebreid overzicht van het OpenID Connect-protocol, dat wordt gebruikt voor gebruikersauthenticatie in webapplicaties. Het begint met het definiëren van de belangrijkste termen en notaties voordat het zich verdiept in verschillende methoden voor gebruikersauthenticatie met behulp van verschillende stromen zoals Autorisatiecodestroom, Impliciete stroom en Hybride stroom. Het proces omvat onder meer stappen als het valideren van verzoeken op autorisatie-endpoints, het verkrijgen van toestemming van gebruikers en tokenvalidatie op token-endpoints.
+\newline
+Het document behandelt ook onderwerpen die verband houden met het veilig doorgeven van verzoekparameters, evenals privacyoverwegingen met betrekking tot persoonlijk identificeerbare informatie (PII) en het monitoren van gegevenstoegang. Daarnaast bevat het secties over clientauthenticatiemechanismen; handtekeningen en encryptietechnieken voor het beveiligen van communicatie; offline toegangsbeheer via Refresh Tokens; serialisatieformaten zoals JSON of querystring enz.; implementatierichtlijnen inclusief verplichte functies voor alle OpenID-providers en vertrouwende partijen.
+\newline
 Verder worden de potentiële veiligheidsrisico's beschreven die verband houden met het gebruik van dit protocol, samen met aanbevelingen om deze risico's effectief te beperken. Ten slotte zijn er IANA-overwegingen die specificeren hoe bepaalde codepunten moeten worden toegewezen binnen registers die door andere specificaties zijn gedefinieerd, terwijl er verwijzingen in de inhoud worden gegeven.
-
+\newline
 Over het geheel genomen dient dit hulpmiddel zowel de academische nieuwsgierigheid naar moderne protocollen, maar kan het ook praktische inzichten bieden die relevant zijn voor praktijkscenario's voor softwareontwikkeling.
 Concluderend zijn de IANA-overwegingen in deze bron van cruciaal belang voor het garanderen van interoperabiliteit en standaardisatie tussen verschillende implementaties van protocollen.
-
+\newline
 OpenID Connect 1.0 is een identiteitslaag die bovenop het OAuth 2.0-protocol is gebouwd, waardoor klanten eindgebruikers kunnen authenticeren en hun basisprofielinformatie op een gestandaardiseerde manier kunnen verkrijgen. Het breidt OAuth 2.0 uit door het concept van ID-tokens te introduceren, die claims bevatten over de authenticatie van een eindgebruiker door een autorisatieserver bij gebruik van een clientapplicatie.
-
+\newline
 De OpenID Connect Core 1.0-specificatie definieert de belangrijkste functionaliteit voor het implementeren van authenticatie via OAuth 2.0 en schetst beveiligingsoverwegingen voor het gebruik ervan.
-
-Bovendien wordt ervan uitgegaan dat vertrouwende partijen (clients) de noodzakelijke configuratie-informatie hebben verkregen van OpenID-providers (autorisatieservers), inclusief eindpuntlocaties via detectie of andere mechanismen zoals dynamische registratie.
-
+\newline
+Bovendien wordt ervan uitgegaan dat vertrouwende partijen (clients) de noodzakelijke configuratie-informatie hebben verkregen van OpenID-providers (autorisatieservers), inclusief endpoint locaties via detectie of andere mechanismen zoals dynamische registratie.
+\newline
 Over het geheel genomen biedt dit framework interoperabele manieren voor applicaties van derden om de identiteit van gebruikers veilig te verifiëren zonder dat gedetailleerde kennis over de configuraties van individuele autorisatieservers nodig is.
 Het is echter belangrijk dat vertrouwende partijen deze configuratie-informatie regelmatig bijwerken en onderhouden om de voortdurende veiligheid en betrouwbaarheid van de verificatie van de gebruikersidentiteit te garanderen.
-
+\newline
 De inhoud bespreekt de vereisten en procedures voor authenticatie in OpenID Connect. Het benadrukt dat ID-tokens moeten worden ondertekend met JSON Web Signature (JWS) om integriteit, onweerlegbaarheid en eventueel vertrouwelijkheid te garanderen. Het proces omvat verschillende stromen, zoals Autorisatiecodestroom, Impliciete stroom of Hybride stroom.
-
-Met de Authorization Code Flow kunnen clients bijvoorbeeld veilig een ID-token verkrijgen zonder tokens bloot te leggen via een user-agent of kwaadaardige applicaties. Deze stroom ondergaat stappen, waaronder het verzenden van een authenticatieverzoek naar het eindpunt van de autorisatieserver met validatieprotocollen.
-
+\newline
+Met de Authorization Code Flow kunnen clients bijvoorbeeld veilig een ID-token verkrijgen zonder tokens bloot te leggen via een user-agent of kwaadaardige applicaties. Deze stroom ondergaat stappen, waaronder het verzenden van een authenticatieverzoek naar het endpoint van de autorisatieserver met validatieprotocollen.
+\newline
 Bovendien worden beveiligingsmaatregelen tegen ongeoorloofde toegang tijdens interactie met eindgebruikers benadrukt, waarbij passende standaarden zoals Cross-Site Request Forgery en Clickjacking-beveiligingen worden toegepast door de autorisatieserver.
 Het uiteindelijke doel is ervoor te zorgen dat alleen geauthenticeerde en geautoriseerde gebruikers toegang hebben tot de gevraagde bronnen.
-
-De inhoud bespreekt het proces van het verkrijgen van autorisatie en toegangstokens in OAuth 2.0, een protocol voor veilige authenticatie. Het schetst de stappen die betrokken zijn bij interacties tussen een applicatie (relying party), gebruiker en server om toestemming te verkrijgen voor toegang tot beschermde bronnen.
-
+\newline
+De inhoud bespreekt het proces van het verkrijgen van autorisatie en Access Tokens in OAuth 2.0, een protocol voor veilige authenticatie. Het schetst de stappen die betrokken zijn bij interacties tussen een applicatie (relying party), gebruiker en server om toestemming te verkrijgen voor toegang tot beschermde bronnen.
+\newline
 Na een succesvolle authenticatie door de eindgebruiker moet de Autorisatieserver toestemming verkrijgen voordat informatie wordt vrijgegeven aan de Vertrouwende Partij. Dit kan worden bereikt door middel van een interactieve dialoog of eerdere administratieve toestemmingsmechanismen.
-
+\newline
 Er wordt verder uitgelegd hoe authenticatiereacties en foutreacties worden afgehandeld met behulp van verschillende stromen, zoals de impliciete stroom en de autorisatiecodestroom, waarbij overal duidelijke voorbeelden worden gegeven.
-
+\newline
 Daarnaast worden tokenverzoeken beschreven die via Token Endpoint van clients naar servers worden verzonden, inclusief validatieprocessen aan beide uiteinden, samen met de afhandeling van foutreacties, indien nodig tijdens deze uitwisseling.
 Bovendien behandelt het details over het gebruik van ID-tokens binnen verschillende stromen, zoals impliciete stromen, naast de respectieve validaties die vereist zijn bij het ontvangen ervan van servers na succesvolle uitwisselingen.
 Ten slotte biedt het essentiële richtlijnen voor acties aan de clientzijde met betrekking tot deze transacties, waarbij veiligheidsmaatregelen worden gewaarborgd terwijl gevoelige gegevens worden opgehaald. Applicaties die in browsers zijn geïmplementeerd en gebruik maken van scripttalen, volgen specifieke procedures onder Impliciete Stromen die hierin worden uitgelegd, met gedetailleerde verschillen in vergelijking met andere gebruikte protocollen.
-
+\newline
+\newline
 Dit zorgt ervoor dat alle acties aan de clientzijde worden uitgevoerd met het hoogste niveau van beveiliging en bescherming voor gevoelige gegevens.
-
+\newline
 De tekst bespreekt de impliciete stroom en hybride stroom in OAuth 2.0 voor gebruikersauthenticatie, autorisatie en tokenvalidatieprocessen. In het geval van de impliciete stroom wordt gedetailleerd beschreven hoe een authenticatieverzoek wordt gevalideerd en wordt benadrukt dat responsparameters worden toegevoegd aan de fragmentcomponent van een redirect-URI.
-
+\newline
 Daarnaast worden stappen beschreven zoals het verkrijgen van toestemming van de eindgebruiker en het afhandelen van foutreacties die specifiek zijn voor deze stroom. De inhoud bevat ook instructies voor het ophalen van parametergegevens na de respons aan de clientzijde door gecodeerde waarden van de User Agent te parseren.
-
-Bij het gebruik van de hybride stroom zijn daarentegen vergelijkbare procedures van toepassing, met variaties in sommige aspecten, zoals het gebruik van autorisatie-eindpunten of verificatiemethoden voor de inhoud van ID-tokens, vergeleken met de methoden die in andere stromen worden gebruikt.
-
-Over het algemeen bieden deze secties gedetailleerde technische specificaties met betrekking tot het impliciete stroommechanisme dat verschillende fasen omvat, waaronder aanvraag-/antwoordpatronen over verschillende eindpunten, samen met overwegingen voor gegevensformaten.
+\newline
+Bij het gebruik van de hybride stroom zijn daarentegen vergelijkbare procedures van toepassing, met variaties in sommige aspecten, zoals het gebruik van autorisatie-endpoints of verificatiemethoden voor de inhoud van ID-tokens, vergeleken met de methoden die in andere stromen worden gebruikt.
+\newline
+Over het algemeen bieden deze secties gedetailleerde technische specificaties met betrekking tot het impliciete stroommechanisme dat verschillende fasen omvat, waaronder aanvraag-/antwoordpatronen over verschillende endpoints, samen met overwegingen voor gegevensformaten.
 Over het algemeen bieden deze secties gedetailleerde technische specificaties met betrekking tot het impliciete stroommechanisme, waardoor een uitgebreid inzicht wordt geboden in het protocol en de implementatie ervan in verschillende scenario's.
-
-De hybride stroom in OpenID Connect omvat de validatie en afhandeling van ID-tokens, tokenverzoeken, tokenreacties, toegangstokens en claims over de eindgebruiker. Wanneer u deze stroom gebruikt voor authenticatie- en autorisatieprocessen tussen clients (applicaties) en identiteitsproviders zoals Google of Facebook:
-
+\newline
+De hybride stroom in OpenID Connect omvat de validatie en afhandeling van ID-tokens, tokenverzoeken, tokenreacties, Access Tokens en claims over de eindgebruiker. Wanneer u deze stroom gebruikt voor authenticatie- en autorisatieprocessen tussen clients (applicaties) en identiteitsproviders zoals Google of Facebook:
+\newline
 \begin{enumerate}
   \item De inhoud van een ID-token van zowel het autorisatie-endpoint als het token-endpoint moet op dezelfde manier worden gevalideerd.
   \item Het gebruik van het token-endpoint is vergelijkbaar met dat in de Autorisatiecodestroom.
   \item Validatiemethoden zijn identiek aan die gebruikt in de Autorisatiecodestroom.
 \end{enumerate}
-
+\newline
 Aanvullend:
 \begin{enumerate}
   \item[4.] Het specificeert hoe een klant claims kan verkrijgen over de fysieke adressen van eindgebruikers.
   \item[5.] Het beveelt botsingsbestendige namen aan bij het opnemen van aanvullende standaardclaimwaarden.
 \end{enumerate}
-
+\newline
 Verder:
 \begin{enumerate}
   \item[6.] De specificatie definieert voor mensen leesbare claimwaarden die in meerdere talen/scripts worden weergegeven volgens de BCP47-richtlijnen voor taaltags.
 \end{enumerate}
-
-Het is belangrijk op te merken dat verschillende toegangstokens kunnen worden geretourneerd vanwege verschillende beveiligingskenmerken op eindpunten met verschillende levensduren/bronnen die door hen worden verleend; Er worden ook voorzorgsmaatregelen tegen ongeautoriseerde inlogpogingen via sites van derden geadviseerd.
-
-
-Het is essentieel om toegangstokens zorgvuldig te beheren en veilig op te slaan om ongeoorloofde toegang of misbruik te voorkomen.
-
-De inhoud omvat de aanbevelingen en vereisten voor taaltagwaarden, afhandeling van UserInfo-claims op een OAuth 2.0 Protected Resource (UserInfo Endpoint), communicatie met het eindpunt met behulp van HTTP-methoden zoals GET en POST, validatie van UserInfo-reacties door clients, gebruik van scope waarden om toegangsrechten op te geven voor toegangstokens in OpenID Connect-clients, waarbij individuele claims worden aangevraagd via parameters voor autorisatieverzoeken.
-
-Volgens de hier genoemde BCP47-richtlijnen wordt aanbevolen om specifieke taaltags alleen te gebruiken als dat nodig is. Het userinfo-eindpunt biedt geverifieerde gebruikersinformatie via JSON-objecten die naam-waardeparen bevatten die bekend staan als 'Claims'. Het specificeert ook beveiligingsmaatregelen zoals TLS-gebruik en ondersteuning voor verschillende methoden, waaronder CORS.
-
-Bovendien zijn scopes gekoppeld aan claimverzoeken terwijl er namens gebruikers een autorisatieserververzoek wordt gedaan; deze definiëren welke bronnen beschikbaar zullen zijn bij tokenpresentatie tijdens toegang tot beschermde broneindpunten vanaf de open ID connect-client.
-Ten slotte worden ook het gebruik van vernieuwingstokens en vervaltijden van tokens gedefinieerd om veilige toegangscontrole te garanderen.
-
+\newline
+Het is belangrijk op te merken dat verschillende Access Tokens kunnen worden geretourneerd vanwege verschillende beveiligingskenmerken op endpoints met verschillende levensduren/bronnen die door hen worden verleend; Er worden ook voorzorgsmaatregelen tegen ongeautoriseerde inlogpogingen via sites van derden geadviseerd.
+\newline
+\newline
+Het is essentieel om Access Tokens zorgvuldig te beheren en veilig op te slaan om ongeoorloofde toegang of misbruik te voorkomen.
+\newline
+De inhoud omvat de aanbevelingen en vereisten voor taaltagwaarden, afhandeling van UserInfo-claims op een OAuth 2.0 Protected Resource (UserInfo Endpoint), communicatie met de endpoint met behulp van HTTP-methoden zoals GET en POST, validatie van UserInfo-reacties door clients, gebruik van scope waarden om toegangsrechten op te geven voor Access Tokens in OpenID Connect-clients, waarbij individuele claims worden aangevraagd via parameters voor autorisatieverzoeken.
+\newline
+Volgens de hier genoemde BCP47-richtlijnen wordt aanbevolen om specifieke taaltags alleen te gebruiken als dat nodig is. Het userinfo-endpoint biedt geverifieerde gebruikersinformatie via JSON-objecten die naam-waardeparen bevatten die bekend staan als 'Claims'. Het specificeert ook beveiligingsmaatregelen zoals TLS-gebruik en ondersteuning voor verschillende methoden, waaronder CORS.
+\newline
+Bovendien zijn scopes gekoppeld aan claimverzoeken terwijl er namens gebruikers een autorisatieserververzoek wordt gedaan; deze definiëren welke bronnen beschikbaar zullen zijn bij tokenpresentatie tijdens toegang tot beschermde bron endpoints vanaf de open ID connect-client.
+Ten slotte worden ook het gebruik van Refresh Tokens en vervaltijden van tokens gedefinieerd om veilige toegangscontrole te garanderen.
+\newline
 De tekst bespreekt het gebruik van de parameter "claims" in OpenID Connect, waarbij wordt gespecificeerd dat de ondersteuning ervan optioneel is voor identiteitsproviders (OP's). Wanneer het wordt ondersteund door een OP en wordt gebruikt door een Relying Party (RP), is het mogelijk om specifieke claims over eindgebruikers op te vragen. Het formaat van deze verzoeken volgt bepaalde regels, waarbij gebruik wordt gemaakt van JSON-codering.
-
+\newline
 Daarnaast wordt beschreven hoe essentiële en vrijwillige claims worden afgehandeld tijdens authenticatieprocessen. Het legt ook verschillende methoden uit, zoals geaggregeerde en gedistribueerde claims om informatie uit verschillende bronnen op te halen.
-
+\newline
 Bovendien benadrukt het het belang van het gebruik van stabiele identificatiegegevens die worden verstrekt via specifieke claimwaarden zoals sub en iss, terwijl wordt gewaarschuwd voor het vertrouwen op andere gebruikersspecifieke gegevens vanwege mogelijke veranderingen in de loop van de tijd of tussen emittenten.
-
+\newline
 Ten slotte introduceert het autorisatieverzoekparameters die ondertekende/gecodeerde authenticatieverzoeken via JWT's mogelijk maken.
   Deze aanpak garandeert de veiligheid en integriteit van authenticatieverzoeken en biedt tegelijkertijd een gestandaardiseerde verificatiemethode.
-
-De ondersteuning voor de verzoekparameter in OpenID Connect Connect is optioneel en het gebruik ervan hangt af van de vraag of de OP (OpenID Provider) deze ondersteunt. Als een RP (Relying Party) deze parameter gebruikt terwijl deze niet wordt ondersteund door het OP, moet er een fout worden geretourneerd. De waarden in een JWT vervangen de waarden die zijn doorgegeven met de OAuth 2.0-syntaxis.
-
+  \newline
+De ondersteuning voor de verzoekparameter in OpenID Connect is optioneel en het gebruik ervan hangt af van de vraag of de OP (OpenID Provider) deze ondersteunt. Als een RP (Relying Party) deze parameter gebruikt terwijl deze niet wordt ondersteund door het OP, moet er een fout worden geretourneerd. De waarden in een JWT vervangen de waarden die zijn doorgegeven met de OAuth 2.0-syntaxis.
+\newline
 Verzoekobjecten kunnen al dan niet ondertekend zijn en kunnen ook gebruik maken van encryptie met JWE zonder te zijn ondertekend. Wanneer ze worden gebruikt, moeten ze specifieke parameters bevatten, zoals response\verb|_|type en client\verb|_|id, zoals vereist door OAuth 2.0 om de geldigheid te garanderen.
-
-Bovendien zijn er aanvullende overwegingen bij het gebruik van request\verb|_|uri Authorization Request-parameters, waaronder validatiestappen die verder gaan dan de standaard authenticatieverzoeken die worden beschreven in relevante secties van OpenID Connect Connect-specificaties.
+\newline
+Bovendien zijn er aanvullende overwegingen bij het gebruik van request\verb|_|uri Authorization Request-parameters, waaronder validatiestappen die verder gaan dan de standaard authenticatieverzoeken die worden beschreven in relevante secties van OpenID Connect-specificaties.
 Het is essentieel om deze richtlijnen en best practices zorgvuldig te volgen om de veiligheid en integriteit van het autorisatieproces te behouden.
-
+\newline
 De tekst bespreekt de processen en vereisten voor autorisatieservers bij het omgaan met JSON Web Tokens (JWT) in OpenID Connect. Het schetst dat servers JWT moeten decoderen volgens specifieke standaarden, handtekeningen moeten valideren, indien aanwezig, en autorisatieverzoekparameters moeten samenstellen uit de Request Object-waarde en OAuth 2.0-parameters.
-
+\newline
 Bovendien introduceert het zelf uitgegeven OpenID-providers als persoonlijke OP's die zelfondertekende ID-tokens uitgeven met behulp van speciale identificatiegegevens. In dit gedeelte wordt beschreven hoe deze providers functioneren zonder dat klanten zich hoeven te registreren of standaard detectieprocedures moeten volgen.
 Bovendien worden aanvullende clientauthenticatiemethoden uitgelegd die worden gebruikt tijdens interacties tussen clients en de autorisatieserver op Token Endpoint.
-
+\newline
 Over het geheel genomen biedt dit document gedetailleerde instructies over het omgaan met verschillende aspecten van open identiteitsprotocollen, zoals validatietechnieken voor decoderingsprocessen, samen met specifieke informatie over de functionaliteit van zelf uitgegeven OP's, die nuttig kunnen zijn voor het begrijpen van beveiligingsmechanismen binnen een identiteitsbeheercontext voor studenten die informatica studeren of cyberbeveiligingsvelden.
-
+\newline
 De tekst bespreekt het gebruik van JSON Web Signature (JWS) en JSON Web Encryption (JWE) om de berichtintegriteit, authenticatie en vertrouwelijkheid in OpenID Connect-communicatie te garanderen. Er wordt uitgelegd dat door het gebruik van deze technieken berichten zowel kunnen worden ondertekend als gecodeerd voor een betere beveiliging.
-
+\newline
 Daarnaast wordt uiteengezet hoe de betrokken partijen moeten omgaan met de rotatie van ondertekeningssleutels via JWK Set-publicatie op een specifieke locatie. Het proces omvat het opnemen van sleutel-ID's om aan te geven welke sleutel wordt gebruikt voor validatie. Op dezelfde manier vereist het roteren van encryptiesleutels het publiceren van nieuwe sleutels, terwijl de oude intern behouden blijven voor een soepele overgangsperiode.
-
+\newline
 Het document behandelt ook de scopes die verband houden met offline toegangsverzoeken in OpenID Connect, evenals richtlijnen voor het vernieuwen van tokens, met voorbeelden die overal in de inhoud worden gegeven.
 Bovendien worden syntaxis gedetailleerd met betrekking tot het serialiseren van parameters in verschillende formaten, zoals queryreeksen of JSON-objecten, gebaseerd op specifieke HTTP-verzoektypen zoals respectievelijk GET- of POST-methoden.
-
+\newline
 De tekst bespreekt de verwerking van OpenID Connect-berichten, waarbij de nadruk specifiek ligt op het vergelijken van waarden in deze berichten met bekende waarden. Het benadrukt de gevolgen voor de veiligheid bij het vergelijken van Unicode-reeksen en specificeert hoe vergelijkingen tussen JSON-reeksen en andere Unicode-reeksen moeten worden uitgevoerd.
-
+\newline
 Bovendien worden er functies beschreven die zowel Relying Parties (RP's) als OpenID Providers (OP's) naar verwachting zullen implementeren. Deze omvatten verplicht te implementeren functies voor OP's die in twee groepen zijn vermeld: één voor alle OP's en een andere voor 'dynamische' providers.
-
+\newline
 Het gaat ook in op scenario's waarin vooraf geconfigureerde relaties misschien niet nodig zijn als installaties ervoor kiezen om onverwachte interacties tussen RP's en OP's te ondersteunen zonder een vooraf vastgestelde relatie.
-
+\newline
 Daarnaast worden overwegingen uiteengezet met betrekking tot het gebruik van autorisatiecode of hybride stromen, het implementeren van nonce-parameterwaardebeschermingstechnieken tegen herhalingspogingen van aanvallers en het garanderen van een veilige verwerking van responsparameters die worden geretourneerd in omleidings-URI-fragmenten door gebruikersagenten met toegang tot cryptografische API's of via validatie. via webserverclients.
-
+\newline
 Ten slotte worden optionele specificaties benadrukt die de functionaliteit van deze standaard kunnen aanvullen, terwijl wordt verwezen naar relevante beveiligingsoverwegingen uit de OAuth 2.0-standaarden.
-
-
+\newline
+\newline
 Ten slotte belicht het optionele specificaties die de functionaliteit van deze standaard kunnen aanvullen, terwijl wordt verwezen naar relevante beveiligingsoverwegingen uit de OAuth 2.0-standaarden en worden richtlijnen gegeven voor best practices voor een veilige implementatie van de autorisatiecodestroom.
-
-Toegangstokens zijn inloggegevens die worden gebruikt om toegang te krijgen tot beschermde bronnen in het OAuth 2.0-framework. Deze vertegenwoordigen de autorisatie van een eindgebruiker en mogen niet worden blootgesteld aan ongeautoriseerde partijen. Het serverantwoord kan gevoelige clientinformatie bevatten, waardoor deze kwetsbaar wordt als deze openbaar wordt gemaakt. Tot de beperkende maatregelen behoren onder meer het digitaal ondertekenen van antwoorden door de server en het vereisen van een digitale handtekening van clients met behulp van een sleutel die onweerlegbaarheid ondersteunt.
-
-Om aanvallen zoals het vervangen van tokens of het nabootsen van geprivilegieerde gebruikers te voorkomen, wordt doelgroepbeperking voor toegangstokens aanbevolen, samen met een korte geldigheidsduur en het opnemen van tijdstempels in tokens.
-
+\newline
+Access Tokens zijn inloggegevens die worden gebruikt om toegang te krijgen tot beschermde bronnen in het OAuth 2.0-framework. Deze vertegenwoordigen de autorisatie van een eindgebruiker en mogen niet worden blootgesteld aan ongeautoriseerde partijen. Het serverantwoord kan gevoelige clientinformatie bevatten, waardoor deze kwetsbaar wordt als deze openbaar wordt gemaakt. Tot de beperkende maatregelen behoren onder meer het digitaal ondertekenen van antwoorden door de server en het vereisen van een digitale handtekening van clients met behulp van een sleutel die onweerlegbaarheid ondersteunt.
+\newline
+Om aanvallen zoals het vervangen van tokens of het nabootsen van geprivilegieerde gebruikers te voorkomen, wordt doelgroepbeperking voor Access Tokens aanbevolen, samen met een korte geldigheidsduur en het opnemen van tijdstempels in tokens.
+\newline
 OpenID Connect biedt mechanismen via ID Token om tokenvervangingsaanvallen te detecteren en tegelijkertijd problemen aan te pakken die verband houden met meerdere uitgevers per host- en poortcombinatie.
-
+\newline
 Implementaties moeten het TLS-protocol ondersteunen voor beveiligingsdoeleinden en de richtlijnen volgen uit BCP 195 [RFC8996] (Moriarty et al., maart 2021) voor het verbeteren van de beveiliging van geïmplementeerde services bij het gebruik van TLS.
 Het is belangrijk voor organisaties om op de hoogte te blijven van de nieuwste best practices op het gebied van beveiliging en hun implementaties voortdurend dienovereenkomstig bij te werken.
-
-De tekst bespreekt het veilige gebruik van Transport Layer Security (TLS) in online communicatie. Het benadrukt dat servers bij het gebruik van TLS certificaten moeten verifiëren om veilige verbindingen te garanderen. Toegangstokens moeten een korte levensduur hebben en om veiligheidsredenen door de autorisatieserver kunnen worden ingetrokken.
-
-Het behandelt ook belangrijke principes zoals het versleutelen van verzoeken om gevoelige gebruikersinformatie te beschermen, het vermijden van bepaalde soorten HTTP-omleidingen die inloggegevens kunnen lekken, het verkrijgen van expliciete toestemming van gebruikers voordat persoonlijke gegevens worden vrijgegeven, en het beschermen van toegangstokens tegen blootstelling via verschillende stromen.
-
+\newline
+De tekst bespreekt het veilige gebruik van Transport Layer Security (TLS) in online communicatie. Het benadrukt dat servers bij het gebruik van TLS certificaten moeten verifiëren om veilige verbindingen te garanderen. Access Tokens moeten een korte levensduur hebben en om veiligheidsredenen door de autorisatieserver kunnen worden ingetrokken.
+\newline
+Het behandelt ook belangrijke principes zoals het versleutelen van verzoeken om gevoelige gebruikersinformatie te beschermen, het vermijden van bepaalde soorten HTTP-omleidingen die inloggegevens kunnen lekken, het verkrijgen van expliciete toestemming van gebruikers voordat persoonlijke gegevens worden vrijgegeven, en het beschermen van Access Tokens tegen blootstelling via verschillende stromen.
+\newline
 Bovendien benadrukt het het belang van het respecteren van de privacyregelgeving en het verkrijgen van geldige toestemming voor het verwerken van gebruikersgegevens, terwijl een hoog beveiligingsniveau in verschillende rechtsgebieden wordt gehandhaafd.
-
+\newline
 Bovendien registreert het specifieke claimparameterfouten met betrekking tot OAuth 2.0 bij de relevante autoriteiten.
-
-
+\newline
+\newline
 Bovendien registreert het specifieke fouten in claimparameters met betrekking tot OAuth 2.0 bij de relevante autoriteiten om eventuele nalevingsproblemen aan te pakken en te corrigeren.
-
+\newline
 De tekst bespreekt de weergave van algoritme (alg) en sleutelidentificatie (kid) in JSON Web Tokens, met bijzondere aandacht voor het RS256-algoritme. Het benadrukt het belang van het verifiëren en decoderen van ID-tokensegmenten om specifieke claims te verkrijgen. Het document erkent ook bijdragen van verschillende individuen en organisaties aan de specificaties van de OpenID Foundation, terwijl de licentievoorwaarden voor auteursrechten voor reproductie-, ontwikkelings- en implementatiedoeleinden worden benadrukt. Bovendien verduidelijkt het dat de beschikbaarheid van technologie geen goedkeuring of validatie door de stichting impliceert met betrekking tot intellectuele eigendomsrechten die verband houden met het gebruik ervan. Bovendien wordt er melding gemaakt van een patentbelofte met betrekking tot beweerde patentclaims tegen bijdragers en uitvoerders volgens het OpenID Intellectual Property Rights-beleid.
-
+\newline
 De inhoud legt aspecten uit van het weergeven van algoritmen (alg) en sleutelidentificaties (kid), waarbij de betekenis van RS256 in het verificatie-/decoderingsproces van JWT voor het verkrijgen van specifieke claiminformatie wordt opgemerkt. Het erkennen van de bijdrage van meerdere entiteiten aan de OpenID-specificaties wordt benadrukt naast details over auteursrechtlicenties die materiaalgebruik toestaan, maar zonder een impliciete goedkeuring die de geldigheid of reikwijdte garandeert van IP-rechten met betrekking tot de technologie die in de specificatiedocumenten wordt beschreven.
 Het schetst verder het opnemen van een gepatenteerde garantie volgens het OpenID IPR-beleid, samen met het uitnodigen van partijen met relevante auteursrechten/octrooien enz., waarbij het in praktijk brengen van deze specificatie vereist is om ze naar voren te brengen.
 Dit benadrukt het belang van transparante en inclusieve samenwerking binnen de OpenID-gemeenschap om een eerlijke vertegenwoordiging en bescherming van intellectuele eigendomsrechten te garanderen.
@@ -471,3 +472,82 @@ Het plan is om een nieuw OAuth 2.0 authenticatiesysteem te ontwikkelen dat verge
 \end{enumerate}
 
 Door te focussen op deze gebieden kan een OAuth 2.0 authenticatiesysteem ontwikkeld worden dat zich onderscheidt van bestaande oplossingen door verbeterde prestaties, beveiliging, gebruiksgemak en aanpasbaarheid, waardoor het aantrekkelijk is voor gebruikers die op zoek zijn naar een geavanceerde en uitgebreide oplossing.
+
+\subsection{Long list}%
+\label{subsec:long-list}
+\begin{table}[htbp]
+  \centering
+  \caption{OAuth 2.0-authenticatieservers en Docker-image beschikbaarheid}
+  \label{tab:oauth_servers}
+  \begin{adjustbox}{width=1\textwidth}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    Naam          & Website                               & Beschrijving                                                                   & Docker-image beschikbaar \\ \midrule
+    Keycloak      & \texttt{https://www.keycloak.org/}     & Open source identiteits- en toegangsbeheer voor moderne applicaties en services. & Ja                        \\
+    Hydra         & \texttt{https://www.ory.sh/hydra/}     & OAuth 2.0 en OpenID Connect-server met krachtige functies voor authenticatie en autorisatie. & Ja                        \\
+    ORY Oathkeeper & \texttt{https://www.ory.sh/oathkeeper/} & Identity \& Access Proxy (IAP) gebouwd op top van Ory Hydra en Ory Keto. & Ja                        \\
+    Gluu          & \texttt{https://www.gluu.org/}         & Open source IAM-platform voor web- en mobiele applicaties.                   & Ja (community images)    \\
+    Apereo CAS    & \texttt{https://apereo.github.io/cas/} & Central Authentication Service (CAS) voor authenticatie en autorisatie.      & Ja                        \\
+    Dex           & \texttt{https://dexidp.io/}            & Open source OIDC-provider met LDAP-ondersteuning.                             & Ja                        \\
+    FusionAuth    & \texttt{https://fusionauth.io/}        & Identity and access management voor developers.                               & Ja                        \\
+    LemonLDAP::NG & \texttt{https://lemonldap-ng.org/}     & Open source toegangsbeheer voor webapplicaties.                               & Ja                        \\
+    Keycloak Gatekeeper & \texttt{https://www.keycloak.org/docs/latest/securing\_apps/} & Een authenticatie-gateway die werkt met Keycloak.                     & Ja                        \\
+    IdentityServer & \texttt{https://identityserver.io/}    & OpenID Connect- en OAuth 2.0-protocolserver voor ASP.NET Core.               & Nee                       \\
+    Apache Oltu   & \texttt{https://oltu.apache.org/}      & OAuth 2.0-bibliotheken voor Java.                                             & Nee                       \\
+    UAA           & \texttt{https://github.com/cloudfoundry/uaa} & Open source identiteitsbeheerservice voor Cloud Foundry.                & Nee                       \\
+    Okta          & \texttt{https://www.okta.com/}         & Identity Cloud-service met ondersteuning voor OAuth 2.0 en OpenID Connect.    & Nee                       \\
+    Auth0         & \texttt{https://auth0.com/}            & Identity-platform voor ontwikkelaars met OAuth 2.0 en OpenID Connect-ondersteuning. & Nee                       \\
+    AWS Cognito   & \texttt{https://aws.amazon.com/cognito/} & Identity-service van Amazon Web Services met ondersteuning voor OAuth 2.0 en OpenID Connect. & Nee                       \\ \bottomrule
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
+\begin{table}[htbp]
+  \centering
+  \caption{Alternatieven beoordelen op basis van vergelijkingscriteria}
+  \label{tab:oauth_servers}
+  \begin{adjustbox}{width=1\textwidth}
+  \begin{tabular}{@{}lllllllllllll@{}}
+    \toprule
+    Naam          & Gebruiksgemak & OAuth 2.0 & Andere protocollen & Schaalbaarheid & Aanpasbaarheid & Documentatie & Beveiliging & Onderhoud & Integraties & Kosten & Totaal \\ 
+                   &                & functies &                     & en prestaties   & en uitbreidbaarheid & en community-ondersteuning & functies & en updates & beschikbaarheid & en licentie &        \\
+    \midrule
+    Keycloak      & Ja             & Ja        & Ja                  & Nee             & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 9      \\
+    Hydra         & Ja             & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
+    ORY Oathkeeper & Ja            & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
+    Gluu          & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
+    Apereo CAS    & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
+    Dex           & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
+    FusionAuth    & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
+    LemonLDAP::NG & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
+    Keycloak Gatekeeper & Ja       & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
+    IdentityServer & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
+    Apache Oltu   & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
+    UAA           & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
+    Okta          & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
+    Auth0         & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
+    AWS Cognito   & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
+    \bottomrule
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
+
+\subsection{Short list}%
+\label{subsec:short-list}
+Hier is een shortlist van de meest veelbelovende alternatieven:
+\begin{enumerate}
+    \item Keycloak
+    \item Hydra
+    \item ORY Oathkeeper
+\end{enumerate}
+
+Deze drie alternatieven hebben het hoogste totaal aantal voldane vereisten en hebben ook Docker-images beschikbaar.
+
+Voor de proof-of-concept kan worden voorgesteld om één van deze drie alternatieven te kiezen en een eenvoudige implementatie op te zetten om een basaal scenario te testen. Dit kan bijvoorbeeld inhouden:
+
+\begin{itemize}
+    \item Het opzetten van een OAuth 2.0-authenticatieserver met het gekozen alternatief.
+    \item Het implementeren van een eenvoudige client-applicatie die de authenticatie via OAuth 2.0 integreert.
+    \item Het uitvoeren van enkele basisauthenticatie- en autorisatietests om te controleren of het alternatief voldoet aan de vereisten zoals gebruikersbeheer, toegangscontrole en veiligheid.
+\end{itemize}
+
+Hierdoor kan de werking van het gekozen alternatief beter begrepen worden en bepalen of het geschikt is voor verdere implementatie in je project.
