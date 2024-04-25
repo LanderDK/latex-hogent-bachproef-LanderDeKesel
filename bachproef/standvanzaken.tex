@@ -339,7 +339,7 @@ Uit vorige onderzoeken kan men concluderen dat auth al veel verder is geëvoluee
 Het volgende dat onderzocht werd was of er light weight instances bestaan, zoals bijvoorbeeld een Docker Image, die OAuth 2.0 implementeren. Dit zou een goede oplossing zijn voor een kleinere applicatie die geen behoefte heeft aan de uitgebreide diensten die Auth0 en TrustBuilder aanbieden. Het zou ook een goede oplossing zijn voor een ontwikkelaar die wil leren hoe OAuth 2.0 werkt en hoe het kan worden geïmplementeerd in hun eigen applicatie, zonder af te hangen van een derde partij.
 \newline
 \newline
-Uit een volgend onderzoek bleek dat er al een aantal Docker Images bestonden die OAuth 2.0 implementeert, namelijk Keycloak, Hydra, ORY Oathkeeper en meer.
+Uit een volgend onderzoek bleek dat er al een aantal Docker Images bestonden die OAuth 2.0 implementeert, namelijk Keycloak, Hydra, Oathkeeper en meer.
 
 
 \subsection{Vergelijkingscriteria}%
@@ -370,49 +370,49 @@ Uit een volgend onderzoek bleek dat er al een aantal Docker Images bestonden die
 
 \subsection{Docker Images vergelijken}%
 \label{subsec:docker-images-vergelijken}
-Op basis van de eerder genoemde criteria, werden de volgende Docker Images vergeleken: Keycloak, Hydra en ORY Oathkeeper.
+Op basis van de eerder genoemde criteria, werden de volgende Docker Images vergeleken: Keycloak, Hydra en Oathkeeper.
 
 \begin{enumerate}
   \item Gebruiksgemak en configuratie:
   \begin{itemize}
     \item Keycloak wordt over het algemeen beschouwd als gebruiksvriendelijk met een intuïtieve gebruikersinterface voor configuratie.
     \item Hydra vereist wat meer configuratie, vooral als het gaat om het opzetten van complexe autorisatie flows.
-    \item ORY Oathkeeper kan uitdagender zijn om te configureren vanwege de focus op API-gateway functionaliteit, hoewel het krachtige mogelijkheden biedt.
+    \item Oathkeeper kan uitdagender zijn om te configureren vanwege de focus op API-gateway functionaliteit, hoewel het krachtige mogelijkheden biedt.
   \end{itemize}
   
   \item Ondersteunde OAuth 2.0-functies:
   \begin{itemize}
     \item Keycloak biedt een breed scala aan functies, waaronder autorisatiecodes, impliciete access tokens, client credentials en refresh tokens.
     \item Hydra is zeer uitgebreid en biedt ondersteuning voor geavanceerde autorisatiefuncties zoals dynamische toestemming verlening.
-    \item ORY Oathkeeper richt zich meer op toegangscontrole voor APIs en biedt mogelijk niet dezelfde diepgaande ondersteuning voor OAuth 2.0 als de andere twee.
+    \item Oathkeeper richt zich meer op toegangscontrole voor APIs en biedt mogelijk niet dezelfde diepgaande ondersteuning voor OAuth 2.0 als de andere twee.
   \end{itemize}
   
   \item Ondersteuning voor andere protocollen:
   \begin{itemize}
     \item Keycloak biedt ondersteuning voor OpenID Connect en SAML naast OAuth 2.0.
     \item Hydra richt zich voornamelijk op OAuth 2.0, maar biedt ondersteuning voor OpenID Connect.
-    \item ORY Oathkeeper is voornamelijk gericht op OAuth 2.0 en JWT verificatie.
+    \item Oathkeeper is voornamelijk gericht op OAuth 2.0 en JWT verificatie.
   \end{itemize}
   
   \item Schaalbaarheid en prestaties:
   \begin{itemize}
     \item Keycloak kan in grootschalige implementaties prestatieproblemen ondervinden.
     \item Hydra is ontworpen met schaalbaarheid in gedachten en presteert over het algemeen goed in grote omgevingen.
-    \item ORY Oathkeeper is lichtgewicht en schaalbaar, maar het ontbreekt mogelijk aan enkele geavanceerde functies voor grote implementaties.
+    \item Oathkeeper is lichtgewicht en schaalbaar, maar het ontbreekt mogelijk aan enkele geavanceerde functies voor grote implementaties.
   \end{itemize}
   
   \item Aanpasbaarheid en uitbreidbaarheid:
   \begin{itemize}
     \item Keycloak biedt enige mate van aanpasbaarheid via plugins en themas.
     \item Hydra biedt uitgebreide aanpassingsmogelijkheden met behulp van plugins en aangepaste logica.
-    \item ORY Oathkeeper biedt mogelijkheden voor aanpassing, maar het is meer gericht op standaard API-gateway functionaliteit.
+    \item Oathkeeper biedt mogelijkheden voor aanpassing, maar het is meer gericht op standaard API-gateway functionaliteit.
   \end{itemize}
   
   \item Documentatie en community ondersteuning:
   \begin{itemize}
     \item Keycloak heeft een grote community en uitgebreide documentatie.
     \item Hydra heeft ook een actieve community, maar de documentatie kan op sommige gebieden ontoereikend zijn.
-    \item ORY Oathkeeper heeft een groeiende community, maar de documentatie kan nog wat uitgebreider worden.
+    \item Oathkeeper heeft een groeiende community, maar de documentatie kan nog wat uitgebreider worden.
   \end{itemize}
   
   \item Beveiligingsfuncties:
@@ -423,7 +423,7 @@ Op basis van de eerder genoemde criteria, werden de volgende Docker Images verge
   \item Onderhoud en updates:
   \begin{itemize}
     \item Keycloak en Hydra worden actief onderhouden en bijgewerkt.
-    \item ORY Oathkeeper wordt ook regelmatig bijgewerkt, maar de ontwikkeling kan iets minder snel zijn dan bij de andere twee.
+    \item Oathkeeper wordt ook regelmatig bijgewerkt, maar de ontwikkeling kan iets minder snel zijn dan bij de andere twee.
   \end{itemize}
   
   \item Beschikbaarheid van integraties:
@@ -434,7 +434,7 @@ Op basis van de eerder genoemde criteria, werden de volgende Docker Images verge
   \item Kosten en licentie:
   \begin{itemize}
     \item Keycloak is gratis en open source.
-    \item Hydra en ORY Oathkeeper zijn ook open source, maar sommige functies kunnen onderworpen zijn aan commerciële licenties in bepaalde scenario's.
+    \item Hydra en Oathkeeper zijn ook open source, maar sommige functies kunnen onderworpen zijn aan commerciële licenties in bepaalde scenario's.
   \end{itemize}
 \end{enumerate}
 
@@ -451,7 +451,7 @@ De zwaktes van veel identiteits- en toegangsbeheer oplossingen, waaronder Keyclo
   Hoewel veel oplossingen voldoen aan de gangbare standaarden zoals OAuth 2.0 en OpenID Connect, kunnen ze achterlopen bij het ondersteunen van opkomende standaarden en technologieën die relevant kunnen zijn voor bepaalde toepassingen. Investeren in het verkennen en implementeren van nieuwe standaarden zoals verifiable credentials en decentralized identifiers is een optie.
 \end{enumerate}
 
-Nu kunnen suggesties worden aangeboden voor verbeteringen en unieke functies in bestaande oplossingen zoals Keycloak, Hydra en ORY Oathkeeper:
+Nu kunnen suggesties worden aangeboden voor verbeteringen en unieke functies in bestaande oplossingen zoals Keycloak, Hydra en Oathkeeper:
 
 \begin{enumerate}
   \item Verbeterde schaalbaarheid en prestaties: Focus op het optimaliseren van de schaalbaarheid en prestaties van het systeem, zodat het gemakkelijk kan omgaan met grote aantallen gelijktijdige gebruikers en verzoeken. Gebruik bijvoorbeeld geavanceerde technieken zoals horizontale schaalbaarheid, caching en asynchrone verwerking om de prestaties te verbeteren.
@@ -481,7 +481,7 @@ Door te focussen op deze gebieden kan een OAuth 2.0 authenticatiesysteem ontwikk
     Naam          & Website                               & Beschrijving                                                                   & Docker-image beschikbaar \\ \midrule
     Keycloak      & \texttt{https://www.keycloak.org/}     & Open source identiteits- en toegangsbeheer voor moderne applicaties en services. & Ja                        \\
     Hydra         & \texttt{https://www.ory.sh/hydra/}     & OAuth 2.0 en OpenID Connect-server met krachtige functies voor authenticatie en autorisatie. & Ja                        \\
-    ORY Oathkeeper & \texttt{https://www.ory.sh/oathkeeper/} & Identity \& Access Proxy (IAP) gebouwd op top van Ory Hydra en Ory Keto. & Ja                        \\
+    Oathkeeper & \texttt{https://www.ory.sh/oathkeeper/} & Identity \& Access Proxy (IAP) gebouwd op top van Ory Hydra en Ory Keto. & Ja                        \\
     Gluu          & \texttt{https://www.gluu.org/}         & Open source IAM-platform voor web- en mobiele applicaties.                   & Ja (community images)    \\
     Apereo CAS    & \texttt{https://apereo.github.io/cas/} & Central Authentication Service (CAS) voor authenticatie en autorisatie.      & Ja                        \\
     Dex           & \texttt{https://dexidp.io/}            & Open source OIDC-provider met LDAP-ondersteuning.                             & Ja                        \\
@@ -509,7 +509,7 @@ Door te focussen op deze gebieden kan een OAuth 2.0 authenticatiesysteem ontwikk
     \midrule
     Keycloak      & Ja             & Ja        & Ja                  & Nee             & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 9      \\
     Hydra         & Ja             & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
-    ORY Oathkeeper & Ja            & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
+    Oathkeeper & Ja            & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
     Gluu          & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
     Apereo CAS    & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
     Dex           & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
@@ -533,7 +533,7 @@ Hier is een shortlist van de meest veelbelovende alternatieven:
 \begin{enumerate}
     \item Keycloak
     \item Hydra
-    \item ORY Oathkeeper
+    \item Oathkeeper
 \end{enumerate}
 
 Deze drie alternatieven hebben het hoogste totaal aantal voldane vereisten en hebben ook Docker-images beschikbaar.
@@ -547,3 +547,28 @@ Voor de proof-of-concept kan worden voorgesteld om één van deze drie alternati
 \end{itemize}
 
 Hierdoor kan de werking van het gekozen alternatief beter begrepen worden en bepalen of het geschikt is voor verdere implementatie in je project.
+
+\subsection{Short list alternatieven testen}
+\label{subsec:short-list-alternatieven-testen}
+In deze sectie wordt er verder verdiept in de drie alternatieven, namelijk Keycloak, Hydra en Oathkeeper.
+Het doel is de alternatieven van de short list te testen en te evalueren op basis van de eerder vastgestelde criteria. Indien er pijnpunten of tekortkomingen worden vastgesteld, zullen deze worden opgesomd en zullen er suggesties worden gegeven voor mogelijke verbeteringen.
+
+\subsubsection{Keycloak}%
+\label{subsubsec:keycloak}
+Als eerste werd er genavigeerd naar de documentatie, hier werd snel de download gevonden voor de Docker container. Na het downloaden van de container werd deze gestart en werd de webinterface geopend. De interface was zeer gebruiksvriendelijk en intuïtief, met duidelijke instructies voor het instellen van gebruikers, clients en scopes. Het was ook mogelijk om plugins en themas toe te voegen om de functionaliteit en het uiterlijk van de auth server aan te passen. De documentatie was uitgebreid en er was een actieve community die vragen kon beantwoorden en ondersteuning kon bieden. Keycloak ondersteunde een breed scala aan OAuth 2.0-functies, waaronder autorisatiecodes, impliciete access tokens, client credentials en refresh tokens. Het bood ook ondersteuning voor andere protocollen zoals OpenID Connect en SAML. De beveiligingsfuncties waren robuust, met ondersteuning voor multifactor authenticatie en integratie met externe identiteitsproviders. Keycloak werd regelmatig bijgewerkt en onderhouden en had integraties met populaire frameworks en platforms. Het was gratis en open source, wat het een aantrekkelijke optie maakte voor ontwikkelaars die op zoek waren naar een krachtige en aanpasbare auth server.
+Het was zelfs niet nodig om een proof-of-concept op te zetten, omdat u de SPA-testapplicatie op de Keycloak-website kunt gebruiken. Dit is een geweldige manier om de functionaliteit van Keycloak te verkennen en te begrijpen hoe het werkt in de praktijk en duurt slechts enkele minuten om op te zetten.
+Met de ervaring die is opgedaan met Keycloak, kan worden geconcludeerd dat deze oplossing zeer gebruiksvriendelijk is met veel configuratie mogelijkheden en een zeer uitgebreide documentatie heeft. De "Getting started with Docker" handleiding is zeer duidelijk en eenvoudig te volgen. De webinterface is intuïtief en biedt een breed scala aan functies voor het beheren van gebruikers, clients en scopes. De ondersteuning voor OAuth 2.0 en andere protocollen is uitgebreid en de beveiligingsfuncties zijn robuust. De actieve community en regelmatige updates maken Keycloak een aantrekkelijke optie voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
+
+\subsubsection{Hydra}%
+\label{subsubsec:hydra}
+Opnieuw werd er eerst gezocht naar documentatie, dit werd gevonden onder de "Self-hosting" sectie. De download werd hier ook gevonden voor de Docker container.
+Maar het opzetten en zelfs starten van de container was niet eenvoudig in vergelijking met Keycloak. Na dezelfde hoeveelheid tijd te hebben besteed aan Hydra als aan Keycloak, was het nog steeds niet gelukt om de webinterface te openen en de auth server te configureren. 
+Dit was een groot pijnpunt, omdat het niet mogelijk was om de functionaliteit van Hydra te verkennen en te testen. Dit maakte het al snel minder aantrekkelijk om Hydra te gebruiken boven Keycloak. Het was duidelijk dat Hydra een steilere leercurve had en meer configuratie vereiste om aan de slag te gaan. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een snelle en eenvoudige manier om een auth server op te zetten.
+De documentatie lijk wel uitgebreid, maar er zijn veel meer stappen en configuratie vereist om Hydra aan de praat te krijgen. 
+Echter zijn er wel een aantal methoden om in contact te komen met de community, dus het is mogelijk dat er hulp kan worden gevonden om Hydra aan de praat te krijgen.
+
+\subsubsection{Oathkeeper}%
+\label{subsubsec:oathkeeper}
+De documentatie was beter en de stappen waren gedetailleerder en het was mogelijk een aantal dingen uit te testen en een vaststelling te maken: namelijk dat dit enkel gericht is op API-gateway functionaliteit. 
+Dit wil zeggen dat er geen UI is omdat er vooral moet worden geconfigureerd via de command line. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een gebruiksvriendelijke en intuïtieve manier om een auth server op te zetten.
+Ondanks is dit wel een goede oplossing, maar valt het een beetje buiten de scope van dit onderzoek, omdat er geen UI is en het vooral is op API-gateway functionaliteit.
