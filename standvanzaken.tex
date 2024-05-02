@@ -56,6 +56,7 @@ Hier zijn enkele applicaties met hun respectievelijke clienttypes:
     Een applicatie die wordt uitgevoerd op het apparaat dat wordt gebruikt door de resource-eigenaar, zoals een desktopapplicatie of een mobiele applicatie. Dit type client is een public client. De clientgeheimen zijn toegankelijk voor de resource-eigenaar en kunnen niet worden beschermd tegen ongeautoriseerde toegang.
 \end{enumerate}
 
+
 \subsubsection{Client Authentication}
 \label{subsubsec:client-authentication}
 De client moet bij elk verzoek niet meer dan één authenticatiemethode gebruiken.
@@ -105,6 +106,7 @@ De client maakt een verzoek naar de autorisatieserver om autorisatie te verkrijg
     HTTP/1.1
     Host: server.example.com
   \end{verbatim}
+    
 
 \subsubsection{Authorization reponse}%
 \label{subsubsec:authorization-reponse}
@@ -122,210 +124,210 @@ De autorisatieserver verleent autorisatie aan de clienttoepassing en leidt de ge
     Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA&state=xyz
   \end{verbatim}
 
-  \subsubsection{Error response}%
-  \label{subsubsec:error-response}
-  Als het verzoek mislukt vanwege een ontbrekende, ongeldige of niet-overeenkomende redirect-URI, of als de client-ID ontbreekt of ongeldig is, moet de autorisatieserver de eigenaar van de bron op de hoogte stellen van de fout en moet de user-agent niet automatisch omleiden naar de ongeldige redirect-URI.
-  
-  \subsubsection{Een Access Token vernieuwen}%
-  \label{subsubsec:een-access-token-vernieuwen}
-  Als de autorisatieserver een Refresh Token aan de client heeft uitgegeven, doet de cliënt een vernieuwingsverzoek aan het token endpoint.
-  Indien geldig en geautoriseerd, geeft de autorisatieserver een Access Token uit. Als de verificatie van het verzoek is mislukt of ongeldig is, retourneert de autorisatieserver een foutreactie.
-  De autorisatieserver kan een nieuw Refresh Token uitgeven, in welk geval de cliënt het oude Refresh Token moet weggooien en vervangen door het nieuwe Refresh Token. De autorisatieserver kan het oude Refresh Token intrekken nadat een nieuw Refresh Token aan de client is uitgegeven. Als er een nieuw Refresh Token wordt uitgegeven, moet het bereik van het Refresh Token identiek zijn aan dat van het Refresh Token dat door de client in de aanvraag is opgenomen.
-  
-  \subsubsection{Beveiligingsoverwegingen}
-  \label{subsubsec:beveiligingsoverwegingen}
-  \begin{enumerate}[label=\textbf{-}]
-      \item Client Impersonation: \\
-      Een kwaadwillende client kan zich voordoen als een andere client en toegang krijgen tot beschermde bronnen als de nagebootste client er niet in slaagt of niet in staat is zijn clientreferenties vertrouwelijk te houden.
-  
-      \item Access Tokens: \\
-      De autorisatieserver moet ervoor zorgen dat Access Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden om geldige Access Tokens te produceren.
-  
-      \item Refresh Tokens: \\
-      De autorisatieserver moet de binding tussen het Refresh Token en de clientidentiteit verifiëren wanneer de clientidentiteit kan worden geverifieerd. Wanneer clientauthenticatie niet mogelijk is, moet de autorisatieserver andere middelen inzetten om misbruik van Refresh Token te detecteren. De autorisatieserver zou bijvoorbeeld Refresh Token rotatie kunnen gebruiken, waarbij een nieuw Refresh Token wordt uitgegeven bij elke vernieuwingsreactie van het Access Token. Het vorige Refresh Token wordt ongeldig gemaakt, maar behouden door de autorisatieserver. Als een Refresh Token wordt aangetast en vervolgens door zowel de aanvaller als de legitieme client wordt gebruikt, zal een van hen een ongeldig Refresh Token presenteren, dat de autorisatieserver op de hoogte stelt van de inbreuk. De autorisatieserver moet ervoor zorgen dat Refresh Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden dat ze geldige Refresh Tokens produceren.
-  
-      \item Request Confidentiality: \\
-      Access Tokens, Refresh Tokens, wachtwoorden voor resource-eigenaren en klantreferenties moeten niet openbaar worden verzonden. De parameters ``state'' en ``scope'' moeten geen gevoelige klant- of resource-eigenaarinformatie in platte tekst bevatten, omdat deze via onveilige kanalen kunnen worden verzonden of onveilig kunnen worden opgeslagen.
-  \end{enumerate}
+\subsubsection{Error response}%
+\label{subsubsec:error-response}
+Als het verzoek mislukt vanwege een ontbrekende, ongeldige of niet-overeenkomende redirect-URI, of als de client-ID ontbreekt of ongeldig is, moet de autorisatieserver de eigenaar van de bron op de hoogte stellen van de fout en moet de user-agent niet automatisch omleiden naar de ongeldige redirect-URI.
+
+\subsubsection{Een Access Token vernieuwen}%
+\label{subsubsec:een-access-token-vernieuwen}
+Als de autorisatieserver een Refresh Token aan de client heeft uitgegeven, doet de cliënt een vernieuwingsverzoek aan het token endpoint.
+Indien geldig en geautoriseerd, geeft de autorisatieserver een Access Token uit. Als de verificatie van het verzoek is mislukt of ongeldig is, retourneert de autorisatieserver een foutreactie.
+De autorisatieserver kan een nieuw Refresh Token uitgeven, in welk geval de cliënt het oude Refresh Token moet weggooien en vervangen door het nieuwe Refresh Token. De autorisatieserver kan het oude Refresh Token intrekken nadat een nieuw Refresh Token aan de client is uitgegeven. Als er een nieuw Refresh Token wordt uitgegeven, moet het bereik van het Refresh Token identiek zijn aan dat van het Refresh Token dat door de client in de aanvraag is opgenomen.
+
+\subsubsection{Beveiligingsoverwegingen}
+\label{subsubsec:beveiligingsoverwegingen}
+\begin{enumerate}[label=\textbf{-}]
+    \item Client Impersonation: \\
+    Een kwaadwillende client kan zich voordoen als een andere client en toegang krijgen tot beschermde bronnen als de nagebootste client er niet in slaagt of niet in staat is zijn clientreferenties vertrouwelijk te houden.
+
+    \item Access Tokens: \\
+    De autorisatieserver moet ervoor zorgen dat Access Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden om geldige Access Tokens te produceren.
+
+    \item Refresh Tokens: \\
+    De autorisatieserver moet de binding tussen het Refresh Token en de clientidentiteit verifiëren wanneer de clientidentiteit kan worden geverifieerd. Wanneer clientauthenticatie niet mogelijk is, moet de autorisatieserver andere middelen inzetten om misbruik van Refresh Token te detecteren. De autorisatieserver zou bijvoorbeeld Refresh Token rotatie kunnen gebruiken, waarbij een nieuw Refresh Token wordt uitgegeven bij elke vernieuwingsreactie van het Access Token. Het vorige Refresh Token wordt ongeldig gemaakt, maar behouden door de autorisatieserver. Als een Refresh Token wordt aangetast en vervolgens door zowel de aanvaller als de legitieme client wordt gebruikt, zal een van hen een ongeldig Refresh Token presenteren, dat de autorisatieserver op de hoogte stelt van de inbreuk. De autorisatieserver moet ervoor zorgen dat Refresh Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden dat ze geldige Refresh Tokens produceren.
+
+    \item Request Confidentiality: \\
+    Access Tokens, Refresh Tokens, wachtwoorden voor resource-eigenaren en klantreferenties moeten niet openbaar worden verzonden. De parameters ``state'' en ``scope'' moeten geen gevoelige klant- of resource-eigenaarinformatie in platte tekst bevatten, omdat deze via onveilige kanalen kunnen worden verzonden of onveilig kunnen worden opgeslagen.
+\end{enumerate}
 
 
-  \subsection{OAuth 2.0 voor Native Apps}%
-  \label{subsec:oauth-2.0-voor-native-apps}
-  \autocite{Denniss2017}
-  Een native app is een app die door de gebruiker op zijn apparaat wordt geïnstalleerd, in tegenstelling tot een webapp die alleen in de browsercontext wordt uitgevoerd. Apps die zijn geïmplementeerd met behulp van webgebaseerde technologie maar worden gedistribueerd als een native app, de zogenaamde ``hybride apps'', worden voor het doel van deze specificatie beschouwd als gelijkwaardig aan native apps.
-  OAuth 2.0-autorisatieverzoeken van native apps worden het best, en het liefst alleen, gedaan via externe user-agents, voornamelijk de browser van de gebruiker. Het andere alternatief is het gebruik van ingebedde user-agents. Deze aanpak heeft veel nadelen, waaronder het feit dat de host-app gebruikersgegevens en cookies kan kopiëren en dat de gebruiker zich in elke app helemaal opnieuw moet authenticeren. Autorisatieverzoeken voor native apps die de browser gebruiken, zijn veiliger en kunnen profiteren van de authenticatiestatus van de gebruiker. Door de bestaande authenticatiesessie in de browser te kunnen gebruiken, is eenmalige aanmelding (SSO) mogelijk, omdat gebruikers zich niet telkens opnieuw hoeven te authenticeren bij de autorisatieserver wanneer ze een nieuwe app gebruiken.
-  Om deze best practices te ondersteunen, dienen bepaalde OAuth-serverimplementaties die vertrouwen op alle clients als vertrouwelijk (confidential) voor het web, openbare (public) native app-clients en hun bijbehorende soorten redirect-URI's te erkennen.
-  \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{oauth2_native.png}
-    \caption{OAuth 2.0 verloop in native apps}
-    \label{fig:example2}
-  \end{figure}
-  \newline
-  Dit wordt bereikt door het autorisatieverzoek in de browser te openen en een redirect-URI te gebruiken die het autorisatieantwoord terugstuurt naar de native app.
-  \newline
-  \newline
-  Het ontvangen van de Autorisatiereactie in een Native App gebeurt ook via een redirect URI, er zijn verschillende opties:
-  \newline
-  - Omleiding van URI-schema voor privégebruik: nadat de auth-server het verzoek heeft voltooid, wordt deze omgeleid naar de omleidings-URI van de client, com.example.app:/oauth2redirect/example-provider, dit resulteert erin dat het besturingssysteem de native app start en de URI als startparameter.
-  \newline
-  - Geclaimde 'https'-schema-URI-omleiding: https://app.example.com/oauth2redirect/example-provider, door de app geclaimde 'https'-schema-omleidings-URI's hebben enkele voordelen vergeleken met andere native app-omleidingsopties, omdat de identiteit van de de bestemmingsapp wordt door het besturingssysteem gegarandeerd aan de autorisatieserver. Om deze reden moeten native apps deze waar mogelijk boven de andere opties gebruiken.
-  \newline
-  - Loopback Interface Redirection: http://127.0.0.1:51004/oauth2redirect/example-provider, voornamelijk voor desktop-apps die een poort op de loopback-netwerkinterface kunnen openen zonder speciale machtigingen nodig te hebben, kunnen de loopback-interface gebruiken om de OAuth te ontvangen omleiden.
-
-  
-  \subsection{OAuth 2.0: Bearer Token gebruik}%
-  \label{subsec:oauth-2.0-bearer-token-gebruik}
-  OAuth 2.0 bearer tokens kunnen worden gebruikt in HTTP-verzoeken om toegang te krijgen tot beveiligde bronnen \autocite[p.~{Section 1.0}]{Jones2012}.
-  Een bearer token is een token dat kan worden gebruikt door iedereen die eigenaar is van het token, zonder dat er bewijs nodig is van het bezit van cryptografisch materiaal \autocite[p.~{Section 1.2}]{Jones2012}.
-  Er worden drie manieren beschreven om een bearer token in een aanvraag op te nemen: in de Authorization-header, als een formuliergecodeerde body-parameter of als een URI-queryparameter \autocite[p.~{Section 2.1}]{Jones2012}. Als een verzoek mislukt, moet de bronserver een 401-statuscode en een foutcode retourneren, zoals 'invalid\verb|_|request', 'invalid\verb|_|token' of 'insufficient\verb|_|scope' \autocite[p.~{Section 3.0}]{Jones2012}.
-  Het gebruik van TLS, het valideren van certificaten, het uitgeven van tokens voor de korte termijn en het niet opslaan van tokens in cookies zijn elk sterk aanbevolen \autocite[p.~{Section 5.0}]{Jones2012}.
+\subsection{OAuth 2.0 voor Native Apps}%
+\label{subsec:oauth-2.0-voor-native-apps}
+\autocite{Denniss2017}
+Een native app is een app die door de gebruiker op zijn apparaat wordt geïnstalleerd, in tegenstelling tot een webapp die alleen in de browsercontext wordt uitgevoerd. Apps die zijn geïmplementeerd met behulp van webgebaseerde technologie maar worden gedistribueerd als een native app, de zogenaamde ``hybride apps'', worden voor het doel van deze specificatie beschouwd als gelijkwaardig aan native apps.
+OAuth 2.0-autorisatieverzoeken van native apps worden het best, en het liefst alleen, gedaan via externe user-agents, voornamelijk de browser van de gebruiker. Het andere alternatief is het gebruik van ingebedde user-agents. Deze aanpak heeft veel nadelen, waaronder het feit dat de host-app gebruikersgegevens en cookies kan kopiëren en dat de gebruiker zich in elke app helemaal opnieuw moet authenticeren. Autorisatieverzoeken voor native apps die de browser gebruiken, zijn veiliger en kunnen profiteren van de authenticatiestatus van de gebruiker. Door de bestaande authenticatiesessie in de browser te kunnen gebruiken, is eenmalige aanmelding (SSO) mogelijk, omdat gebruikers zich niet telkens opnieuw hoeven te authenticeren bij de autorisatieserver wanneer ze een nieuwe app gebruiken.
+Om deze best practices te ondersteunen, dienen bepaalde OAuth-serverimplementaties die vertrouwen op alle clients als vertrouwelijk (confidential) voor het web, openbare (public) native app-clients en hun bijbehorende soorten redirect-URI's te erkennen.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{oauth2_native.png}
+  \caption{OAuth 2.0 verloop in native apps}
+  \label{fig:example2}
+\end{figure}
+\newline
+Dit wordt bereikt door het autorisatieverzoek in de browser te openen en een redirect-URI te gebruiken die het autorisatieantwoord terugstuurt naar de native app.
+\newline
+\newline
+Het ontvangen van de Autorisatiereactie in een Native App gebeurt ook via een redirect URI, er zijn verschillende opties:
+\newline
+- Omleiding van URI-schema voor privégebruik: nadat de auth-server het verzoek heeft voltooid, wordt deze omgeleid naar de omleidings-URI van de client, com.example.app:/oauth2redirect/example-provider, dit resulteert erin dat het besturingssysteem de native app start en de URI als startparameter.
+\newline
+- Geclaimde 'https'-schema-URI-omleiding: https://app.example.com/oauth2redirect/example-provider, door de app geclaimde 'https'-schema-omleidings-URI's hebben enkele voordelen vergeleken met andere native app-omleidingsopties, omdat de identiteit van de de bestemmingsapp wordt door het besturingssysteem gegarandeerd aan de autorisatieserver. Om deze reden moeten native apps deze waar mogelijk boven de andere opties gebruiken.
+\newline
+- Loopback Interface Redirection: http://127.0.0.1:51004/oauth2redirect/example-provider, voornamelijk voor desktop-apps die een poort op de loopback-netwerkinterface kunnen openen zonder speciale machtigingen nodig te hebben, kunnen de loopback-interface gebruiken om de OAuth te ontvangen omleiden.
 
 
-  \subsection{JWT huidige Best Practices}%
-  \label{subsec:jwt-huidige-best-practices}
-  Deze sectie lijst de bekende en mogelijke problemen op met JWT-implementaties en -inzet. Elk probleem wordt gevolgd door verwijzingen naar een of meer maatregelen om deze problemen te verhelpen.
-  \begin{enumerate}[label=\textbf{-}]
-      \item Zwakke Handtekeningen en Onvoldoende Validatie van Handtekeningen
-      \item Zwakke Symmetrische Sleutels: Deze zijn even onveilig als makkelijk te onthouden wachtwoorden.
-      \item Onjuiste Samenstelling van Encryptie en Handtekening: Sommige bibliotheken die een JWE-versleutelde JWT ontcijferen om een JWS-ondertekend object te verkrijgen, valideren niet altijd de interne handtekening.
-      \item Plaintext lek door Analyse van Cijfertekstlengte: Veel encryptiealgoritmen lekken informatie over de lengte van de oorspronkelijke tekst.
-      \item Onveilig Gebruik van Elliptische Curve-Encryptie
-      \item Veelvoud van JSON-coderingen
-      \item Substitutieaanvallen: Dit zijn aanvallen waarbij een ontvanger een JWT krijgt die voor hem bedoeld was en probeert deze te gebruiken bij een andere ontvanger waarvoor die JWT niet bedoeld was.
-      \item Kruis-JWT-verwarring: Gevallen voorkomen waarin JWT-tokens die zijn uitgegeven voor een bepaald doel, worden ondermijnd en gebruikt voor een ander doel.
-      \item Indirecte Aanvallen op de Server
-  \end{enumerate}
-  Best Practices
-  \begin{enumerate}[label=\textbf{-}]
-    \item Voer algoritmeverificatie uit: Zorg ervoor dat de algoritmen die worden gebruikt voor het ondertekenen en versleutelen van JWT's veilig zijn.
-    \item Gebruik geschikte algoritmen: Gebruik veilige algoritmen voor het ondertekenen en versleutelen van JWT's.
-    \item Valideer alle cryptografische bewerkingen: Zorg ervoor dat alle cryptografische bewerkingen correct worden uitgevoerd.
-    \item Valideer cryptografische invoer: Zorg ervoor dat alle invoer voor cryptografische bewerkingen correct is. Dit omvat het valideren van de lengte van de invoer, het controleren van de invoer op ongeldige tekens en het valideren van de invoer tegen een lijst met bekende sleutels.
-    \item Zorg ervoor dat cryptografische sleutels voldoende entropie hebben: Entropie is een maat voor de onvoorspelbaarheid van een reeks gegevens.
-    \item Vermijd compressie van coderingsinvoer: Compressie van coderingsinvoer kan leiden tot lekken van informatie over de oorspronkelijke tekst.
-    \item Gebruik UTF-8: Zorg ervoor dat alle tekst die wordt gebruikt in JWT's wordt gecodeerd in UTF-8.
-    \item Valideer de uitgever en het onderwerp: Issuer en Subject
-    \item Gebruik en valideer doelgroep: Audience
-    \item Vertrouw ontvangen claims niet
-    \item Gebruik expliciet typen
-    \item Gebruik wederzijds exclusieve validatieregels voor verschillende soorten JWT's
-  \end{enumerate}
-  \autocite{Sheffer2020}
+\subsection{OAuth 2.0: Bearer Token gebruik}%
+\label{subsec:oauth-2.0-bearer-token-gebruik}
+OAuth 2.0 bearer tokens kunnen worden gebruikt in HTTP-verzoeken om toegang te krijgen tot beveiligde bronnen \autocite[p.~{Section 1.0}]{Jones2012}.
+Een bearer token is een token dat kan worden gebruikt door iedereen die eigenaar is van het token, zonder dat er bewijs nodig is van het bezit van cryptografisch materiaal \autocite[p.~{Section 1.2}]{Jones2012}.
+Er worden drie manieren beschreven om een bearer token in een aanvraag op te nemen: in de Authorization-header, als een formuliergecodeerde body-parameter of als een URI-queryparameter \autocite[p.~{Section 2.1}]{Jones2012}. Als een verzoek mislukt, moet de bronserver een 401-statuscode en een foutcode retourneren, zoals 'invalid\verb|_|request', 'invalid\verb|_|token' of 'insufficient\verb|_|scope' \autocite[p.~{Section 3.0}]{Jones2012}.
+Het gebruik van TLS, het valideren van certificaten, het uitgeven van tokens voor de korte termijn en het niet opslaan van tokens in cookies zijn elk sterk aanbevolen \autocite[p.~{Section 5.0}]{Jones2012}.
 
 
-  \subsection{OpenID Connect}%
-  \label{subsec:openid-connect}
-  OpenID Connect is een identiteitslaag bovenop OAuth 2.0, dat wordt gebruikt voor authenticatie. Het is een eenvoudige identiteitslaag die bovenop OAuth 2.0 is gebouwd en die de authenticatie van gebruikers mogelijk maakt. OpenID Connect biedt een eenvoudige manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services. Het maakt gebruik van JSON Web Tokens (JWT's) om claims over gebruikers te verstrekken en om gebruikers te verifiëren. OpenID Connect is ontworpen om eenvoudig te implementeren en te gebruiken en biedt een veilige en betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
-  \newline
-  \newline
-  OpenID Connect biedt een aantal voordelen ten opzichte van traditionele authenticatiemethoden, waaronder:
-  \begin{enumerate}[label=\textbf{-}]
-      \item Eenvoudige implementatie: OpenID Connect is eenvoudig te implementeren en te gebruiken en biedt een gestandaardiseerde manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
-      \item Veilige en betrouwbare authenticatie: OpenID Connect maakt gebruik van JSON Web Tokens (JWT's) om claims over gebruikers te verstrekken en om gebruikers te verifiëren. Dit biedt een veilige en betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
-      \item Flexibiliteit: OpenID Connect biedt een flexibele manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services. Het ondersteunt verschillende authenticatiemethoden en kan worden gebruikt in een breed scala van toepassingen.
-      \item Schaalbaarheid: OpenID Connect is schaalbaar en kan worden gebruikt in grote en complexe omgevingen. Het biedt een betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
-  \end{enumerate}
-  \autocite{Sakimura2014}
+\subsection{JWT huidige Best Practices}%
+\label{subsec:jwt-huidige-best-practices}
+Deze sectie lijst de bekende en mogelijke problemen op met JWT-implementaties en -inzet. Elk probleem wordt gevolgd door verwijzingen naar een of meer maatregelen om deze problemen te verhelpen.
+\begin{enumerate}[label=\textbf{-}]
+    \item Zwakke Handtekeningen en Onvoldoende Validatie van Handtekeningen
+    \item Zwakke Symmetrische Sleutels: Deze zijn even onveilig als makkelijk te onthouden wachtwoorden.
+    \item Onjuiste Samenstelling van Encryptie en Handtekening: Sommige bibliotheken die een JWE-versleutelde JWT ontcijferen om een JWS-ondertekend object te verkrijgen, valideren niet altijd de interne handtekening.
+    \item Plaintext lek door Analyse van Cijfertekstlengte: Veel encryptiealgoritmen lekken informatie over de lengte van de oorspronkelijke tekst.
+    \item Onveilig Gebruik van Elliptische Curve-Encryptie
+    \item Veelvoud van JSON-coderingen
+    \item Substitutieaanvallen: Dit zijn aanvallen waarbij een ontvanger een JWT krijgt die voor hem bedoeld was en probeert deze te gebruiken bij een andere ontvanger waarvoor die JWT niet bedoeld was.
+    \item Kruis-JWT-verwarring: Gevallen voorkomen waarin JWT-tokens die zijn uitgegeven voor een bepaald doel, worden ondermijnd en gebruikt voor een ander doel.
+    \item Indirecte Aanvallen op de Server
+\end{enumerate}
+Best Practices
+\begin{enumerate}[label=\textbf{-}]
+  \item Voer algoritmeverificatie uit: Zorg ervoor dat de algoritmen die worden gebruikt voor het ondertekenen en versleutelen van JWT's veilig zijn.
+  \item Gebruik geschikte algoritmen: Gebruik veilige algoritmen voor het ondertekenen en versleutelen van JWT's.
+  \item Valideer alle cryptografische bewerkingen: Zorg ervoor dat alle cryptografische bewerkingen correct worden uitgevoerd.
+  \item Valideer cryptografische invoer: Zorg ervoor dat alle invoer voor cryptografische bewerkingen correct is. Dit omvat het valideren van de lengte van de invoer, het controleren van de invoer op ongeldige tekens en het valideren van de invoer tegen een lijst met bekende sleutels.
+  \item Zorg ervoor dat cryptografische sleutels voldoende entropie hebben: Entropie is een maat voor de onvoorspelbaarheid van een reeks gegevens.
+  \item Vermijd compressie van coderingsinvoer: Compressie van coderingsinvoer kan leiden tot lekken van informatie over de oorspronkelijke tekst.
+  \item Gebruik UTF-8: Zorg ervoor dat alle tekst die wordt gebruikt in JWT's wordt gecodeerd in UTF-8.
+  \item Valideer de uitgever en het onderwerp: Issuer en Subject
+  \item Gebruik en valideer doelgroep: Audience
+  \item Vertrouw ontvangen claims niet
+  \item Gebruik expliciet typen
+  \item Gebruik wederzijds exclusieve validatieregels voor verschillende soorten JWT's
+\end{enumerate}
+\autocite{Sheffer2020}
 
 
-  \subsection{Biometrische authenticatie}%
-  \label{subsec:biometrische-authenticatie}
-  Biometrische authenticatie is een methode voor het verifiëren van de identiteit van een persoon op basis van fysieke of gedragskenmerken. Het maakt gebruik van biometrische gegevens zoals vingerafdrukken, gezichtsherkenning en irisscans om gebruikers te verifiëren en toegang te verlenen tot systemen, applicaties en gegevens. Biometrische authenticatie biedt een veilige en gebruiksvriendelijke manier om gebruikers te verifiëren en biedt bescherming tegen identiteitsdiefstal en fraude. Het wordt gebruikt in een breed scala van toepassingen, waaronder mobiele apparaten, computers, toegangscontrolesystemen en financiële transacties. Biometrische authenticatie wordt steeds populairder vanwege de groeiende behoefte aan veilige en gemakkelijke manieren om gebruikers te verifiëren en hun identiteit te beschermen. Het biedt een effectieve manier om de beveiliging van systemen en gegevens te verbeteren en biedt een betere gebruikerservaring dan traditionele wachtwoordgebaseerde methoden. Biometrische authenticatie wordt beschouwd als een van de meest veilige en betrouwbare methoden voor het verifiëren van de identiteit van een persoon en wordt steeds vaker gebruikt in verschillende sectoren, waaronder banksector, gezondheidszorg, overheid en bedrijfsleven.
-  \newline
-  \newline
-  Misbruik van traditionele beveiligings maatregelen, zoals wachtwoorden, heeft geleid tot de ontwikkeling van biometrische authenticatie als een veiligere en betrouwbaardere methode voor het verifiëren van de identiteit van een persoon. Biometrische gegevens zijn uniek voor elke persoon en kunnen niet, in het slechtste geval moeilijk, worden nagemaakt of gestolen, waardoor ze een effectieve manier zijn om de identiteit van een persoon te verifiëren.
-  
-  \subsubsection{Gezichtsherkenning}%
-  \label{subsubsec:gezichtsherkenning}
-  Deze systemen gebruiken de unieke gelaatstrekken van een persoon om deze te identificeren. Het wordt op verschillende plaatsen gebruikt, zoals op smartphones, creditcardbetalingen en bij wetshandhaving.
-  
-  \subsubsection{Vingerafdrukherkenning}%
-  \label{subsubsec:vingerafdrukherkenning}
-  Vingerafdrukauthenticatie maakt gebruik van de unieke vingerafdruk van een persoon om zijn identiteit te verifiëren. Het kan worden gebruikt om alles te beveiligen, van mobiele apparaten tot auto's en zelfs gebouwen, waardoor het de meest wijd verspreide biometrische authenticatietechnologie is.
-  
-  \subsubsection{Oogherkenning}%
-  \label{subsubsec:oogherkenning}
-  Oogherkenning maakt gebruik van het unieke patroon van iemands iris of netvlies om iemand te identificeren. Omdat dit type biometrische authenticatie moeilijker te implementeren is, komt het minder vaak voor dan de andere soorten biometrische authenticatieopties. Een irisscan vereist een infraroodlichtbron, een camera die IR kan zien en minimale lichtvervuiling om nauwkeurigheid te garanderen. Hoewel het uitdagingen met zich meebrengt, is het een van de meest nauwkeurige biometrische authenticatiesystemen die beschikbaar zijn als aan deze voorwaarden wordt voldaan. Oogherkenning wordt over het algemeen gebruikt in situaties waarin de veiligheid het meest kritisch is, zoals bij nucleaire onderzoeksfaciliteiten, enz.
-  
-  \subsubsection{Spraakherkenning}%
-  \label{subsubsec:spraakherkenning}
-  Spraakherkenning maakt gebruik van de toon, toonhoogte en frequenties die uniek zijn voor een individu om deze te authenticeren. Dit is de meest gebruikte biometrie om gebruikers te verifiëren wanneer ze contact opnemen met een callcenter voor klantenservice (bijvoorbeeld online bankieren).
-  
-  \subsubsection{Gangherkenning}%
-  \label{subsubsec:gangherkenning}
-  Gangherkenning authenticeert door gebruik te maken van de manier waarop iemand loopt om hem/haar te identificeren. Elke persoon loopt een beetje anders, dus de manier waarop iemand de ene voet voor de andere zet, is een effectieve manier om zijn identiteit te verifiëren. Op dit moment is het geen gebruikelijke vorm van authenticatie, maar de verwachting is dat dit steeds gebruikelijker zal worden naarmate toekomstige vormen van authenticatie populairder worden.
-  
-  \subsubsection{Aderherkenning}%
-  \label{subsubsec:aderherkenning}
-  Bij aderherkenning wordt gebruik gemaakt van het patroon van de bloedvaten in de hand of vinger van een persoon om deze te identificeren. Bij dit type biometrische authenticatie wordt gebruik gemaakt van infraroodlicht om de aderen onder de huid van uw handen of vingers in kaart te brengen. Aderherkenning is uiterst nauwkeurig, meer dan netvlies-/irisherkenning.
-  
-  \subsubsection{Multimodale biometrische authenticatie}%
-  \label{subsubsec:multimodale-biometrische-authenticatie}
-  Eerst moet men begrijpen wat een unimodaal biometrisch authenticatie systeem is. Dit is een systeem dat verifieert op basis van 1 biometrische methode, het is dan uiteraard niet verwondelijk dat dit soort systemen heel kwetsbaar zijn voor spoofing.
-  \newline
-  \newline
-  Dit is waar multimodale biometrische authenticatie in beeld komt. Het is een aanpak waarin meerdere biometrische eigenschappen worden gebruikt om de identiteit van een persoon te verifiëren. Dit kan bijvoorbeeld een combinatie zijn van gezichtsherkenning en vingerafdrukherkenning. Door meerdere biometrische eigenschappen te combineren, wordt de nauwkeurigheid van het authenticatiesysteem verhoogd en wordt het moeilijker voor aanvallers om het systeem te misleiden. Multimodale biometrische authenticatie wordt steeds populairder vanwege de groeiende behoefte aan veilige en betrouwbare authenticatiesystemen.
-  
-  \subsubsection{De voordelen van biometrische authenticatie}%
-  \label{subsubsec:de-voordelen-van-biometrische-authenticatie}
-  \begin{enumerate}[label=\textbf{-}]
-    \item Identiteitsverzekering: \\
-    Biometrische identificatie biedt de antwoorden op “iets wat een persoon heeft en is” en helpt de identiteit te verifiëren. Biometrische authenticatie zorgt voor meer zekerheid voor eindgebruikers. De geavanceerde software laat providers weten dat een persoon is wie ze beweren te zijn door middel van een tastbare, reële eigenschap. Zelfs als een cyberaanvaller het wachtwoord van een gebruiker of het antwoord op zijn beveiligingsvraag kent, is het onmogelijk dat hij of zij een vingerafdruk of irisscan kan dupliceren.
-  
-    \item Gebruiksgemak: \\
-    Hoewel biometrische authenticatie meer technisch van aard is met betrekking tot het interne proces, is het over het algemeen gemakkelijk en snel vanuit het oogpunt van de gebruiker. Door een vingerafdrukscanner te gebruiken om een account te ontgrendelen of gezichtsherkenning, vermindert u het aantal keren dat u moet inloggen met een lang wachtwoord dat meerdere speciale tekens bevat die u waarschijnlijk uiteindelijk zult vergeten.
-  
-    \item Fraudedetectie: \\
-    Biometrie is bijna onmogelijk te repliceren. Ze zijn moeilijk te repliceren en te stelen, en de kans is slechts ongeveer 1 op 64 miljard \autocite{Baker2021} \autocite{Lee2013} dat jouw vingerafdruk precies overeenkomt met die van iemand anders. Het is zeer onwaarschijnlijk dat een hacker toegang krijgt tot alles dat met biometrie is beveiligd.
-  \end{enumerate}
-  
-  \subsubsection{De nadelen van biometrische authenticatie}%
-  \label{subsubsec:de-nadelen-van-biometrische-authenticatie}
-  \begin{enumerate}[label=\textbf{-}]
-    \item Hackbaar: \\
-    Biometrie kan nog steeds worden gehackt. Bedrijven en overheden die de persoonlijke gegevens van gebruikers verzamelen en opslaan, worden voortdurend bedreigd door hackers. Als ze echter het slachtoffer worden van een datalek, zijn biometrische gegevens onvervangbaar en moeten organisaties zorgvuldig omgaan met de biometrische gegevens van gebruikers.
-  
-    \item Gedeeltelijke overeenkomsten: \\
-    De meeste gangbare biometrische authenticatiemethoden zijn afhankelijk van gedeeltelijke informatie om de identiteit van een gebruiker te verifiëren. Tijdens het registratieproces voor het registreren van uw vingerafdruk worden bijvoorbeeld gegevens van uw gehele afdruk gebruikt en omgezet in gegevens. Tijdens toekomstige authenticatie zijn echter slechts gedeeltelijke vingerafdrukgegevens nodig om uw identiteit te verifiëren, zodat het steeds sneller gaat.
-  
-    \item Onnauwkeurigheid: \\
-    Biometrische authenticatie is niet perfect en kan fouten maken bij het identificeren van gebruikers. Dit kan leiden tot frustratie bij gebruikers en kan de veiligheid van het systeem in gevaar brengen. Het is belangrijk om de nauwkeurigheid van biometrische authenticatie te evalueren voordat u het implementeert.
-  \end{enumerate}
+\subsection{OpenID Connect}%
+\label{subsec:openid-connect}
+OpenID Connect is een identiteitslaag bovenop OAuth 2.0, dat wordt gebruikt voor authenticatie. Het is een eenvoudige identiteitslaag die bovenop OAuth 2.0 is gebouwd en die de authenticatie van gebruikers mogelijk maakt. OpenID Connect biedt een eenvoudige manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services. Het maakt gebruik van JSON Web Tokens (JWT's) om claims over gebruikers te verstrekken en om gebruikers te verifiëren. OpenID Connect is ontworpen om eenvoudig te implementeren en te gebruiken en biedt een veilige en betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
+\newline
+\newline
+OpenID Connect biedt een aantal voordelen ten opzichte van traditionele authenticatiemethoden, waaronder:
+\begin{enumerate}[label=\textbf{-}]
+    \item Eenvoudige implementatie: OpenID Connect is eenvoudig te implementeren en te gebruiken en biedt een gestandaardiseerde manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
+    \item Veilige en betrouwbare authenticatie: OpenID Connect maakt gebruik van JSON Web Tokens (JWT's) om claims over gebruikers te verstrekken en om gebruikers te verifiëren. Dit biedt een veilige en betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
+    \item Flexibiliteit: OpenID Connect biedt een flexibele manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services. Het ondersteunt verschillende authenticatiemethoden en kan worden gebruikt in een breed scala van toepassingen.
+    \item Schaalbaarheid: OpenID Connect is schaalbaar en kan worden gebruikt in grote en complexe omgevingen. Het biedt een betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
+\end{enumerate}
+\autocite{Sakimura2014}
 
 
-  \subsection{WebAuthn}%
-  \label{subsec:webauthn}
-  WebAuthn is een W3C-specificatie die een webstandaard biedt voor biometrische authenticatie. Het is bedoeld om een veilige en gebruiksvriendelijke manier te bieden om gebruikers te verifiëren zonder dat ze wachtwoorden hoeven te onthouden. WebAuthn maakt gebruik van openbare en privésleutels om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. Het maakt gebruik van biometrische gegevens zoals vingerafdrukken, gezichtsherkenning en irisscans om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. WebAuthn is ontworpen om de beveiliging van online accounts te verbeteren en gebruikers te beschermen tegen phishingaanvallen en andere vormen van cybercriminaliteit. Het is een open standaard die wordt ondersteund door alle grote webbrowsers en platformen en wordt gebruikt door bedrijven over de hele wereld om hun online accounts te beveiligen. WebAuthn is een belangrijke stap voorwaarts in de strijd tegen cybercriminaliteit en biedt een veilige en gebruiksvriendelijke manier om gebruikers te verifiëren en hun online accounts te beschermen.
-  
-  
-  
-  \section{Auth aanbieders}%
-  \label{sec:auth-aanbieders}
-  In deze sectie worden enkele van de belangrijkste aanbieders van authenticatiediensten besproken, waaronder Auth0, TrustBuilder en meer. Deze aanbieders bieden een reeks diensten en tools om ontwikkelaars te helpen bij het implementeren van authenticatie en autorisatie in hun applicaties. Ze bieden ook ondersteuning voor verschillende authenticatieprotocollen, waaronder OAuth 2.0 en OpenID Connect, en bieden een reeks functies om ontwikkelaars te helpen bij het beheren van gebruikersidentiteiten en toegangscontrole.
-  De reden waarom we aanbieders bespreken en vergelijken is om inzicht te krijgen in wat er momenteel wordt aangeboden op de markt, zodat de must haves kunnen worden bepaald voor de ontwikkeling van een eigen authenticatieservice of light weight instance (zie later).
-  
-  
-  \subsection{Auth0}%
-  \label{subsec:auth0}
-  Auth0 is a popular Identity as a Service (IDaaS) platform that provides authentication and authorization services. It supports various identity providers, social logins, and multi-factor authentication. Auth0 offers a range of features, including user management, single sign-on, and passwordless authentication. It also provides SDKs and APIs for integrating authentication into web and mobile applications. Auth0 is widely used by developers and organizations to secure their applications and protect user identities. It is known for its ease of use, scalability, and security features.
-  
-  
-  \subsection{TrustBuilder}%
-  \label{subsec:trustbuilder}
-  TrustBuilder is een Belgisch bedrijf dat gespecialiseerd is in Identity and Access Management (IAM) oplossingen. Het doel van TrustBuilder is om organisaties te helpen bij het beheren van de toegangscontrole tot hun digitale middelen, zoals applicaties, gegevens en systemen, op een veilige en efficiënte manier. Het biedt oplossingen voor authenticatie, autorisatie en het beheer van identiteiten, waardoor organisaties de beveiliging kunnen versterken en tegelijkertijd een naadloze gebruikerservaring kunnen bieden. TrustBuilder richt zich voornamelijk op bedrijven in verschillende sectoren, waaronder financiële dienstverlening, gezondheidszorg, overheid en retail.
-  
-  
-  \subsection{Andere}%
-  \label{subsec:andere}
-  Naast Auth0 en TrustBuilder zijn er nog andere aanbieders van authenticatiediensten, waaronder:
-  \begin{enumerate}[label=\textbf{-}]
-    \item Okta: Okta is een toonaangevende aanbieder van Identity and Access Management (IAM) oplossingen. Het biedt een reeks diensten en tools om organisaties te helpen bij het beheren van gebruikersidentiteiten en toegangscontrole. Het ondersteund Single Sign-On (SSO), Multi-Factor Authentication (MFA), adaptieve authenticatie, API-toegangsbeheer, lifesyclebeheer van gebruikers en groepen en meer.
-    \item Firebase Authentication: Firebase Authentication is een dienst van Google die ontwikkelaars helpt bij het implementeren van authenticatie in hun applicaties. Het biedt ondersteuning voor verschillende authenticatiemethoden, waaronder e-mail en wachtwoord, telefoonnummer, Google, Facebook, Twitter en GitHub.
-    \item Amazon Cognito: Amazon Cognito is een dienst van Amazon Web Services (AWS) die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor gebruikersregistratie, inloggen, groepen, rollen en toegangsbeheer.
-    \item Microsoft Azure Active Directory: Azure Active Directory is een dienst van Microsoft die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor Single Sign-On (SSO), Multi-Factor Authentication (MFA), en kan worden geïntegreerd met verschillende toepassingen van Microsoft en derden.
-    \item Google Identity Platform: Google Identity Platform biedt authenticatie- en autorisatieservices. Het ondersteunt Google Sign-In, OAuth 2.0 en OpenID Connect voor integratie met de identiteitsservices van Google.
-  \end{enumerate}
+\subsection{Biometrische authenticatie}%
+\label{subsec:biometrische-authenticatie}
+Biometrische authenticatie is een methode voor het verifiëren van de identiteit van een persoon op basis van fysieke of gedragskenmerken. Het maakt gebruik van biometrische gegevens zoals vingerafdrukken, gezichtsherkenning en irisscans om gebruikers te verifiëren en toegang te verlenen tot systemen, applicaties en gegevens. Biometrische authenticatie biedt een veilige en gebruiksvriendelijke manier om gebruikers te verifiëren en biedt bescherming tegen identiteitsdiefstal en fraude. Het wordt gebruikt in een breed scala van toepassingen, waaronder mobiele apparaten, computers, toegangscontrolesystemen en financiële transacties. Biometrische authenticatie wordt steeds populairder vanwege de groeiende behoefte aan veilige en gemakkelijke manieren om gebruikers te verifiëren en hun identiteit te beschermen. Het biedt een effectieve manier om de beveiliging van systemen en gegevens te verbeteren en biedt een betere gebruikerservaring dan traditionele wachtwoordgebaseerde methoden. Biometrische authenticatie wordt beschouwd als een van de meest veilige en betrouwbare methoden voor het verifiëren van de identiteit van een persoon en wordt steeds vaker gebruikt in verschillende sectoren, waaronder banksector, gezondheidszorg, overheid en bedrijfsleven.
+\newline
+\newline
+Misbruik van traditionele beveiligings maatregelen, zoals wachtwoorden, heeft geleid tot de ontwikkeling van biometrische authenticatie als een veiligere en betrouwbaardere methode voor het verifiëren van de identiteit van een persoon. Biometrische gegevens zijn uniek voor elke persoon en kunnen niet, in het slechtste geval moeilijk, worden nagemaakt of gestolen, waardoor ze een effectieve manier zijn om de identiteit van een persoon te verifiëren.
+
+\subsubsection{Gezichtsherkenning}%
+\label{subsubsec:gezichtsherkenning}
+Deze systemen gebruiken de unieke gelaatstrekken van een persoon om deze te identificeren. Het wordt op verschillende plaatsen gebruikt, zoals op smartphones, creditcardbetalingen en bij wetshandhaving.
+
+\subsubsection{Vingerafdrukherkenning}%
+\label{subsubsec:vingerafdrukherkenning}
+Vingerafdrukauthenticatie maakt gebruik van de unieke vingerafdruk van een persoon om zijn identiteit te verifiëren. Het kan worden gebruikt om alles te beveiligen, van mobiele apparaten tot auto's en zelfs gebouwen, waardoor het de meest wijd verspreide biometrische authenticatietechnologie is.
+
+\subsubsection{Oogherkenning}%
+\label{subsubsec:oogherkenning}
+Oogherkenning maakt gebruik van het unieke patroon van iemands iris of netvlies om iemand te identificeren. Omdat dit type biometrische authenticatie moeilijker te implementeren is, komt het minder vaak voor dan de andere soorten biometrische authenticatieopties. Een irisscan vereist een infraroodlichtbron, een camera die IR kan zien en minimale lichtvervuiling om nauwkeurigheid te garanderen. Hoewel het uitdagingen met zich meebrengt, is het een van de meest nauwkeurige biometrische authenticatiesystemen die beschikbaar zijn als aan deze voorwaarden wordt voldaan. Oogherkenning wordt over het algemeen gebruikt in situaties waarin de veiligheid het meest kritisch is, zoals bij nucleaire onderzoeksfaciliteiten, enz.
+
+\subsubsection{Spraakherkenning}%
+\label{subsubsec:spraakherkenning}
+Spraakherkenning maakt gebruik van de toon, toonhoogte en frequenties die uniek zijn voor een individu om deze te authenticeren. Dit is de meest gebruikte biometrie om gebruikers te verifiëren wanneer ze contact opnemen met een callcenter voor klantenservice (bijvoorbeeld online bankieren).
+
+\subsubsection{Gangherkenning}%
+\label{subsubsec:gangherkenning}
+Gangherkenning authenticeert door gebruik te maken van de manier waarop iemand loopt om hem/haar te identificeren. Elke persoon loopt een beetje anders, dus de manier waarop iemand de ene voet voor de andere zet, is een effectieve manier om zijn identiteit te verifiëren. Op dit moment is het geen gebruikelijke vorm van authenticatie, maar de verwachting is dat dit steeds gebruikelijker zal worden naarmate toekomstige vormen van authenticatie populairder worden.
+
+\subsubsection{Aderherkenning}%
+\label{subsubsec:aderherkenning}
+Bij aderherkenning wordt gebruik gemaakt van het patroon van de bloedvaten in de hand of vinger van een persoon om deze te identificeren. Bij dit type biometrische authenticatie wordt gebruik gemaakt van infraroodlicht om de aderen onder de huid van uw handen of vingers in kaart te brengen. Aderherkenning is uiterst nauwkeurig, meer dan netvlies-/irisherkenning.
+
+\subsubsection{Multimodale biometrische authenticatie}%
+\label{subsubsec:multimodale-biometrische-authenticatie}
+Eerst moeten we begrijpen wat een unimodaal biometrisch authenticatie systeem is. Dit is een systeem dat verifieert op basis van 1 biometrische methode, het is dan uiteraard niet verwondelijk dat dit soort systemen heel kwetsbaar zijn voor spoofing.
+\newline
+\newline
+Dit is waar multimodale biometrische authenticatie in beeld komt. Het is een aanpak waarin meerdere biometrische eigenschappen worden gebruikt om de identiteit van een persoon te verifiëren. Dit kan bijvoorbeeld een combinatie zijn van gezichtsherkenning en vingerafdrukherkenning. Door meerdere biometrische eigenschappen te combineren, wordt de nauwkeurigheid van het authenticatiesysteem verhoogd en wordt het moeilijker voor aanvallers om het systeem te misleiden. Multimodale biometrische authenticatie wordt steeds populairder vanwege de groeiende behoefte aan veilige en betrouwbare authenticatiesystemen.
+
+\subsubsection{De voordelen van biometrische authenticatie}%
+\label{subsubsec:de-voordelen-van-biometrische-authenticatie}
+\begin{enumerate}[label=\textbf{-}]
+  \item Identiteitsverzekering: \\
+  Biometrische identificatie biedt de antwoorden op “iets wat een persoon heeft en is” en helpt de identiteit te verifiëren. Biometrische authenticatie zorgt voor meer zekerheid voor eindgebruikers. De geavanceerde software laat providers weten dat een persoon is wie ze beweren te zijn door middel van een tastbare, reële eigenschap. Zelfs als een cyberaanvaller het wachtwoord van een gebruiker of het antwoord op zijn beveiligingsvraag kent, is het onmogelijk dat hij of zij een vingerafdruk of irisscan kan dupliceren.
+
+  \item Gebruiksgemak: \\
+  Hoewel biometrische authenticatie meer technisch van aard is met betrekking tot het interne proces, is het over het algemeen gemakkelijk en snel vanuit het oogpunt van de gebruiker. Door een vingerafdrukscanner te gebruiken om een account te ontgrendelen of gezichtsherkenning, vermindert u het aantal keren dat u moet inloggen met een lang wachtwoord dat meerdere speciale tekens bevat die u waarschijnlijk uiteindelijk zult vergeten.
+
+  \item Fraudedetectie: \\
+  Biometrie is bijna onmogelijk te repliceren. Ze zijn moeilijk te repliceren en te stelen, en de kans is slechts ongeveer 1 op 64 miljard \autocite{Baker2021} \autocite{Lee2013} dat jouw vingerafdruk precies overeenkomt met die van iemand anders. Het is zeer onwaarschijnlijk dat een hacker toegang krijgt tot alles dat met biometrie is beveiligd.
+\end{enumerate}
+
+\subsubsection{De nadelen van biometrische authenticatie}%
+\label{subsubsec:de-nadelen-van-biometrische-authenticatie}
+\begin{enumerate}[label=\textbf{-}]
+  \item Hackbaar: \\
+  Biometrie kan nog steeds worden gehackt. Bedrijven en overheden die de persoonlijke gegevens van gebruikers verzamelen en opslaan, worden voortdurend bedreigd door hackers. Als ze echter het slachtoffer worden van een datalek, zijn biometrische gegevens onvervangbaar en moeten organisaties zorgvuldig omgaan met de biometrische gegevens van gebruikers.
+
+  \item Gedeeltelijke overeenkomsten: \\
+  De meeste gangbare biometrische authenticatiemethoden zijn afhankelijk van gedeeltelijke informatie om de identiteit van een gebruiker te verifiëren. Tijdens het registratieproces voor het registreren van uw vingerafdruk worden bijvoorbeeld gegevens van uw gehele afdruk gebruikt en omgezet in gegevens. Tijdens toekomstige authenticatie zijn echter slechts gedeeltelijke vingerafdrukgegevens nodig om uw identiteit te verifiëren, zodat het steeds sneller gaat.
+
+  \item Onnauwkeurigheid: \\
+  Biometrische authenticatie is niet perfect en kan fouten maken bij het identificeren van gebruikers. Dit kan leiden tot frustratie bij gebruikers en kan de veiligheid van het systeem in gevaar brengen. Het is belangrijk om de nauwkeurigheid van biometrische authenticatie te evalueren voordat u het implementeert.
+\end{enumerate}
+
+
+\subsection{WebAuthn}%
+\label{subsec:webauthn}
+WebAuthn is een W3C-specificatie die een webstandaard biedt voor biometrische authenticatie. Het is bedoeld om een veilige en gebruiksvriendelijke manier te bieden om gebruikers te verifiëren zonder dat ze wachtwoorden hoeven te onthouden. WebAuthn maakt gebruik van openbare en privésleutels om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. Het maakt gebruik van biometrische gegevens zoals vingerafdrukken, gezichtsherkenning en irisscans om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. WebAuthn is ontworpen om de beveiliging van online accounts te verbeteren en gebruikers te beschermen tegen phishingaanvallen en andere vormen van cybercriminaliteit. Het is een open standaard die wordt ondersteund door alle grote webbrowsers en platformen en wordt gebruikt door bedrijven over de hele wereld om hun online accounts te beveiligen. WebAuthn is een belangrijke stap voorwaarts in de strijd tegen cybercriminaliteit en biedt een veilige en gebruiksvriendelijke manier om gebruikers te verifiëren en hun online accounts te beschermen.
+
+
+
+\section{Auth aanbieders}%
+\label{sec:auth-aanbieders}
+In deze sectie worden enkele van de belangrijkste aanbieders van authenticatiediensten besproken, waaronder Auth0, TrustBuilder en meer. Deze aanbieders bieden een reeks diensten en tools om ontwikkelaars te helpen bij het implementeren van authenticatie en autorisatie in hun applicaties. Ze bieden ook ondersteuning voor verschillende authenticatieprotocollen, waaronder OAuth 2.0 en OpenID Connect, en bieden een reeks functies om ontwikkelaars te helpen bij het beheren van gebruikersidentiteiten en toegangscontrole.
+De reden waarom we aanbieders bespreken en vergelijken is om inzicht te krijgen in wat er momenteel wordt aangeboden op de markt, zodat de must haves kunnen worden bepaald voor de ontwikkeling van een eigen authenticatieservice of light weight instance (zie later).
+
+
+\subsection{Auth0}%
+\label{subsec:auth0}
+Auth0 is a popular Identity as a Service (IDaaS) platform that provides authentication and authorization services. It supports various identity providers, social logins, and multi-factor authentication. Auth0 offers a range of features, including user management, single sign-on, and passwordless authentication. It also provides SDKs and APIs for integrating authentication into web and mobile applications. Auth0 is widely used by developers and organizations to secure their applications and protect user identities. It is known for its ease of use, scalability, and security features.
+
+
+\subsection{TrustBuilder}%
+\label{subsec:trustbuilder}
+TrustBuilder is een Belgisch bedrijf dat gespecialiseerd is in Identity and Access Management (IAM) oplossingen. Het doel van TrustBuilder is om organisaties te helpen bij het beheren van de toegangscontrole tot hun digitale middelen, zoals applicaties, gegevens en systemen, op een veilige en efficiënte manier. Het biedt oplossingen voor authenticatie, autorisatie en het beheer van identiteiten, waardoor organisaties de beveiliging kunnen versterken en tegelijkertijd een naadloze gebruikerservaring kunnen bieden. TrustBuilder richt zich voornamelijk op bedrijven in verschillende sectoren, waaronder financiële dienstverlening, gezondheidszorg, overheid en retail.
+
+
+\subsection{Andere}%
+\label{subsec:andere}
+Naast Auth0 en TrustBuilder zijn er nog andere aanbieders van authenticatiediensten, waaronder:
+\begin{enumerate}[label=\textbf{-}]
+  \item Okta: Okta is een toonaangevende aanbieder van Identity and Access Management (IAM) oplossingen. Het biedt een reeks diensten en tools om organisaties te helpen bij het beheren van gebruikersidentiteiten en toegangscontrole. Het ondersteund Single Sign-On (SSO), Multi-Factor Authentication (MFA), adaptieve authenticatie, API-toegangsbeheer, lifesyclebeheer van gebruikers en groepen en meer.
+  \item Firebase Authentication: Firebase Authentication is een dienst van Google die ontwikkelaars helpt bij het implementeren van authenticatie in hun applicaties. Het biedt ondersteuning voor verschillende authenticatiemethoden, waaronder e-mail en wachtwoord, telefoonnummer, Google, Facebook, Twitter en GitHub.
+  \item Amazon Cognito: Amazon Cognito is een dienst van Amazon Web Services (AWS) die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor gebruikersregistratie, inloggen, groepen, rollen en toegangsbeheer.
+  \item Microsoft Azure Active Directory: Azure Active Directory is een dienst van Microsoft die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor Single Sign-On (SSO), Multi-Factor Authentication (MFA), en kan worden geïntegreerd met verschillende toepassingen van Microsoft en derden.
+  \item Google Identity Platform: Google Identity Platform biedt authenticatie- en autorisatieservices. Het ondersteunt Google Sign-In, OAuth 2.0 en OpenID Connect voor integratie met de identiteitsservices van Google.
+\end{enumerate}
 
 
 
@@ -467,7 +469,6 @@ Nu kunnen suggesties worden aangeboden voor verbeteringen en unieke functies in 
 
 Door te focussen op deze gebieden kan een OAuth 2.0 authenticatiesysteem ontwikkeld worden dat zich onderscheidt van bestaande oplossingen door verbeterde prestaties, beveiliging, gebruiksgemak en aanpasbaarheid, waardoor het aantrekkelijk is voor gebruikers die op zoek zijn naar een geavanceerde en uitgebreide oplossing.
 
-
 \subsection{Long list}%
 \label{subsec:long-list}
 \begin{table}[htbp]
@@ -526,7 +527,6 @@ Door te focussen op deze gebieden kan een OAuth 2.0 authenticatiesysteem ontwikk
   \end{adjustbox}
 \end{table}
 
-
 \subsection{Short list}%
 \label{subsec:short-list}
 Hier is een shortlist van de meest veelbelovende alternatieven:
@@ -547,7 +547,6 @@ Voor de proof-of-concept kan worden voorgesteld om één van deze drie alternati
 \end{itemize}
 
 Hierdoor kan de werking van het gekozen alternatief beter begrepen worden en bepalen of het geschikt is voor verdere implementatie in je project.
-
 
 \subsection{Short list alternatieven testen}
 \label{subsec:short-list-alternatieven-testen}

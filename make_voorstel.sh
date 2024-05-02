@@ -13,7 +13,7 @@ if [ -x /usr/bin/podman ]; then
   mount_opts=":Z"
 else
   echo "Using Docker"
-  container_cmd=$(which docker)
+  container_cmd=docker
   mount_opts=
 fi
 
