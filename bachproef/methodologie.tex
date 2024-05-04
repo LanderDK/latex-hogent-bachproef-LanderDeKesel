@@ -141,28 +141,45 @@ Het doel is de alternatieven van de short list te testen en te evalueren op basi
 
 \subsection{Keycloak}%
 \label{subsubsec:keycloak}
-Als eerste werd er genavigeerd naar de documentatie, hier werd snel de download gevonden voor de Docker container. Na het downloaden van de container werd deze gestart en werd de webinterface geopend. De interface was zeer gebruiksvriendelijk en intuïtief, met duidelijke instructies voor het instellen van gebruikers, clients en scopes. Het was ook mogelijk om plugins en themas toe te voegen om de functionaliteit en het uiterlijk van de auth server aan te passen. De documentatie was uitgebreid en er was een actieve community die vragen kon beantwoorden en ondersteuning kon bieden. Keycloak ondersteunde een breed scala aan OAuth 2.0-functies, waaronder autorisatiecodes, impliciete access tokens, client credentials en refresh tokens. Het bood ook ondersteuning voor andere protocollen zoals OpenID Connect en SAML. De beveiligingsfuncties waren robuust, met ondersteuning voor multifactor authenticatie en integratie met externe identiteitsproviders. Keycloak werd regelmatig bijgewerkt en onderhouden en had integraties met populaire frameworks en platforms. Het was gratis en open source, wat het een aantrekkelijke optie maakte voor ontwikkelaars die op zoek waren naar een krachtige en aanpasbare auth server.
+Als eerste werd er genavigeerd naar de documentatie, hier werd snel de download gevonden voor de Docker container. Na het downloaden van de container werd deze gestart en werd de webinterface geopend. De interface was zeer gebruiksvriendelijk en intuïtief, met duidelijke instructies voor het instellen van gebruikers, clients en scopes. Het was ook mogelijk om plugins en themas toe te voegen om de functionaliteit en het uiterlijk van de auth server aan te passen. De documentatie was uitgebreid en er was een actieve community die vragen kon beantwoorden en ondersteuning kon bieden. Keycloak ondersteunde een breed scala aan OAuth 2.0-functies, waaronder autorisatiecodes, impliciete access tokens, client credentials en refresh tokens. Het bood ook ondersteuning voor andere protocollen zoals OpenID Connect en SAML. De beveiligingsfuncties waren robuust, met ondersteuning voor multifactor authenticatie en integratie met externe identiteitsproviders. Keycloak word regelmatig bijgewerkt en onderhouden en heeft integraties met populaire frameworks en platforms. Het is gratis en open source, wat het een aantrekkelijke optie maakte voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
 Het was zelfs niet nodig om een proof-of-concept op te zetten, omdat u de SPA-testapplicatie op de Keycloak-website kunt gebruiken. Dit is een geweldige manier om de functionaliteit van Keycloak te verkennen en te begrijpen hoe het werkt in de praktijk en duurt slechts enkele minuten om op te zetten.
 Met de ervaring die is opgedaan met Keycloak, kan worden geconcludeerd dat deze oplossing zeer gebruiksvriendelijk is met veel configuratie mogelijkheden en een zeer uitgebreide documentatie heeft. De ``Getting started with Docker'' handleiding is zeer duidelijk en eenvoudig te volgen. De webinterface is intuïtief en biedt een breed scala aan functies voor het beheren van gebruikers, clients en scopes. De ondersteuning voor OAuth 2.0 en andere protocollen is uitgebreid en de beveiligingsfuncties zijn robuust. De actieve community en regelmatige updates maken Keycloak een aantrekkelijke optie voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
+\newline
+Keycloak is een open-source Identity and Access Management (IAM) oplossing die een breed scala aan functies biedt voor het beheren van identiteiten, authenticatie en autorisatie. Als het gaat om OAuth 2.0-functionaliteit, biedt Keycloak verschillende mogelijkheden, waaronder:
+Uiteraard OAuth 2.0 want het fungeert als een OAuth 2.0 Authorization Server, waardoor ontwikkelaars toegang krijgen tot de mogelijkheden van OAuth 2.0 voor het beveiligen van hun applicaties en API's.
+Naast OAuth 2.0 biedt Keycloak ondersteuning voor OpenID Connect, waardoor het mogelijk is om inlog- en authenticatiefuncties toe te voegen aan applicaties met behulp van OIDC.
+Het biedt functionaliteit voor tokenintrospectie, waarmee applicaties de geldigheid en reikwijdte van OAuth 2.0-tokens kunnen verifiëren.
+Keycloak ondersteunt tokenherroeping, waardoor uitgegeven tokens ongeldig kunnen worden gemaakt indien nodig, bijvoorbeeld bij het intrekken van toestemming door de gebruiker of bij verlies of diefstal van toegangstokens.
+Applicaties kunnen dynamisch worden geregistreerd bij Keycloak, waardoor het gemakkelijk wordt om nieuwe applicaties toe te voegen en te beheren.
 
 \subsection{Hydra}%
 \label{subsubsec:hydra}
 Opnieuw werd er eerst gezocht naar documentatie, dit werd gevonden onder de ``Self-hosting'' sectie. De download werd hier ook gevonden voor de Docker container.
 Maar het opzetten en zelfs starten van de container was niet eenvoudig in vergelijking met Keycloak. Na dezelfde hoeveelheid tijd te hebben besteed aan Hydra als aan Keycloak, was het nog steeds niet gelukt om de webinterface te openen en de auth server te configureren. 
 Dit was een groot pijnpunt, omdat het niet mogelijk was om de functionaliteit van Hydra te verkennen en te testen. Dit maakte het al snel minder aantrekkelijk om Hydra te gebruiken boven Keycloak. Het was duidelijk dat Hydra een steilere leercurve had en meer configuratie vereiste om aan de slag te gaan. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een snelle en eenvoudige manier om een auth server op te zetten.
-De documentatie lijk wel uitgebreid, maar er zijn veel meer stappen en configuratie vereist om Hydra aan de praat te krijgen. 
+De documentatie lijkt wel uitgebreid, maar er zijn veel meer stappen en configuratie vereist om Hydra aan de praat te krijgen. 
 Echter zijn er wel een aantal methoden om in contact te komen met de community, dus het is mogelijk dat er hulp kan worden gevonden om Hydra aan de praat te krijgen.
+\newline
+Hydra biedt een vergelijkbare reeks OAuth 2.0-functionaliteiten als Keycloak, maar met minder functionaliteit voor identiteits- en toegangsbeheer.
 
 \subsection{Oathkeeper}%
 \label{subsubsec:oathkeeper}
 De documentatie was beter en de stappen waren gedetailleerder en het was mogelijk een aantal dingen uit te testen en een vaststelling te maken: namelijk dat dit enkel gericht is op API-gateway functionaliteit. 
 Dit wil zeggen dat er geen UI is omdat er vooral moet worden geconfigureerd via de command line. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een gebruiksvriendelijke en intuïtieve manier om een auth server op te zetten.
-Ondanks is dit wel een goede oplossing, maar valt het een beetje buiten de scope van dit onderzoek, omdat er geen UI is en het vooral is op API-gateway functionaliteit.
-
+Ondanks is dit wel een goede oplossing, maar valt het een beetje buiten de scope van dit onderzoek, omdat er geen UI is en het vooral gericht is op API-gateway functionaliteit.
+\newline
+Oathkeeper is een open-source Identity and Access Proxy (IAP) ontwikkeld door ORY. Het biedt een reeks functies voor het beheren van toegangscontrole, authenticatie en autorisatie in microservices-architecturen en cloud-native omgevingen. Als het gaat om OAuth 2.0-functionaliteit, biedt Oathkeeper verschillende mogelijkheden:
+Oathkeeper kan fungeren als een proxy voor OAuth 2.0 Authorization Servers, waardoor het mogelijk is om OAuth 2.0-autorisatie te implementeren voor het beveiligen van applicaties en API's.
+Het biedt mogelijkheden voor het valideren van OAuth 2.0-tokens (Token Validation), waardoor applicaties kunnen controleren of de ontvangen tokens geldig zijn en of ze de benodigde toegangsrechten hebben.
+Het stelt ontwikkelaars in staat om beleidsregels (Policy Enforcement) te definiëren en af te dwingen voor toegangscontrole, waardoor granulaire controle mogelijk is over welke gebruikers toegang hebben tot welke resources.
+Oathkeeper maakt het mogelijk om access control rules te configureren op basis van verschillende criteria, zoals gebruikersgroepen, scopes en andere claims in OAuth 2.0-tokens.
 
 \section{Docker Images vergelijken}%
 \label{subsec:docker-images-vergelijken}
-Op basis van de eerder genoemde criteria, werden de volgende Docker Images vergeleken: Keycloak, Hydra en Oathkeeper.
+Op basis van de eerder genoemde criteria, werden de volgende Docker Images verder besproken en vergeleken: Keycloak, Hydra en Oathkeeper.
+De bedoeling van deze sectie is om nog eens op te sommen wat elk van de alternatieven in de short list goed of minder doen, per vergelijkingscriterium.
+Dit werd al eens kort aangehaald in de tweede tabel in de long list, maar graag werd hier verder in detail op ingegaan, zodat men weet welk alternatief
+het best past bij zijn of haar use case.
 
 \begin{enumerate}
   \item Gebruiksgemak en configuratie:
@@ -188,75 +205,107 @@ Op basis van de eerder genoemde criteria, werden de volgende Docker Images verge
   
   \item Schaalbaarheid en prestaties:
   \begin{itemize}
-    \item Keycloak kan in grootschalige implementaties prestatieproblemen ondervinden.
-    \item Hydra is ontworpen met schaalbaarheid in gedachten en presteert over het algemeen goed in grote omgevingen.
-    \item Oathkeeper is lichtgewicht en schaalbaar, maar het ontbreekt mogelijk aan enkele geavanceerde functies voor grote implementaties.
+    \item Keycloak is een robuust en schaalbaar platform dat wordt gebruikt in verschillende omgevingen, variërend van kleine tot grote ondernemingen. Het biedt clusteringmogelijkheden voor schaalbaarheid en kan worden geconfigureerd voor hoge beschikbaarheid. De prestaties zijn over het algemeen goed, maar bij zeer grote implementaties kan het nodig zijn om de infrastructuur zorgvuldig te plannen en te schalen om optimale prestaties te garanderen.
+    \item Hydra is ook ontworpen met schaalbaarheid in gedachten en wordt vaak gebruikt in moderne cloudomgevingen. Het is gebouwd met behulp van Go, wat bekend staat om zijn goede prestaties en efficiënt gebruik van systeembronnen. Hydra kan worden geconfigureerd voor clustering en hoge beschikbaarheid om te voldoen aan de behoeften van grootschalige implementaties. Over het algemeen presteert Hydra goed in termen van snelheid en schaalbaarheid.
+    \item Oathkeeper is ontworpen met schaalbaarheid in gedachten en kan worden gebruikt in cloud-native omgevingen waar microservices worden gebruikt. Het is lichtgewicht en kan horizontaal worden geschaald om te voldoen aan de vereisten van groeiende applicaties en services. De prestaties kunnen over het algemeen goed zijn, maar net als bij Keycloak is het belangrijk om de infrastructuur en configuratie te optimaliseren voor maximale efficiëntie.
   \end{itemize}
   
   \item Aanpasbaarheid en uitbreidbaarheid:
   \begin{itemize}
-    \item Keycloak biedt enige mate van aanpasbaarheid via plugins en themas.
-    \item Hydra biedt uitgebreide aanpassingsmogelijkheden met behulp van plugins en aangepaste logica.
-    \item Oathkeeper biedt mogelijkheden voor aanpassing, maar het is meer gericht op standaard API-gateway functionaliteit.
+    \item Keycloak biedt een krachtig extensiemodel waarmee ontwikkelaars functionaliteit kunnen aanpassen en uitbreiden met behulp van plugins en aangepaste code. Het ondersteunt verschillende soorten extensies, waaronder authenticators, thema's, providers en meer. Met behulp van het JBoss Modules-systeem kunnen externe modules worden gemaakt en ingezet om aanvullende functionaliteit toe te voegen. Het aanpassen van Keycloak is over het algemeen goed gedocumenteerd en er zijn veel voorbeelden en community-ondersteuning beschikbaar.
+    \item Hydra heeft een modulair ontwerp dat aanpassingen en uitbreidingen mogelijk maakt, zij het met een iets andere benadering dan Keycloak en Oathkeeper. Het biedt ondersteuning voor plugins voor bepaalde functionaliteit, zoals authenticators en authorizers. Hydra is gebouwd met behulp van Go, wat een krachtige en efficiënte programmeertaal is, maar het kan zijn dat ontwikkelaars die niet bekend zijn met Go en de Hydra-architectuur meer moeite hebben om aanpassingen te maken.
+    \item Oathkeeper biedt ook mogelijkheden voor aanpassing en uitbreiding, zij het in mindere mate dan Keycloak. Het ondersteunt plugins voor authenticatie- en autorisatiestrategieën, waardoor ontwikkelaars kunnen aanpassen hoe toegangscontrole wordt afgedwongen. Hoewel de documentatie niet zo uitgebreid is als die van Keycloak, biedt Oathkeeper wel enige ondersteuning voor aangepaste code en integratie met externe systemen.
   \end{itemize}
   
   \item Documentatie en community ondersteuning:
   \begin{itemize}
-    \item Keycloak heeft een grote community en uitgebreide documentatie.
-    \item Hydra heeft ook een actieve community, maar de documentatie kan op sommige gebieden ontoereikend zijn.
-    \item Oathkeeper heeft een groeiende community, maar de documentatie kan nog wat uitgebreider worden.
+    \item Keycloak heeft uitgebreide documentatie beschikbaar op hun officiële website, inclusief handleidingen, tutorials en referentiedocumentatie. Ze bieden ook Docker-images voor eenvoudige implementatie en hebben een actieve community op hun forums en andere platforms zoals Stack Overflow, waar ontwikkelaars vragen kunnen stellen en ondersteuning kunnen krijgen. De community rond Keycloak is over het algemeen behoorlijk actief en behulpzaam.
+    \item Hydra wordt onderhouden door ORY, en ze bieden documentatie op hun officiële website, inclusief handleidingen, configuratiegidsen en API-referenties, maar de documentatie kan op sommige gebieden ontoereikend zijn. Ze hebben Docker-images beschikbaar voor eenvoudige implementatie en een actieve community op hun forums en GitHub-repository, waar ontwikkelaars vragen kunnen stellen en problemen kunnen melden. De community rond Hydra is over het algemeen behoorlijk betrokken en biedt goede ondersteuning aan gebruikers.
+    \item Oathkeeper heeft ook documentatie beschikbaar op hun officiële website, inclusief installatiehandleidingen en referentiedocumentatie voor configuratie en gebruik. Hoewel de documentatie mogelijk niet zo uitgebreid is als die van Keycloak maar wel uitgebreider dan die van Hydra, bieden ze wel een redelijke basis voor het aan de slag gaan met het systeem. Oathkeeper heeft ook een gemeenschap rond hun GitHub-repository en andere kanalen waar gebruikers vragen kunnen stellen en hulp kunnen krijgen van andere ontwikkelaars.
   \end{itemize}
   
   \item Beveiligingsfuncties:
   \begin{itemize}
-    \item Alle drie de oplossingen bieden robuuste beveiligingsfuncties, waaronder ondersteuning voor multifactor authenticatie en integratie met externe identiteitsproviders.
+    \item Keycloak biedt ondersteuning voor verschillende vormen van MFA, waaronder One-Time Passwords (OTP), SMS-verificatie, e-mailverificatie, biometrische authenticatie en meer. Het kan JWT's (JSON Web Tokens) verifiëren die worden gebruikt voor authenticatie en autorisatie. Ook is er ondersteuning voor integratie met externe identiteitsproviders, waaronder SAML 2.0 Identity Providers, OAuth 2.0 Authorization Servers en LDAP-systemen.
+    \item Hydra zelf biedt geen ingebouwde MFA-functionaliteit, maar kan worden geïntegreerd met externe systemen voor MFA. Het ondersteunt verificatie van JWT's voor het afdwingen van toegangscontrole. Ook kan het worden geconfigureerd om samen te werken met externe identiteitsproviders voor authenticatie en autorisatie.
+    \item Oathkeeper zelf biedt geen ingebouwde MFA-functionaliteit, maar kan worden geïntegreerd met externe systemen voor MFA. Het ondersteunt verificatie van JWT's voor het afdwingen van toegangscontrole. Ook kan het worden geconfigureerd om samen te werken met externe identiteitsproviders voor authenticatie en autorisatie.
   \end{itemize}
   
   \item Onderhoud en updates:
   \begin{itemize}
-    \item Keycloak en Hydra worden actief onderhouden en bijgewerkt.
-    \item Oathkeeper wordt ook regelmatig bijgewerkt, maar de ontwikkeling kan iets minder snel zijn dan bij de andere twee.
+    \item Keycloak wordt weekelijks bijgewerkt met bug fixes en beveiligingspatches, en er zijn regelmatig nieuwe releases met nieuwe functies en verbeteringen. De ontwikkeling van Keycloak is actief en er is een roadmap beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
+    \item Hydra wordt meestal maandelijks bijgewerkt met bug fixes en beveiligingspatches, en er zijn regelmatig nieuwe releases met nieuwe functies en verbeteringen. De ontwikkeling van Hydra is actief en er is een roadmap en changelog beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
+    \item Oathkeeper werd maandelijks bijgewerkt, maar de laatste tijd zijn er minder updates geweest. De ontwikkeling van Oathkeeper lijkt minder actief te zijn dan die van Keycloak en Hydra, maar er zijn nog steeds regelmatig bug fixes en beveiligingspatches beschikbaar. Er is een roadmap en changelog beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
   \end{itemize}
   
   \item Beschikbaarheid van integraties:
   \begin{itemize}
-    \item Alle drie de oplossingen bieden integraties met populaire frameworks, bibliotheken en platforms, hoewel de diepte van integraties kan variëren.
+    \item Keycloak heeft een diepe integratie met Java, Spring Framework, Node.js en Angular. Hoewel er geen officiële React-adapter is, zijn er community-bibliotheken beschikbaar voor integratie met React-toepassingen.
+    \item Hydra is gebouwd in Go en biedt uitstekende integratie met Go-toepassingen. Hoewel er geen officiële Node.js-adapter is, zijn er community-bibliotheken beschikbaar voor integratie met Node.js-toepassingen. Hydra kan worden geïntegreerd met vrijwel elk platform via HTTP, waardoor het geschikt is voor verschillende programmeertalen en frameworks.
+    \item Oathkeeper biedt integraties op laag niveau met verschillende programmeertalen en frameworks, maar het heeft geen specifieke adapters of integraties met populaire frameworks zoals Keycloak. Het kan worden gebruikt in combinatie met verschillende programmeertalen en frameworks via HTTP, waardoor ontwikkelaars vrij zijn om het te integreren zoals ze willen.
   \end{itemize}
   
   \item Kosten en licentie:
   \begin{itemize}
-    \item Keycloak is gratis en open source.
-    \item Hydra en Oathkeeper zijn ook open source, maar sommige functies kunnen onderworpen zijn aan commerciële licenties in bepaalde scenario's.
+    \item Keycloak is een gratis en open-source project, wat betekent dat het vrij te gebruiken is zonder kosten voor licenties. Keycloak wordt uitgebracht onder de Apache License 2.0, wat een permissieve open-source licentie is die gebruikers veel vrijheid biedt bij het gebruik en distribueren van de software. Het staat gebruikers toe om de software aan te passen en te distribueren, zelfs in commerciële contexten, zolang ze voldoen aan de voorwaarden van de licentie.
+    \item Hydra is ook een gratis en open-source project, dus er zijn geen kosten verbonden aan het gebruik ervan. Hydra wordt uitgebracht onder de Apache License 2.0, vergelijkbaar met Keycloak. Dit betekent dat het vrij te gebruiken, aan te passen en te distribueren is onder de voorwaarden van de licentie.
+    \item Oathkeeper is ook een open-source project en is gratis te gebruiken zonder kosten voor licenties. Oathkeeper wordt uitgebracht onder de Apache License 2.0, net als Keycloak en Hydra. Het biedt dezelfde vrijheden en voorwaarden voor gebruik als de andere twee systemen.
   \end{itemize}
 \end{enumerate}
 
-De zwaktes van veel identiteits- en toegangsbeheer oplossingen, waaronder Keycloak, zijn onder andere:
+Op basis van de informatie die we hebben besproken, kunnen we enkele potentiële zwakke punten identificeren voor elk van de auth server-implementaties:
 
-\begin{enumerate}
-  \item Gebruikerservaring
-  Een gebied waarop veel identiteits- en toegangsbeheer oplossingen tekortschieten, is de gebruikerservaring bij het inloggen en beheren van gebruikersaccounts. Vaak zijn de standaard authenticatie- en registratie flows te complex of niet goed afgestemd op de specifieke behoeften van een applicatie. Ontwerpen van intuïtieve en aanpasbare gebruikersinterfaces voor authenticatie en account beheer lijkt interessant.
-  
-  \item Schaalbaarheid en prestaties
-  Bij het beheren van grote aantallen gebruikers en verzoeken kunnen sommige identiteits- en toegangsbeheer oplossingen te maken krijgen met prestatieproblemen en schaalbaarheid uitdagingen. Werken aan het optimaliseren van de prestaties en schaalbaarheid van een oplossing lijk een idee, bijvoorbeeld door gebruik te maken van caching, gegevens partitionering en schaalbare infrastructuur.
-  
-  \item Ondersteuning voor opkomende standaarden
-  Hoewel veel oplossingen voldoen aan de gangbare standaarden zoals OAuth 2.0 en OpenID Connect, kunnen ze achterlopen bij het ondersteunen van opkomende standaarden en technologieën die relevant kunnen zijn voor bepaalde toepassingen. Investeren in het verkennen en implementeren van nieuwe standaarden zoals verifiable credentials en decentralized identifiers is een optie.
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Keycloak}:
+    \begin{itemize}
+        \item \textbf{Resource-intensief}: Voor grootschalige implementaties kan Keycloak behoorlijk resource-intensief zijn, vooral als het gaat om geheugen- en CPU-gebruik.
+    \end{itemize}
+
+    \item \textbf{Hydra}:
+    \begin{itemize}
+        \item \textbf{Steilere leercurve}: Hydra kan een steilere leercurve hebben vanwege zijn meer modulaire en programmeergerichte aanpak. Dit kan het implementeren en aanpassen ervan bemoeilijken voor gebruikers zonder diepgaande technische kennis.
+        \item \textbf{Minder integraties}: Hoewel Hydra flexibel is, biedt het mogelijk minder integraties met populaire frameworks en bibliotheken in vergelijking met Keycloak, vooral voor specifieke programmeertalen en platforms.
+    \end{itemize}
+    
+    \item \textbf{Oathkeeper}:
+    \begin{itemize}
+        \item \textbf{Beperkte functionaliteit}: Oathkeeper biedt mogelijk niet dezelfde uitgebreide functionaliteit als Keycloak, vooral op het gebied van identiteits- en toegangsbeheer. Het kan meer gericht zijn op specifieke use-cases en vereist mogelijk aanvullende tools of integraties voor een complete oplossing.
+        \item \textbf{Minder community ondersteuning}: Oathkeeper heeft mogelijk minder community ondersteuning in vergelijking met Keycloak, wat kan resulteren in minder beschikbare bronnen en hulp bij problemen of vragen.
+    \end{itemize}
 \end{enumerate}
 
-Nu kunnen suggesties worden aangeboden voor verbeteringen en unieke functies in bestaande oplossingen zoals Keycloak, Hydra en Oathkeeper:
+Het is belangrijk op te merken dat deze zwakke punten relatief zijn en afhankelijk zijn van de specifieke behoeften, vaardigheden en vereisten van een project. Wat voor de ene gebruiker als een zwak punt wordt beschouwd, kan voor een andere gebruiker geen probleem zijn. Het is altijd raadzaam om een grondige evaluatie te maken op basis van uw specifieke situatie voordat u een beslissing neemt over welke auth server-implementatie het meest geschikt is voor uw project.
 
-\begin{enumerate}
-  \item Verbeterde schaalbaarheid en prestaties: Focus op het optimaliseren van de schaalbaarheid en prestaties van het systeem, zodat het gemakkelijk kan omgaan met grote aantallen gelijktijdige gebruikers en verzoeken. Gebruik bijvoorbeeld geavanceerde technieken zoals horizontale schaalbaarheid, caching en asynchrone verwerking om de prestaties te verbeteren.
-  
-  \item Verbeterde beveiligingsfuncties: Integreer geavanceerde beveiligingsfuncties zoals geavanceerde bedreiging detectie, geografische toegangscontrole, geavanceerde logging en auditing en machine learning-aangedreven anomalie detectie om de beveiliging van het systeem te verbeteren.
-  
-  \item Gebruiksvriendelijke configuratie en beheer: Zorg voor een intuïtieve gebruikersinterface voor configuratie en beheer, waardoor gebruikers gemakkelijk het systeem kunnen instellen en aanpassen aan hun specifieke behoeften. Bied ook uitgebreide documentatie en ondersteuning om gebruikers te helpen bij het configureren en beheren van het systeem.
-  
-  \item Verbeterde aanpasbaarheid en uitbreidbaarheid: Maak het systeem zeer aanpasbaar en uitbreidbaar, zodat gebruikers gemakkelijk functionaliteit kunnen toevoegen of aanpassen via plugins, extensies of aangepaste code. Bied een goed gedefinieerde API en ontwikkelplatform voor het bouwen van op maat gemaakte integraties en extensies.
-  
-  \item Geavanceerde autorisatie- en toestemming beheer: Ontwikkel geavanceerde autorisatie- en toestemming beheer functionaliteit, waaronder ondersteuning voor dynamische toestemming verlening, beleid gebaseerde toegangscontrole, contextuele autorisatie en geavanceerde gebruikersrollen en machtigingen.
-  
-  \item Verbeterde integraties met externe systemen: Bied uitgebreide integraties met externe systemen en services, waaronder identiteitsproviders, directory services, applicaties en API's. Zorg ervoor dat het systeem gemakkelijk kan integreren met populaire frameworks, bibliotheken en platforms die vaak worden gebruikt door ontwikkelaars.
+\subsection{Verbeteringen voor Bestaande Systemen}%
+\label{subsec:verbeteringen-voor-bestaande-systemen}
+\subsubsection{Verbeteringen voor Keycloak:}%
+\label{subsubsec:verbeteringen-voor-keycloak}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Verbeterde schaalbaarheidsopties}: Implementeer verbeterde schaalbaarheidsopties om de prestaties te optimaliseren voor grootschalige implementaties.
+    \item \textbf{Uitbreiding van integraties}: Werk aan het uitbreiden van integraties met een breder scala aan programmeertalen, frameworks en platforms.
+    \item \textbf{Verbeterde documentatie}: Investeer in het verbeteren van de documentatie met uitgebreidere handleidingen, tutorials en voorbeelden.
 \end{enumerate}
 
-Door te focussen op deze gebieden kan een OAuth 2.0 authenticatiesysteem ontwikkeld worden dat zich onderscheidt van bestaande oplossingen door verbeterde prestaties, beveiliging, gebruiksgemak en aanpasbaarheid, waardoor het aantrekkelijk is voor gebruikers die op zoek zijn naar een geavanceerde en uitgebreide oplossing.
+\subsubsection{Verbeteringen voor Hydra:}%
+\label{subsubsec:verbeteringen-voor-hydra}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Uitbreiding van integraties}: Breid de integraties uit met populaire frameworks en platforms.
+    \item \textbf{Verbeterde prestaties}: Werk aan het optimaliseren van de prestaties van Hydra, vooral voor grootschalige implementaties.
+    \item \textbf{Beveiligingsverbeteringen}: Investeer in het verbeteren van de beveiliging van Hydra door regelmatige audits uit te voeren.
+\end{enumerate}
+
+\subsubsection{Verbeteringen voor Oathkeeper:}%
+\label{subsubsec:verbeteringen-voor-oathkeeper}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Uitbreiding van functieset}: Voeg aanvullende functies toe, zoals ingebouwde ondersteuning voor Multi-Factor Authentication (MFA).
+    \item \textbf{Gebruiksvriendelijkheid verbeteren}: Werk aan het verbeteren van de gebruikerservaring en gebruiksvriendelijkheid van het systeem.
+    \item \textbf{Community-engagement vergroten}: Stimuleer community-engagement door het organiseren van evenementen en webinars.
+\end{enumerate}
+
+\subsection{Suggesties voor de keuze van een bestaand systeem:}%
+\label{subsec:suggesties-voor-de-keuze-van-een-bestaand-systeem}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Keycloak}: Kies Keycloak als u een gebruiksvriendelijke en krachtige oplossing nodig heeft met uitgebreide documentatie en community-ondersteuning.
+    \item \textbf{Hydra}: Selecteer Hydra als u behoefte heeft aan een zeer schaalbare en flexibele oplossing met geavanceerde autorisatiefuncties.
+    \item \textbf{Oathkeeper}: Overweeg Oathkeeper als u een lichtgewicht en eenvoudig te configureren oplossing nodig heeft voor toegangscontrole in API-gateway-omgevingen.
+\end{enumerate}
