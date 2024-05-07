@@ -27,8 +27,58 @@
 %% en geef het een gepaste titel.
 
 
+\section{Vergelijkingscriteria Auth aanbieders}%
+\label{sec:vergelijkingscriteria-auth-aanbieders}
+
+\begin{enumerate}
+  \item Hoofd functionaliteit: Wat zijn de belangrijkste functionaliteiten?
+  \item Ontwikkelaars ervaring: Wat ervaren ontwikkelaars? Hoe gemakkelijk is het te gebruiken? (Documentatie, SDKs, integraties, \ldots)
+  \item Integratie mogelijkheden: Hoe gemakkelijk integreert het met tech stacks, frameworks, gerelateerde producten, \ldots?
+  \item Use Cases: Waarom en wanneer gebruik je de auth aanbieder het best?
+\end{enumerate}
+
+
+\section{Auth aanbieders vergelijken}%
+\label{sec:auth-aanbieders-vergelijken}
+Op basis van de eerder genoemde criteria, werden de volgende Docker Images verder besproken en vergeleken: Auth0, Okta, Firebase Authentication en Amazon Cognito.
+\begin{enumerate}
+  \item Hoofd functionaliteit:
+  \begin{itemize}
+    \item Auth0 biedt een uitgebreide ondersteuning voor diverse identiteitsproviders, waaronder sociale logins en bedrijfsverbindingen, waardoor gebruikers een naadloze en veelzijdige inlogervaring hebben. Het platform gaat verder dan standaard beveiligingsmaatregelen door multi-factor authenticatie (MFA) en anomaly detectie te bieden, waardoor extra bescherming wordt geboden tegen ongeautoriseerde toegangspogingen. Bovendien kunnen bedrijven de inlog- en aanmeldingspagina's aanpassen aan hun eigen huisstijl, wat bijdraagt aan een consistente merkervaring voor gebruikers. Met de rules engine van Auth0 kunnen organisaties op maat gemaakte authenticatie- en autorisatielogica implementeren, waardoor ze flexibel kunnen inspelen op specifieke beveiligingsbehoeften en zakelijke vereisten.
+    \item Okta staat bekend om zijn uitgebreide oplossingen op het gebied van identity and access management (IAM), waaronder een scala aan functionaliteiten die organisaties helpen bij het beheren van gebruikersidentiteiten en toegangsrechten. Enkele van de prominente kenmerken zijn Single Sign-On (SSO), wat gebruikers in staat stelt om met één set inloggegevens toegang te krijgen tot meerdere applicaties, adaptieve authenticatie die dynamisch reageert op verschillende risiconiveaus, en multi-factor authenticatie voor extra beveiligingslagen. Daarnaast biedt Okta ook API Access Management om de beveiliging van API's te waarborgen, en levenscyclusbeheerfunctionaliteiten voor het efficiënt beheren van gebruikersaccounts en groepen binnen een organisatie.
+    \item Firebase Authentication is een cruciaal onderdeel van de uitgebreide Firebase-suite. Het biedt een breed scala aan authenticatiemogelijkheden voor diverse platforms, waaronder web, mobiel en server. Met ondersteuning voor inloggen via e-mail/wachtwoord, sociale media en telefoonnummerverificatie, biedt het een veelzijdige oplossing voor gebruikersidentificatie. Bovendien kan Firebase Authentication naadloos worden geïntegreerd met andere services binnen het Firebase-ecosysteem, waardoor ontwikkelaars een gestroomlijnde en consistente ontwikkelingservaring krijgen.
+    \item Amazon Cognito is een uitgebreide identiteitsservice die wordt beheerd door AWS (Amazon Web Services). Het biedt een scala aan functionaliteiten, waaronder gebruikersregistratie en -aanmelding, multi-factor authenticatie en veilige toegangscontrole. Bovendien integreert het naadloos met AWS Identity and Access Management (IAM), waardoor gedetailleerde controle over toegangsrechten mogelijk is.
+  \end{itemize}
+  
+  \item Ontwikkelaars ervaring:
+  \begin{itemize}
+    \item Auth0 heeft goed gedocumenteerde API's en SDK's voor verschillende platformen en uitgebreide reeks functies voor ontwikkelaars, inclusief hooks voor het aanpassen van workflows.
+    \item Okta heeft goed gedocumenteerde API's en SDK's voor makkelijke integratie mogelijk te maken omdat het kant-en-klare integraties biedt met populaire applicaties.
+    \item Firebase Authentication biedt naadloze integratie met andere Firebase-services, alsook vereenvoudigde SDK's voor populaire platformen.
+    \item Amazon heeft goed gedocumenteerde API's en SDK's voor verschillende programmeertalen met naadloze integratie met andere AWS-services.
+  \end{itemize}
+  
+  \item Integratie mogelijkheden:
+  \begin{itemize}
+    \item Auth0 maakt moeiteloze integratie met diverse technologieën en frameworks mogelijk. Het biedt uitgebreide ondersteuning voor Single Sign-On (SSO) voor alle applicaties, waardoor gebruikers moeiteloos toegang krijgen zonder herhaaldelijk in te loggen.
+    \item Okta kan goed worden geïntegreerd met verschillende cloudservices en bedrijfsapplicaties. Het biedt robuuste ondersteuning voor SSO en toegangsbeheer.
+    \item Firebase Authentication is ontworpen voor integratie met Firebase-aangedreven applicaties. Geschikt voor projecten gebouwd op het Firebase-platform.
+    \item Amazon Cognito integreert soepel met andere AWS-services en cloud-native applicaties. Geschikt voor projecten binnen het AWS-ecosysteem.
+  \end{itemize}
+  
+  \item Use Cases:
+  \begin{itemize}
+    \item Auth0 is geschikt voor een breed scala aan toepassingen, van kleine projecten tot grote bedrijfsoplossingen.
+    \item Okta is zeer geschikt voor ondernemingen die een uitgebreide IAM-oplossing nodig hebben met de nadruk op beveiliging en compliance.
+    \item Firebase Authentication is ideaal voor ontwikkelaars die aan projecten binnen het Firebase-ecosysteem werken.
+    \item Amazon Cognito is ideaal voor applicaties die worden gehost op AWS en biedt schaalbaarheid en nauwe integratie met andere AWS-services.
+  \end{itemize}
+\end{enumerate}
+
+
+
 \section{Vergelijkingscriteria OAuth 2.0 Docker Image's}%
-\label{subsec:vergelijkingscriteria}
+\label{sec:vergelijkingscriteria-oauth2-docker-image}
 
 \begin{enumerate}
   \item Gebruiksgemak en configuratie: Hoe gemakkelijk is het om de Docker-image in te stellen en te configureren voor je specifieke gebruiksscenario? Worden er duidelijke instructies geleverd?
@@ -54,7 +104,7 @@
 
 
 \section{Long list}%
-\label{subsec:long-list}
+\label{sec:long-list}
 \begin{table}[htbp]
   \centering
   \caption{OAuth 2.0-authenticatieservers en Docker-image beschikbaarheid}
@@ -113,7 +163,7 @@
 
 
 \section{Short list}%
-\label{subsec:short-list}
+\label{sec:short-list}
 Hier is een shortlist van de meest veelbelovende alternatieven:
 \begin{enumerate}
     \item Keycloak
@@ -135,12 +185,12 @@ Hierdoor kan de werking van het gekozen alternatief beter begrepen worden en bep
 
 
 \section{Short list alternatieven testen}
-\label{subsec:short-list-alternatieven-testen}
+\label{sec:short-list-alternatieven-testen}
 In deze sectie wordt er verder verdiept in de drie alternatieven, namelijk Keycloak, Hydra en Oathkeeper.
 Het doel is de alternatieven van de short list te testen en te evalueren op basis van de eerder vastgestelde criteria. Indien er pijnpunten of tekortkomingen worden vastgesteld, zullen deze worden opgesomd en zullen er suggesties worden gegeven voor mogelijke verbeteringen.
 
 \subsection{Keycloak}%
-\label{subsubsec:keycloak}
+\label{subsec:keycloak}
 Als eerste werd er genavigeerd naar de documentatie, hier werd snel de download gevonden voor de Docker container. Na het downloaden van de container werd deze gestart en werd de webinterface geopend. De interface was zeer gebruiksvriendelijk en intuïtief, met duidelijke instructies voor het instellen van gebruikers, clients en scopes. Het was ook mogelijk om plugins en themas toe te voegen om de functionaliteit en het uiterlijk van de auth server aan te passen. De documentatie was uitgebreid en er was een actieve community die vragen kon beantwoorden en ondersteuning kon bieden. Keycloak ondersteunde een breed scala aan OAuth 2.0-functies, waaronder autorisatiecodes, impliciete access tokens, client credentials en refresh tokens. Het bood ook ondersteuning voor andere protocollen zoals OpenID Connect en SAML. De beveiligingsfuncties waren robuust, met ondersteuning voor multifactor authenticatie en integratie met externe identiteitsproviders. Keycloak word regelmatig bijgewerkt en onderhouden en heeft integraties met populaire frameworks en platforms. Het is gratis en open source, wat het een aantrekkelijke optie maakte voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
 Het was zelfs niet nodig om een proof-of-concept op te zetten, omdat u de SPA-testapplicatie op de Keycloak-website kunt gebruiken. Dit is een geweldige manier om de functionaliteit van Keycloak te verkennen en te begrijpen hoe het werkt in de praktijk en duurt slechts enkele minuten om op te zetten.
 Met de ervaring die is opgedaan met Keycloak, kan worden geconcludeerd dat deze oplossing zeer gebruiksvriendelijk is met veel configuratie mogelijkheden en een zeer uitgebreide documentatie heeft. De ``Getting started with Docker'' handleiding is zeer duidelijk en eenvoudig te volgen. De webinterface is intuïtief en biedt een breed scala aan functies voor het beheren van gebruikers, clients en scopes. De ondersteuning voor OAuth 2.0 en andere protocollen is uitgebreid en de beveiligingsfuncties zijn robuust. De actieve community en regelmatige updates maken Keycloak een aantrekkelijke optie voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
@@ -153,7 +203,7 @@ Keycloak ondersteunt tokenherroeping, waardoor uitgegeven tokens ongeldig kunnen
 Applicaties kunnen dynamisch worden geregistreerd bij Keycloak, waardoor het gemakkelijk wordt om nieuwe applicaties toe te voegen en te beheren.
 
 \subsection{Hydra}%
-\label{subsubsec:hydra}
+\label{subsec:hydra}
 Opnieuw werd er eerst gezocht naar documentatie, dit werd gevonden onder de ``Self-hosting'' sectie. De download werd hier ook gevonden voor de Docker container.
 Maar het opzetten en zelfs starten van de container was niet eenvoudig in vergelijking met Keycloak. Na dezelfde hoeveelheid tijd te hebben besteed aan Hydra als aan Keycloak, was het nog steeds niet gelukt om de webinterface te openen en de auth server te configureren. 
 Dit was een groot pijnpunt, omdat het niet mogelijk was om de functionaliteit van Hydra te verkennen en te testen. Dit maakte het al snel minder aantrekkelijk om Hydra te gebruiken boven Keycloak. Het was duidelijk dat Hydra een steilere leercurve had en meer configuratie vereiste om aan de slag te gaan. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een snelle en eenvoudige manier om een auth server op te zetten.
@@ -163,7 +213,7 @@ Echter zijn er wel een aantal methoden om in contact te komen met de community, 
 Hydra biedt een vergelijkbare reeks OAuth 2.0-functionaliteiten als Keycloak, maar met minder functionaliteit voor identiteits- en toegangsbeheer.
 
 \subsection{Oathkeeper}%
-\label{subsubsec:oathkeeper}
+\label{subsec:oathkeeper}
 De documentatie was beter en de stappen waren gedetailleerder en het was mogelijk een aantal dingen uit te testen en een vaststelling te maken: namelijk dat dit enkel gericht is op API-gateway functionaliteit. 
 Dit wil zeggen dat er geen UI is omdat er vooral moet worden geconfigureerd via de command line. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een gebruiksvriendelijke en intuïtieve manier om een auth server op te zetten.
 Ondanks is dit wel een goede oplossing, maar valt het een beetje buiten de scope van dit onderzoek, omdat er geen UI is en het vooral gericht is op API-gateway functionaliteit.
@@ -175,7 +225,7 @@ Het stelt ontwikkelaars in staat om beleidsregels (Policy Enforcement) te defini
 Oathkeeper maakt het mogelijk om access control rules te configureren op basis van verschillende criteria, zoals gebruikersgroepen, scopes en andere claims in OAuth 2.0-tokens.
 
 \section{Docker Images vergelijken}%
-\label{subsec:docker-images-vergelijken}
+\label{sec:docker-images-vergelijken}
 Op basis van de eerder genoemde criteria, werden de volgende Docker Images verder besproken en vergeleken: Keycloak, Hydra en Oathkeeper.
 De bedoeling van deze sectie is om nog eens op te sommen wat elk van de alternatieven in de short list goed of minder doen, per vergelijkingscriterium.
 Dit werd al eens kort aangehaald in de tweede tabel in de long list, maar graag werd hier verder in detail op ingegaan, zodat men weet welk alternatief

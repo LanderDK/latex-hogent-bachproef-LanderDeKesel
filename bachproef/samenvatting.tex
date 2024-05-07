@@ -46,48 +46,46 @@
 \chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
 
 Dit onderzoeksvoorstel richt zich op de specifieke uitdagingen met betrekking tot authenticatie en autorisatie in applicatieontwikkeling, met als primaire 
-focus het vereenvoudigen van deze processen. Het doel is om praktische oplossingen te identificeren en implementeren die relevant zijn voor ontwikkelaars 
+focus het vereenvoudigen van deze processen. Het doel is om praktische oplossingen te identificeren die relevant zijn voor ontwikkelaars 
 die in hun projecten worden geconfronteerd met problemen op het gebied van beveiliging en gebruikerservaring. Dit aan de hand van een diepgaande analyse,
 onderzoek en vergelijking van bestaande oplossingen/providers en technologieën/methoden, om zo de meest geschikte en effectieve aanpak te bepalen. 
-% Eventueel,
-% als er tijd over is, zal er een volledig authentificatie- en autorisatiesysteem worden ontwikkeld, dat als referentie kan dienen voor toekomstige
-% ontwikkelaars.
 \newline
 \newline
 Het onderzoek wordt aangedreven door de aanvankelijke uitdagingen bij het beveiligen en toegankelijk maken van applicaties, met authenticatie en 
 autorisatie als cruciale aspecten. Het richt zich op het bieden van een oplossing voor het beveiligen van diverse soorten apps, zoals desktop-, 
-web- en mobiele apps. Graag wordt er een referentie-implementatie ontwikkeld, die ontwikkelaars kunnen gebruiken om hun eigen applicaties te beveiligen,
-zonder te moeten af hangen van externe diensten of aanbieders. Vaak worden externe diensten gebruikt, zoals Auth0, TrustBuilder of Firebase, maar deze
-kunnen beperkingen opleggen en kosten met zich meebrengen. Er wordt te vaak gekozen voor externe diensten, omdat dit vaak de eenvoudigste oplossing is.
-Daarom wordt er in dit onderzoek onderzocht hoe men best te werk kan gaan om een eigen authentificatie- en autorisatiesysteem te ontwikkelen.
-% Opnieuw in geval dat er tijd over is, zal er een ontwikkeling plaatsvinden van een API-backend met diverse endpoints, waarmee ontwikkelaars functionaliteiten 
-% zoals inloggen, registreren, upgraden en meer kunnen implementeren. Daarnaast wordt gewerkt aan een gebruiksvriendelijk dashboard/frontend, waarmee 
-% ontwikkelaars hun gebruikers en andere relevante gegevens effectief kunnen beheren. 
+web- en mobiele apps. Vandaag de dag zijn er al heel wat opties aanwezig hoe men authenticatie en autorisatie kan implementeren in hun applicaties.
+Het doel is dus om te achterhalen hoe dit kan worden aangeboden aan elke ontwikkelaar.
 \newline
 \newline
-% Het onderzoek zal worden uitgevoerd door middel van een iteratieve aanpak, waarbij de focus ligt op het identificeren van de belangrijkste uitdagingen
-% en het ontwikkelen van oplossingen die deze uitdagingen aanpakken. 
-Er zal een grondige analyse worden uitgevoerd van bestaande oplossingen en technologieën,
-waarbij de voor- en nadelen van elke aanpak worden geëvalueerd. Op basis van deze analyse zal een aanpak worden gekozen en geïmplementeerd, waarbij
-de nadruk ligt op het bieden van een eenvoudige, effectieve en veilige oplossing.
-Er zal worden gezocht naar bestaande auth providers. Deze zullen worden geanalyseerd en vergeleken. Er zal worden gekeken naar de voor- en nadelen van
-elke provider. Het zelfde geldt voor de technologieën en methoden die zullen worden gebruikt.
+Er zal een grondige analyse worden uitgevoerd van bestaande oplossingen en technologieën. Als eerst worden de bestaande technologieën onderzocht,
+dit om een grondige kennis te verkrijgen over hoe deze functioneren en vooral hoe deze kunnen worden geïmplementeerd indien men kies een eigen
+authenticatieserver te ontwikkelen. Vervolgens zullen bestaande oplossingen worden geanalyseerd om inzicht te krijgen wat de standaarden zijn die
+men gebruikt bij de ontwikkeling van een authenticatieserver. 
+Door het opstellen van de vergelijkingscriteria, kan er een duidelijk beeld worden geschetst van de voor- en nadelen van elke provider.
+Maar vooral om te kijken of men al dan niet kan vaststellen dat dit hun antwoord is.
+Indien men niet wil afhangen van een derde partij gaan we verder: de analyse of een lichtgewicht instantie, die bijvoorbeeld op een Docker image
+kan draaien, bestaat of niet. Indien dit nog niet bestaat zal er een proof-of-concept worden ontwikkeld, de Docker image zal OAuth 2.0
+autorisatie framework gaan ontwikkelen. Indien dit wel al bestaat zal een vergelijkende studie bestaande alternatieven vergelijken en suggereren.
 \newline
 \newline
-Uit het huidig onderzoekt blijkt dat er uiteraard al veel bestaande providers zijn, maar dat deze vaak beperkingen opleggen en kosten met zich meebrengen.
-Door het opstellen van de vergelijkingscriteria, kan er een duidelijk beeld worden geschetst van de voor- en nadelen van elke provider. Dit zal helpen
-om een weloverwogen keuze te maken. Na het onderzoeken van de bestaand methoden en technologieën, wordt er een duidelijk beeld geschetst van de mogelijkheden
-en beperkingen van elke methode. Dit zal helpen om een weloverwogen keuze te maken bij de combinatie van methoden en technologieën die kunnen worden gebruikt.
+Uit het onderzoek word er veel kennis opgedaan omtrent de bestaande auth technologieën. Met de informatie die beschikbaar is door deze analyse
+zou een ontwikkelaar een eigen authenticatieserver kunnen ontwikkelen. Vervolgens concluderen we uit het huidig onderzoekt dat er al veel bestaande 
+providers zijn, maar dat deze vaak beperkingen opleggen en kosten met zich meebrengen. Als men graag zelf iets implementeert, maar niet volledig
+van nul wilt beginnen, kan men er voor kiezen een lichtgewicht instantie te ontwikkelen. Door dit domein verder te onderzoeken, werd vastgesteld 
+dat deze reeds bestonden. Daarom werd er vervolgens voor gekozen om een vergelijkende studie te houden over de bestaande alternatieven. Uit deze
+studie bleek het al snel dat er maar drie overbleven: Keycloak, Hydra en Oathkeeper. Het resultaat van dit onderzoek stelt dus vast dat men een bestaande
+lichtgewicht instantie kan implementeren, zoals Keycloak, als men volledige controle wil. Het tweede alternatief is een bestaande oplossing/provider
+gebruiken, houd er wel rekening mee dat dit beperkingen en kosten kan met zich meebrengen. Het derde en laatste alternatief, dat vaak het minst zal
+gekozen worden, is om zelf een authenticatieserver te ontwikkelen die bijvoorbeeld het OAuth 2.0 autorisatie framework implementeert. Dit laatste alternatief
+zal de meeste inspanning kosten, maar zal ongetwijfeld de meeste kennis en ervaring opleveren.
 \newline
 \newline
-De doelgroep van dit onderzoek zijn ontwikkelaars die specifieke uitdagingen ervaren bij het implementeren van effectieve authenticatie- en 
-autorisatiesystemen. De focus ligt op concrete problemen waarmee ontwikkelaars worden geconfronteerd, zoals beveiligingslekken, complexe implementaties 
-en gebruikerservaring problemen. 
-\newline
-\newline
-De meerwaarde van dit onderzoek ligt in het bieden van praktische oplossingen voor ontwikkelaars die vergelijkbare uitdagingen tegenkomen. 
-% Dit onderzoek beoogt een volledig authentiek systeem te ontwikkelen (optioneel) en te documenteren. 
-De meerwaarde ligt in het verschaffen van gedetailleerde 
-inzichten in het ontwikkelproces, inclusief overwegingen bij de keuze van technologieën en de ervaringen tijdens de implementatie. Hierdoor kan het 
-dienen als een waardevolle referentie en informatiebron voor toekomstige ontwikkelaars, waarbij het hen helpt om efficiënter en effectiever met 
-soortgelijke uitdagingen om te gaan.
+Conclusie: authenticatie en autorisatie in applicatieontwikkeling is al veel verder ontwikkeld dan initiëel gedacht bij het begin van dit onderzoek.
+Dit onderzoek werd gestart met weinig kennis over auth en werd beëindigd met een grondige basis om zelf een authenticatieserver te ontwikkelen.
+Maar dit is niet de echte conclusie van dit onderzoek. Als een ontwikkelaar of een bedrijf authenticatie en autorisatie in hun applicaties wil
+integreren, kunnen we concluderen dat er vaak zal gegrepen worden naar een bestaande provider. Dit is de makkelijkste weg, maar vaak niet de
+goedkoopste weg. Vaak denken bedrijven alleen aan de korte termijn voordelen en zal er vaak op lange termijn worden ingezien dat er een andere
+mogelijkheid was. Zoals een Docker image van Keycloak bijvoorbeeld, die on-premise draait. Of men kan nog verder gaan: een zelf ontwikkelde
+authenticatieserver implementeren die het OAuth 2.0 autorisatie framework implementeert. Wat gesuggereerd wordt: bij weinig ervaring gebruikt men
+best een bestaande provider, bij matige ervaring kan men Keycloak on-premise gebruiken, en als laatste bij voldoende ervaring kan men een zelf
+ontwikkelde authenticatieserver implementeren die het OAuth 2.0 autorisatie framework implementeert.
