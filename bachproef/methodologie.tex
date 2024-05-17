@@ -201,6 +201,56 @@ Naast OAuth 2.0 biedt Keycloak ondersteuning voor OpenID Connect, waardoor het m
 Het biedt functionaliteit voor tokenintrospectie, waarmee applicaties de geldigheid en reikwijdte van OAuth 2.0-tokens kunnen verifiëren.
 Keycloak ondersteunt tokenherroeping, waardoor uitgegeven tokens ongeldig kunnen worden gemaakt indien nodig, bijvoorbeeld bij het intrekken van toestemming door de gebruiker of bij verlies of diefstal van toegangstokens.
 Applicaties kunnen dynamisch worden geregistreerd bij Keycloak, waardoor het gemakkelijk wordt om nieuwe applicaties toe te voegen en te beheren.
+\subsubsection{Stappenplan voor het opzetten van Keycloak als Docker Image}%
+\label{subsubsec:keycloak-setup}
+Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Keycloak, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
+\textbf{Stap 1: Installatievereisten}\\
+Zorg ervoor dat Docker op uw systeem geïnstalleerd is. U kunt de installatiehandleidingen voor Docker volgen op \texttt{https://docs.docker.com/get-docker/}.\\\\
+\textbf{Stap 2: Keycloak Docker Image Downloaden}\\
+Download het Keycloak Docker-image vanuit de Docker Hub. Gebruik het volgende commando:
+\begin{lstlisting}[language=bash]
+docker pull quay.io/keycloak/keycloak:latest
+\end{lstlisting}
+\textbf{Stap 3: Keycloak Container Starten}\\
+Start een Keycloak-container met het volgende commando. Dit zal een container starten met de standaard admin-gebruiker en wachtwoord ingesteld
+\begin{lstlisting}[language=bash]
+docker run -d --name keycloak \
+    -p 8080:8080 \
+    -e KEYCLOAK_USER=admin \
+    -e KEYCLOAK_PASSWORD=admin \
+    quay.io/keycloak/keycloak:latest
+\end{lstlisting}
+\textbf{Stap 4: Toegang tot Keycloak}\\
+Open een webbrowser en ga naar \texttt{http://localhost:8080}. U zou het Keycloak-welkomstscherm moeten zien.\\\\
+\textbf{Stap 5: Inloggen bij de Keycloak Admin Console}\\
+Klik op de link ``Administration Console'' en log in met de gebruikersnaam \texttt{admin} en het wachtwoord \texttt{admin} die u in stap 3 hebt ingesteld.\\\\
+\textbf{Stap 6: Configureren van een Realm}\\
+Nadat u bent ingelogd, kunt u beginnen met het configureren van uw realm. Een realm vertegenwoordigt een beveiligingsdomein in Keycloak. Volg deze stappen om een nieuwe realm aan te maken:
+\begin{enumerate}
+    \item Klik op het dropdown-menu rechtsboven naast het Keycloak-logo en selecteer ``Add realm''.
+    \item Voer een naam in voor uw realm en klik op ``Create''.
+\end{enumerate}
+\textbf{Stap 7: Configureren van een Client}\\
+Een client vertegenwoordigt een applicatie waarvoor u Keycloak als identiteits- en toegangsbeheeroplossing wilt gebruiken. Volg deze stappen om een nieuwe client aan te maken:
+\begin{enumerate}
+    \item Selecteer uw aangemaakte realm.
+    \item Klik op ``Clients'' in het linkermenu.
+    \item Klik op ``Create'' om een nieuwe client toe te voegen.
+    \item Voer een client ID in, bijvoorbeeld \texttt{my-client}, en selecteer het protocol dat uw applicatie gebruikt (bijvoorbeeld \texttt{openid-connect}).
+    \item Klik op ``Save'' om de client aan te maken.
+\end{enumerate}
+\textbf{Stap 8: Configureren van Gebruikers en Rollen}\\
+Voeg gebruikers en rollen toe aan uw realm om toegang te verlenen aan uw applicaties:
+\begin{enumerate}
+    \item Klik op ``Users'' in het linkermenu.
+    \item Klik op ``Add user'' om een nieuwe gebruiker toe te voegen.
+    \item Voer de gebruikersgegevens in en klik op ``Save''.
+    \item Ga naar het tabblad ``Credentials'' om een wachtwoord voor de gebruiker in te stellen.
+    \item Klik op ``Roles'' in het linkermenu om rollen toe te voegen die u kunt toewijzen aan gebruikers en clients.
+\end{enumerate}
+\textbf{Conclusie}\\
+Met deze stappen heeft u een functionele Keycloak-installatie draaien in een Docker-container, klaar voor gebruik in uw applicaties. U kunt nu verdergaan met het configureren van meer geavanceerde instellingen en integraties op basis van uw specifieke behoeften.
+
 
 \subsection{Hydra}%
 \label{subsec:hydra}
@@ -211,6 +261,81 @@ De documentatie lijkt wel uitgebreid, maar er zijn veel meer stappen en configur
 Echter zijn er wel een aantal methoden om in contact te komen met de community, dus het is mogelijk dat er hulp kan worden gevonden om Hydra aan de praat te krijgen.
 \newline
 Hydra biedt een vergelijkbare reeks OAuth 2.0-functionaliteiten als Keycloak, maar met minder functionaliteit voor identiteits- en toegangsbeheer.
+\subsubsection{Stappenplan voor het opzetten van Hydra als Docker Image}%
+\label{subsubsec:hydra-setup}
+Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Hydra, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
+\textbf{Stap 1: Installatievereisten}\\
+Zorg ervoor dat Docker en Docker Compose op uw systeem geïnstalleerd zijn. U kunt de installatiehandleidingen voor Docker en Docker Compose volgen op\\ \texttt{https://docs.docker.com/get-docker/} en \texttt{https://docs.docker.com/compose/install/}.\\\\
+\textbf{Stap 2: Hydra Docker Image Downloaden}\\
+Download het Hydra Docker-image vanuit de Docker Hub. Gebruik het volgende commando:
+\begin{lstlisting}[language=bash]
+  docker pull oryd/hydra:latest
+\end{lstlisting}
+\textbf{Stap 3: Hydra Configureren}\\
+Voordat we de Hydra-container starten, moeten we enkele configuratiebestanden aanmaken. Maak een nieuw bestand genaamd \texttt{hydra-config.yaml} met de volgende inhoud:
+\begin{lstlisting}[language=bash]
+  dsn: memory
+  log:
+    level: info
+    format: text
+  serve:
+    public:
+      port: 4444
+    admin:
+      port: 4445
+  urls:
+    self:
+      public: http://localhost:4444/
+      admin: http://localhost:4445/
+\end{lstlisting}
+\textbf{Stap 4: Hydra Container Starten}\\
+Start een Hydra-container met het volgende commando. Dit zal de configuratie laden vanuit het bestand dat we zojuist hebben aangemaakt.
+\begin{lstlisting}[language=bash]
+docker run -d --name hydra \
+    -p 4444:4444 -p 4445:4445 \
+    -v $(pwd)/hydra-config.yaml:/etc/hydra/config.yaml \
+    oryd/hydra:latest serve all --config /etc/hydra/config.yaml
+\end{lstlisting}
+\textbf{Stap 5: Hydra Initialiseren}\\
+Initialiseer Hydra door de volgende commando's uit te voeren. Dit zal een admin client aanmaken die nodig is voor de verdere configuratie.
+\begin{lstlisting}[language=bash]
+docker exec -it hydra \
+    hydra clients create \
+    --endpoint http://localhost:4445 \
+    --id my-client \
+    --secret secret \
+    --grant-types authorization_code,refresh_token,client_credentials \
+    --response-types code,id_token \
+    --scope openid,offline_access \
+    --callbacks http://localhost:5555/callback
+\end{lstlisting}
+\textbf{Stap 6: Toegang tot Hydra}\\
+Hydra is nu klaar voor gebruik. U kunt toegang krijgen tot de admin endpoints via \texttt{http://localhost:4445} en de public endpoints via \texttt{http://localhost:4444}.\\\\
+\textbf{Stap 7: Configureren van OAuth 2.0 Clients}\\
+Voeg nieuwe clients toe via de Hydra admin API.\@ U kunt een nieuwe client configureren met de volgende commando's:
+\begin{lstlisting}[language=bash]
+docker exec -it hydra \
+    hydra clients create \
+    --endpoint http://localhost:4445 \
+    --id another-client \
+    --secret another-secret \
+    --grant-types authorization_code,refresh_token,client_credentials \
+    --response-types code,id_token \
+    --scope openid,offline_access \
+    --callbacks http://localhost:5555/callback
+\end{lstlisting}
+\textbf{Stap 8: Configureren van Policies en Consent App}\\
+Hydra vereist een consent app voor het beheren van gebruikersconsent. U kunt een eenvoudige consent app opzetten of de bestaande Hydra consent app gebruiken. Raadpleeg de officiële documentatie voor gedetailleerde instructies over het configureren van de consent app.
+\begin{lstlisting}[language=bash]
+docker run -d --name hydra-consent \
+    -p 5555:3000 \
+    oryd/hydra-login-consent-node:v1.10.6
+\end{lstlisting}
+\textbf{Stap 9: Hydra Integreren met Externe Identiteitsproviders}\\
+Hydra kan worden geïntegreerd met externe identiteitsproviders zoals Google, Facebook, etc. Deze configuratie hangt af van de specifieke provider en vereist het opzetten van de juiste credentials en redirect URLs. Raadpleeg de Hydra documentatie voor gedetailleerde stappen.\\
+\textbf{Conclusie}\\
+Met deze stappen zou u een werkende Hydra setup moeten hebben die klaar is voor gebruik in uw ontwikkelomgeving.
+
 
 \subsection{Oathkeeper}%
 \label{subsec:oathkeeper}
@@ -223,6 +348,91 @@ Oathkeeper kan fungeren als een proxy voor OAuth 2.0 Authorization Servers, waar
 Het biedt mogelijkheden voor het valideren van OAuth 2.0-tokens (Token Validation), waardoor applicaties kunnen controleren of de ontvangen tokens geldig zijn en of ze de benodigde toegangsrechten hebben.
 Het stelt ontwikkelaars in staat om beleidsregels (Policy Enforcement) te definiëren en af te dwingen voor toegangscontrole, waardoor granulaire controle mogelijk is over welke gebruikers toegang hebben tot welke resources.
 Oathkeeper maakt het mogelijk om access control rules te configureren op basis van verschillende criteria, zoals gebruikersgroepen, scopes en andere claims in OAuth 2.0-tokens.
+\subsubsection{Stappenplan voor het opzetten van Oathkeeper als Docker Image}%
+\label{subsubsec:oathkeeper-setup}
+Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Oathkeeper, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
+\textbf{Stap 1: Installatievereisten}\\
+Zorg ervoor dat Docker en Docker Compose op uw systeem geïnstalleerd zijn. U kunt de installatiehandleidingen voor Docker en Docker Compose volgen op\\ \texttt{https://docs.docker.com/get-docker/} en \texttt{https://docs.docker.com/compose/install/}.\\\\
+\textbf{Stap 2: Oathkeeper Docker Image Downloaden}\\
+Download het Oathkeeper Docker-image vanuit de Docker Hub. Gebruik het volgende commando:
+\begin{lstlisting}[language=bash]
+docker pull oryd/oathkeeper:latest
+\end{lstlisting}
+\textbf{Stap 3: Oathkeeper Configureren}\\
+Voordat we de Oathkeeper-container starten, moeten we enkele configuratiebestanden aanmaken. Maak een nieuw bestand genaamd \texttt{oathkeeper-config.yaml} met de volgende inhoud:
+\begin{lstlisting}[language=bash]
+authenticators:
+  noop:
+    enabled: true
+authorizers:
+  allow:
+    enabled: true
+mutators:
+  noop:
+    enabled: true
+access_rules:
+  repositories:
+    - file:///etc/oathkeeper/rules/rules.json
+serve:
+  proxy:
+    port: 4455
+  api:
+    port: 4456
+log:
+  level: debug
+\end{lstlisting}
+Maak vervolgens een regelsbestand \texttt{rules.json} aan met enkele voorbeeldregels:
+\begin{lstlisting}[language=bash]
+[
+  {
+    "id": "example-rule",
+    "upstream": {
+      "url": "http://example.com"
+    },
+    "match": {
+      "url": "http://localhost:4455/<.*>",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "noop"
+      }
+    ]
+  }
+]
+\end{lstlisting}
+\textbf{Stap 4: Oathkeeper Container Starten}\\
+Start een Oathkeeper-container met het volgende commando. Dit zal de configuratie laden vanuit de bestanden die we zojuist hebben aangemaakt.
+\begin{lstlisting}[language=bash]
+docker run -d --name oathkeeper \
+    -p 4455:4455 -p 4456:4456 \
+    -v $(pwd)/oathkeeper-config.yaml:/etc/oathkeeper/oathkeeper.yaml \
+    -v $(pwd)/rules.json:/etc/oathkeeper/rules/rules.json \
+    oryd/oathkeeper:latest serve --config /etc/oathkeeper/oathkeeper.yaml
+\end{lstlisting}
+\textbf{Stap 5: Toegang tot Oathkeeper}\\
+Oathkeeper is nu klaar voor gebruik. U kunt toegang krijgen tot de proxy endpoints via \texttt{http://localhost:4455} en de API endpoints via \texttt{http://localhost:4456}.\\\\
+\textbf{Stap 6: Configureren van Access Rules}\\
+Voeg nieuwe toegangsregels toe door het \texttt{rules.json} bestand te bewerken en de container opnieuw te starten of de configuratie opnieuw te laden via de Oathkeeper API.\@
+\begin{lstlisting}[language=bash]
+docker exec oathkeeper oathkeeper api --endpoint http://localhost:4456 rules create \
+    -f /etc/oathkeeper/rules/rules.json
+\end{lstlisting}
+\textbf{Stap 7: Integreren met Identiteitsproviders}\\
+Oathkeeper kan worden geïntegreerd met identiteitsproviders zoals Hydra, Keycloak, etc. Dit vereist het configureren van de juiste authenticators en authorizers in het configuratiebestand. Raadpleeg de officiële Oathkeeper documentatie voor gedetailleerde instructies over het configureren van integraties.\\\\
+\textbf{Stap 8: Monitoren en Loggen}\\
+Gebruik de ingebouwde loggingfunctionaliteit om toegangspogingen en beleidsbeslissingen te monitoren. De logniveau kan worden aangepast in het configuratiebestand (\texttt{oathkeeper-config.yaml}) door de \texttt{log.level} parameter aan te passen.\\\\
+\textbf{Conclusie}\\
+Met deze stappen zou u een werkende Oathkeeper setup moeten hebben die klaar is voor gebruik in uw ontwikkelomgeving.
+
 
 \section{Docker Images vergelijken}%
 \label{sec:docker-images-vergelijken}
