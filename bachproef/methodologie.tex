@@ -89,7 +89,7 @@ Op basis van de eerder genoemde criteria, werden de volgende Docker Images verde
   
   \item Schaalbaarheid en prestaties: Hoe schaalbaar is de auth server? Kan het omgaan met een groot aantal gelijktijdige gebruikers en verzoeken? Zijn er prestatie benchmarks beschikbaar?
   
-  \item Aanpasbaarheid en uitbreidbaarheid: Kun je de functionaliteit van de auth server aanpassen of uitbreiden met behulp van plugins of aangepaste code? Hoe gemakkelijk is het om deze aanpassingen te maken?
+  \item Aanpasbaarheid en uitbreidbaarheid: Kun je de functionaliteit van de auth server aanpassen of uitbreiden met behulp van plugins of aangepaste code?
   
   \item Documentatie en community ondersteuning: Is er uitgebreide documentatie beschikbaar voor de Docker-image en de bijbehorende auth server? Is er een actieve community waar je vragen kunt stellen en ondersteuning kunt krijgen?
   
@@ -131,35 +131,6 @@ Op basis van de eerder genoemde criteria, werden de volgende Docker Images verde
   \end{tabular}
   \end{adjustbox}
 \end{table}
-\begin{table}[htbp]
-  \centering
-  \caption{Alternatieven beoordelen op basis van vergelijkingscriteria}
-  \label{tab:oauth_servers}
-  \begin{adjustbox}{width=1\textwidth}
-  \begin{tabular}{@{}lllllllllllll@{}}
-    \toprule
-    Naam          & Gebruiksgemak & OAuth 2.0 & Andere protocollen & Schaalbaarheid & Aanpasbaarheid & Documentatie & Beveiliging & Onderhoud & Integraties & Kosten & Totaal \\ 
-                   &                & functies &                     & en prestaties   & en uitbreidbaarheid & en community-ondersteuning & functies & en updates & beschikbaarheid & en licentie &        \\
-    \midrule
-    Keycloak      & Ja             & Ja        & Ja                  & Nee             & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 9      \\
-    Hydra         & Ja             & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
-    Oathkeeper & Ja            & Ja        & Ja                  & Ja              & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 10      \\
-    Gluu          & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
-    Apereo CAS    & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
-    Dex           & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
-    FusionAuth    & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
-    LemonLDAP::NG & Ja             & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
-    Keycloak Gatekeeper & Ja       & Ja        & ?                   & ?               & Ja               & Ja             & Ja         & Ja         & Ja             & Ja          & 8      \\
-    IdentityServer & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
-    Apache Oltu   & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
-    UAA           & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
-    Okta          & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
-    Auth0         & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
-    AWS Cognito   & ?             & ?         & ?                   & ?               & ?                & ?              & ?          & ?          & ?              & ?           & ?      \\
-    \bottomrule
-  \end{tabular}
-  \end{adjustbox}
-\end{table}
 
 
 \section{Short list}%
@@ -191,16 +162,6 @@ Het doel is de alternatieven van de short list te testen en te evalueren op basi
 
 \subsection{Keycloak}%
 \label{subsec:keycloak}
-Als eerste werd er genavigeerd naar de documentatie, hier werd snel de download gevonden voor de Docker container. Na het downloaden van de container werd deze gestart en werd de webinterface geopend. De interface was zeer gebruiksvriendelijk en intuïtief, met duidelijke instructies voor het instellen van gebruikers, clients en scopes. Het was ook mogelijk om plugins en themas toe te voegen om de functionaliteit en het uiterlijk van de auth server aan te passen. De documentatie was uitgebreid en er was een actieve community die vragen kon beantwoorden en ondersteuning kon bieden. Keycloak ondersteunde een breed scala aan OAuth 2.0-functies, waaronder autorisatiecodes, impliciete access tokens, client credentials en refresh tokens. Het bood ook ondersteuning voor andere protocollen zoals OpenID Connect en SAML. De beveiligingsfuncties waren robuust, met ondersteuning voor multifactor authenticatie en integratie met externe identiteitsproviders. Keycloak word regelmatig bijgewerkt en onderhouden en heeft integraties met populaire frameworks en platforms. Het is gratis en open source, wat het een aantrekkelijke optie maakte voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
-Het was zelfs niet nodig om een proof-of-concept op te zetten, omdat u de SPA-testapplicatie op de Keycloak-website kunt gebruiken. Dit is een geweldige manier om de functionaliteit van Keycloak te verkennen en te begrijpen hoe het werkt in de praktijk en duurt slechts enkele minuten om op te zetten.
-Met de ervaring die is opgedaan met Keycloak, kan worden geconcludeerd dat deze oplossing zeer gebruiksvriendelijk is met veel configuratie mogelijkheden en een zeer uitgebreide documentatie heeft. De ``Getting started with Docker'' handleiding is zeer duidelijk en eenvoudig te volgen. De webinterface is intuïtief en biedt een breed scala aan functies voor het beheren van gebruikers, clients en scopes. De ondersteuning voor OAuth 2.0 en andere protocollen is uitgebreid en de beveiligingsfuncties zijn robuust. De actieve community en regelmatige updates maken Keycloak een aantrekkelijke optie voor ontwikkelaars die op zoek zijn naar een krachtige en aanpasbare auth server.
-\newline
-Keycloak is een open-source Identity and Access Management (IAM) oplossing die een breed scala aan functies biedt voor het beheren van identiteiten, authenticatie en autorisatie. Als het gaat om OAuth 2.0-functionaliteit, biedt Keycloak verschillende mogelijkheden, waaronder:
-Uiteraard OAuth 2.0 want het fungeert als een OAuth 2.0 Authorization Server, waardoor ontwikkelaars toegang krijgen tot de mogelijkheden van OAuth 2.0 voor het beveiligen van hun applicaties en API's.
-Naast OAuth 2.0 biedt Keycloak ondersteuning voor OpenID Connect, waardoor het mogelijk is om inlog- en authenticatiefuncties toe te voegen aan applicaties met behulp van OIDC.
-Het biedt functionaliteit voor tokenintrospectie, waarmee applicaties de geldigheid en reikwijdte van OAuth 2.0-tokens kunnen verifiëren.
-Keycloak ondersteunt tokenherroeping, waardoor uitgegeven tokens ongeldig kunnen worden gemaakt indien nodig, bijvoorbeeld bij het intrekken van toestemming door de gebruiker of bij verlies of diefstal van toegangstokens.
-Applicaties kunnen dynamisch worden geregistreerd bij Keycloak, waardoor het gemakkelijk wordt om nieuwe applicaties toe te voegen en te beheren.
 \subsubsection{Stappenplan voor het opzetten van Keycloak als Docker Image}%
 \label{subsubsec:keycloak-setup}
 Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Keycloak, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
@@ -254,13 +215,6 @@ Met deze stappen heeft u een functionele Keycloak-installatie draaien in een Doc
 
 \subsection{Hydra}%
 \label{subsec:hydra}
-Opnieuw werd er eerst gezocht naar documentatie, dit werd gevonden onder de ``Self-hosting'' sectie. De download werd hier ook gevonden voor de Docker container.
-Maar het opzetten en zelfs starten van de container was niet eenvoudig in vergelijking met Keycloak. Na dezelfde hoeveelheid tijd te hebben besteed aan Hydra als aan Keycloak, was het nog steeds niet gelukt om de webinterface te openen en de auth server te configureren. 
-Dit was een groot pijnpunt, omdat het niet mogelijk was om de functionaliteit van Hydra te verkennen en te testen. Dit maakte het al snel minder aantrekkelijk om Hydra te gebruiken boven Keycloak. Het was duidelijk dat Hydra een steilere leercurve had en meer configuratie vereiste om aan de slag te gaan. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een snelle en eenvoudige manier om een auth server op te zetten.
-De documentatie lijkt wel uitgebreid, maar er zijn veel meer stappen en configuratie vereist om Hydra aan de praat te krijgen. 
-Echter zijn er wel een aantal methoden om in contact te komen met de community, dus het is mogelijk dat er hulp kan worden gevonden om Hydra aan de praat te krijgen.
-\newline
-Hydra biedt een vergelijkbare reeks OAuth 2.0-functionaliteiten als Keycloak, maar met minder functionaliteit voor identiteits- en toegangsbeheer.
 \subsubsection{Stappenplan voor het opzetten van Hydra als Docker Image}%
 \label{subsubsec:hydra-setup}
 Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Hydra, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
@@ -339,15 +293,6 @@ Met deze stappen zou u een werkende Hydra setup moeten hebben die klaar is voor 
 
 \subsection{Oathkeeper}%
 \label{subsec:oathkeeper}
-De documentatie was beter en de stappen waren gedetailleerder en het was mogelijk een aantal dingen uit te testen en een vaststelling te maken: namelijk dat dit enkel gericht is op API-gateway functionaliteit. 
-Dit wil zeggen dat er geen UI is omdat er vooral moet worden geconfigureerd via de command line. Dit kan een obstakel vormen voor ontwikkelaars die op zoek zijn naar een gebruiksvriendelijke en intuïtieve manier om een auth server op te zetten.
-Ondanks is dit wel een goede oplossing, maar valt het een beetje buiten de scope van dit onderzoek, omdat er geen UI is en het vooral gericht is op API-gateway functionaliteit.
-\newline
-Oathkeeper is een open-source Identity and Access Proxy (IAP) ontwikkeld door ORY. Het biedt een reeks functies voor het beheren van toegangscontrole, authenticatie en autorisatie in microservices-architecturen en cloud-native omgevingen. Als het gaat om OAuth 2.0-functionaliteit, biedt Oathkeeper verschillende mogelijkheden:
-Oathkeeper kan fungeren als een proxy voor OAuth 2.0 Authorization Servers, waardoor het mogelijk is om OAuth 2.0-autorisatie te implementeren voor het beveiligen van applicaties en API's.
-Het biedt mogelijkheden voor het valideren van OAuth 2.0-tokens (Token Validation), waardoor applicaties kunnen controleren of de ontvangen tokens geldig zijn en of ze de benodigde toegangsrechten hebben.
-Het stelt ontwikkelaars in staat om beleidsregels (Policy Enforcement) te definiëren en af te dwingen voor toegangscontrole, waardoor granulaire controle mogelijk is over welke gebruikers toegang hebben tot welke resources.
-Oathkeeper maakt het mogelijk om access control rules te configureren op basis van verschillende criteria, zoals gebruikersgroepen, scopes en andere claims in OAuth 2.0-tokens.
 \subsubsection{Stappenplan voor het opzetten van Oathkeeper als Docker Image}%
 \label{subsubsec:oathkeeper-setup}
 Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Oathkeeper, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
@@ -438,8 +383,7 @@ Met deze stappen zou u een werkende Oathkeeper setup moeten hebben die klaar is 
 \label{sec:docker-images-vergelijken}
 Op basis van de eerder genoemde criteria, werden de volgende Docker Images verder besproken en vergeleken: Keycloak, Hydra en Oathkeeper.
 De bedoeling van deze sectie is om nog eens op te sommen wat elk van de alternatieven in de short list goed of minder doen, per vergelijkingscriterium.
-Dit werd al eens kort aangehaald in de tweede tabel in de long list, maar graag werd hier verder in detail op ingegaan, zodat men weet welk alternatief
-het best past bij zijn of haar use case.
+Dit zodat men weet welk alternatief het best past bij zijn of haar use case.
 
 \begin{enumerate}
   \item Gebruiksgemak en configuratie:
@@ -493,7 +437,7 @@ het best past bij zijn of haar use case.
   
   \item Onderhoud en updates:
   \begin{itemize}
-    \item Keycloak wordt weekelijks bijgewerkt met bug fixes en beveiligingspatches, en er zijn regelmatig nieuwe releases met nieuwe functies en verbeteringen. De ontwikkeling van Keycloak is actief en er is een roadmap beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
+    \item Keycloak wordt wekelijks bijgewerkt met bug fixes en beveiligingspatches, en er zijn regelmatig nieuwe releases met nieuwe functies en verbeteringen. De ontwikkeling van Keycloak is actief en er is een roadmap beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
     \item Hydra wordt meestal maandelijks bijgewerkt met bug fixes en beveiligingspatches, en er zijn regelmatig nieuwe releases met nieuwe functies en verbeteringen. De ontwikkeling van Hydra is actief en er is een roadmap en changelog beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
     \item Oathkeeper werd maandelijks bijgewerkt, maar de laatste tijd zijn er minder updates geweest. De ontwikkeling van Oathkeeper lijkt minder actief te zijn dan die van Keycloak en Hydra, maar er zijn nog steeds regelmatig bug fixes en beveiligingspatches beschikbaar. Er is een roadmap en changelog beschikbaar waarin toekomstige functies en verbeteringen worden beschreven.
   \end{itemize}
