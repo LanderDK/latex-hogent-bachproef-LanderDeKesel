@@ -157,14 +157,14 @@ Hierdoor kan de werking van het gekozen alternatief beter begrepen worden en bep
 
 \section{Short list alternatieven testen}
 \label{sec:short-list-alternatieven-testen}
-In deze sectie wordt er verder verdiept in de drie alternatieven, namelijk Keycloak, Hydra en Oathkeeper.
+In deze sectie en de sectie die hier op volgt, wordt er verder verdiept in de drie alternatieven, namelijk Keycloak, Hydra en Oathkeeper.
 Het doel is de alternatieven van de short list te testen en te evalueren op basis van de eerder vastgestelde criteria. Indien er pijnpunten of tekortkomingen worden vastgesteld, zullen deze worden opgesomd en zullen er suggesties worden gegeven voor mogelijke verbeteringen.
 
 \subsection{Keycloak}%
 \label{subsec:keycloak}
 \subsubsection{Stappenplan voor het opzetten van Keycloak als Docker Image}%
 \label{subsubsec:keycloak-setup}
-Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Keycloak, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
+Hieronder wordt een stappenplan gegeven voor het opzetten van Keycloak als Docker Image. Dit stappenplan kan worden gevolgd om een functionele Keycloak-installatie te draaien in een Docker-container.\\\\
 \textbf{Stap 1: Installatievereisten}\\
 Zorg ervoor dat Docker op uw systeem geïnstalleerd is. U kunt de installatiehandleidingen voor Docker volgen op \texttt{https://docs.docker.com/get-docker/}.\\\\
 \textbf{Stap 2: Keycloak Docker Image Downloaden}\\
@@ -210,14 +210,14 @@ Voeg gebruikers en rollen toe aan uw realm om toegang te verlenen aan uw applica
     \item Klik op ``Roles'' in het linkermenu om rollen toe te voegen die u kunt toewijzen aan gebruikers en clients.
 \end{enumerate}
 \textbf{Conclusie}\\
-Met deze stappen heeft u een functionele Keycloak-installatie draaien in een Docker-container, klaar voor gebruik in uw applicaties. U kunt nu verdergaan met het configureren van meer geavanceerde instellingen en integraties op basis van uw specifieke behoeften.
+Met deze stappen kan men een functionele Keycloak-installatie draaien in een Docker-container, klaar voor gebruik in applicaties die OAuth 2.0 vereisen. Men zou nu kunenn verdergaan met het configureren van meer geavanceerde instellingen en integraties op basis van specifieke behoeften.
 
 
 \subsection{Hydra}%
 \label{subsec:hydra}
 \subsubsection{Stappenplan voor het opzetten van Hydra als Docker Image}%
 \label{subsubsec:hydra-setup}
-Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Hydra, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
+Hieronder wordt een stappenplan gegeven voor het opzetten van Hydra als Docker Image. Dit stappenplan kan worden gevolgd om een functionele Hydra-installatie te draaien in een Docker-container.\\\\
 \textbf{Stap 1: Installatievereisten}\\
 Zorg ervoor dat Docker en Docker Compose op uw systeem geïnstalleerd zijn. U kunt de installatiehandleidingen voor Docker en Docker Compose volgen op\\ \texttt{https://docs.docker.com/get-docker/} en \texttt{https://docs.docker.com/compose/install/}.\\\\
 \textbf{Stap 2: Hydra Docker Image Downloaden}\\
@@ -288,14 +288,14 @@ docker run -d --name hydra-consent \
 \textbf{Stap 9: Hydra Integreren met Externe Identiteitsproviders}\\
 Hydra kan worden geïntegreerd met externe identiteitsproviders zoals Google, Facebook, etc. Deze configuratie hangt af van de specifieke provider en vereist het opzetten van de juiste credentials en redirect URLs. Raadpleeg de Hydra documentatie voor gedetailleerde stappen.\\
 \textbf{Conclusie}\\
-Met deze stappen zou u een werkende Hydra setup moeten hebben die klaar is voor gebruik in uw ontwikkelomgeving.
+Met deze stappen zou men een werkende Hydra setup moeten hebben die klaar is voor gebruik in een ontwikkelomgeving.
 
 
 \subsection{Oathkeeper}%
 \label{subsec:oathkeeper}
 \subsubsection{Stappenplan voor het opzetten van Oathkeeper als Docker Image}%
 \label{subsubsec:oathkeeper-setup}
-Zojuist werd de ervaring beschreven bij het opzetten en gebruiken van Oathkeeper, in deze sectie wordt er stap voor stap uitgelegd wat er effectief gedaan werd.\\\\
+Hieronder wordt een stappenplan gegeven voor het opzetten van Oathkeeper als Docker Image. Dit stappenplan kan worden gevolgd om een functionele Oathkeeper-installatie te draaien in een Docker-container.\\\\
 \textbf{Stap 1: Installatievereisten}\\
 Zorg ervoor dat Docker en Docker Compose op uw systeem geïnstalleerd zijn. U kunt de installatiehandleidingen voor Docker en Docker Compose volgen op\\ \texttt{https://docs.docker.com/get-docker/} en \texttt{https://docs.docker.com/compose/install/}.\\\\
 \textbf{Stap 2: Oathkeeper Docker Image Downloaden}\\
@@ -376,7 +376,7 @@ Oathkeeper kan worden geïntegreerd met identiteitsproviders zoals Hydra, Keyclo
 \textbf{Stap 8: Monitoren en Loggen}\\
 Gebruik de ingebouwde loggingfunctionaliteit om toegangspogingen en beleidsbeslissingen te monitoren. De logniveau kan worden aangepast in het configuratiebestand (\texttt{oathkeeper-config.yaml}) door de \texttt{log.level} parameter aan te passen.\\\\
 \textbf{Conclusie}\\
-Met deze stappen zou u een werkende Oathkeeper setup moeten hebben die klaar is voor gebruik in uw ontwikkelomgeving.
+Met deze stappen zou men een werkende Oathkeeper setup moeten hebben die klaar is voor gebruik in een ontwikkelomgeving.
 
 
 \section{Docker Images vergelijken}%
