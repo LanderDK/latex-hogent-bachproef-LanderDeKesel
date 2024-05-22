@@ -13,6 +13,7 @@
 
 \usepackage{listings}
 \usepackage{lipsum} % For blind text, can be removed after adding actual content
+\usepackage{glossaries}
 
 %% Pictures to include in the text can be put in the graphics/ folder
 \graphicspath{{../graphics/}}
@@ -77,6 +78,30 @@
 
 \renewcommand{\arraystretch}{1.2}
 
+\makeglossaries
+\newacronym{sso}{SSO}{Single Sign On}
+\newacronym{jwt}{JWT}{JSON Web Token}
+\newacronym{jwts}{JWTs}{JSON Web Tokens}
+\newacronym{jwe}{JWE}{JSON Web Encryption}
+\newacronym{jws}{JWS}{JSON Web Signature}
+\newacronym{idaas}{IDaaS}{Identity as a Service}
+\newacronym{iam}{IAM}{Identity and Access Management}
+\newacronym{mfa}{MFA}{Multi-Factor Authentication}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{aws}{AWS}{Amazon Web Services}
+\newacronym{iap}{IAP}{Identity and Access Proxy}
+\newacronym{cas}{CAS}{Central Authentication Service}
+\newacronym{oidc}{OIDC}{OpenID Connect}
+\newacronym{ldap}{LDAP}{Lightweight Directory Access Protocol}
+\newacronym{otp}{OTP}{One-Time Passwords}
+\newacronym{sdk}{SDK}{Software Development Kit}
+\newacronym{auth}{Auth}{Authenticatie en Autorisatie}
+\newacronym{csrf}{CSRF}{Cross-Site Request Forgery}
+\newacronym{http}{HTTP}{Hypertext Transfer Protocol}
+\newacronym{tls}{TLS}{Transport Layer Security}
+\newacronym{json}{JSON}{JavaScript Object Notation}
+\newacronym{w3c}{W3C}{World Wide Web Consortium}
+
 %% Content starts here.
 \begin{document}
 
@@ -116,12 +141,13 @@
 
 % If you included tables and/or source code listings, uncomment the appropriate
 % lines.
-%\listoftables
-%\listoflistings
+\listoftables
+% \listoflistings
 
 % Als je een lijst van afkortingen of termen wil toevoegen, dan hoort die
 % hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
 % https://www.overleaf.com/learn/latex/Glossaries
+\printglossaries
 
 %---------- Kern ---------------------------------------------------------------
 

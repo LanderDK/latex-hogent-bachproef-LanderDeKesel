@@ -7,16 +7,15 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-\section{Auth technologieën}%
+\section{\gls{auth} technologieën}%
 \label{sec:auth-technologieën}
-In eerste instantie wordt bekeken welke huidige technologieën er vandaag de dag bestaan en welke de meest gebruikte zijn. Dit omdat er eerst een
-grondige kennis van de huidige technologieën moet worden opgebouwd voordat we naar de volgende stappen kunnen overgaan.
-
+In eerste instantie wordt bekeken welke technologieën er momenteel bestaan en welke de meest gebruikte zijn. In eerste instantie dient er een grondige
+kennis worden opgebouwd, betreffende de huidige technologieën, vooraleer we naar de volgende stappen kunnen overgaan.
 
 \subsection{OAuth 2.0}%
 \label{subsec:oauth-2.0}
 OAuth 2.0 wordt gebruikt om toegang tot bronnen te delegeren zonder gebruikersreferenties te delen. Het is een autorisatie framework en wordt dus niet
-gebruikt voor het authenticeren van gebruikers. Vaak gebruikt om Single Sign On (SSO) en toegangsdelegatie in te schakelen. Kan worden gebruikt in web-
+gebruikt voor het authenticeren van gebruikers. Vaak gebruikt om \gls{sso} en toegangsdelegatie in te schakelen. Kan worden gebruikt in web-
 en mobiele applicaties en ondersteunt verschillende authenticatie mechanismen. \autocite{Hardt2012}
 Authenticatie verifieert de identiteit van een gebruiker (bijv. via wachtwoord, biometrie).
 Autorisatie bepaalt welke acties de geauthenticeerde gebruiker mag uitvoeren (bijv. toegangsrechten tot data of functies).
@@ -45,7 +44,7 @@ beveiligingsredenen. Bijvoorbeeld, als een gebruiker zijn wachtwoord wijzigt, ka
 om te voorkomen dat oude tokens worden misbruikt door onbevoegde personen.
 \\
 Een andere reden waarom een Access Token ongeldig kan worden, is vanwege gebruikslimieten. Sommige systemen stellen een maximum aantal keren in dat 
-een token gebruikt kan worden. Bijvoorbeeld, een API kan een Access Token instellen dat slechts 100 verzoeken toestaat. Zodra deze limiet is bereikt, 
+een token gebruikt kan worden. Bijvoorbeeld, een \gls{api} kan een Access Token instellen dat slechts 100 verzoeken toestaat. Zodra deze limiet is bereikt, 
 wordt het token ongeldig en moet de gebruiker een nieuw Access Token verkrijgen om verder te gaan.
 \\\\
 Het uitgeven van een Refresh Tokens is optioneel, omdat men in principe ook gewoon aan de
@@ -124,7 +123,7 @@ De client maakt een verzoek naar de autorisatie server om autorisatie te verkrij
     Deze parameter geeft de machtigingen aan die de clienttoepassing wil verkrijgen. De waarde moet een spatie gescheiden lijst van machtigingen zijn.
   
     \item state: \\
-    Deze parameter geeft een willekeurige, niet-voorspelbare waarde aan die door de clienttoepassing wordt gegenereerd. De waarde moet worden gebruikt om CSRF-aanvallen te voorkomen.
+    Deze parameter geeft een willekeurige, niet-voorspelbare waarde aan die door de clienttoepassing wordt gegenereerd. De waarde moet worden gebruikt om \gls{csrf}-aanvallen te voorkomen.
   \end{enumerate}
   En kan er als volgt uitzien:
   \begin{verbatim}
@@ -156,9 +155,9 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
   
   \subsubsection{Een Access Token vernieuwen}%
   \label{subsubsec:een-access-token-vernieuwen}
-  Als de autorisatie server een Refresh Token aan de client heeft uitgegeven, doet de cliënt een vernieuwings verzoek aan het token endpoint.
-  Indien geldig en geautoriseerd, geeft de autorisatie server een Access Token uit. Als de verificatie van het verzoek is mislukt of ongeldig is, retourneert de autorisatie server een fout reactie.
-  De autorisatie server kan een nieuw Refresh Token uitgeven, in welk geval de cliënt het oude Refresh Token moet weggooien en vervangen door het nieuwe Refresh Token. De autorisatie server kan het oude Refresh Token intrekken nadat een nieuw Refresh Token aan de client is uitgegeven. Als er een nieuw Refresh Token wordt uitgegeven, moet het bereik van het Refresh Token identiek zijn aan dat van het Refresh Token dat door de client in de aanvraag is opgenomen.
+  Als de autorisatie server een Refresh Token aan de client heeft uitgegeven, doet de client een vernieuwingsverzoek aan het token endpoint.
+  Indien geldig en geautoriseerd, geeft de autorisatie server een Access Token uit. Als de verificatie van het verzoek is mislukt of ongeldig is, retourneert de autorisatieserver een fout reactie.
+  De autorisatie server kan een nieuw Refresh Token uitgeven, in welk geval de client het oude Refresh Token moet weggooien en vervangen door het nieuwe Refresh Token. De autorisatieserver kan het oude Refresh Token intrekken nadat een nieuw Refresh Token aan de client is uitgegeven. Als er een nieuw Refresh Token wordt uitgegeven, moet het bereik van het Refresh Token identiek zijn aan dat van het Refresh Token dat door de client in de aanvraag is opgenomen.
   
   \subsubsection{Beveiligingsoverwegingen}
   \label{subsubsec:beveiligingsoverwegingen}
@@ -170,7 +169,7 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
       De autorisatie server moet ervoor zorgen dat Access Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden om geldige Access Tokens te produceren.
   
       \item Refresh Tokens: \\
-      De autorisatie server moet de binding tussen het Refresh Token en de clientidentiteit verifiëren wanneer de clientidentiteit kan worden geverifieerd. Wanneer clientauthenticatie niet mogelijk is, moet de autorisatie server andere middelen inzetten om misbruik van Refresh Token te detecteren. De autorisatie server zou bijvoorbeeld Refresh Token rotatie kunnen gebruiken, waarbij een nieuw Refresh Token wordt uitgegeven bij elke vernieuwings reactie van het Access Token. Het vorige Refresh Token wordt ongeldig gemaakt, maar behouden door de autorisatie server. Als een Refresh Token wordt aangetast en vervolgens door zowel de aanvaller als de legitieme client wordt gebruikt, zal een van hen een ongeldig Refresh Token presenteren, dat de autorisatie server op de hoogte stelt van de inbreuk. De autorisatie server moet ervoor zorgen dat Refresh Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden dat ze geldige Refresh Tokens produceren.
+      De autorisatie server moet de binding tussen het Refresh Token en de clientidentiteit verifiëren wanneer de clientidentiteit kan worden geverifieerd. Wanneer clientauthenticatie niet mogelijk is, moet de autorisatie server andere middelen inzetten om misbruik van Refresh Token te detecteren. De autorisatie server zou bijvoorbeeld Refresh Token rotatie kunnen gebruiken, waarbij een nieuw Refresh Token wordt uitgegeven bij elke vernieuwingsreactie van het Access Token. Het vorige Refresh Token wordt ongeldig gemaakt, maar behouden door de autorisatie server. Als een Refresh Token wordt aangetast en vervolgens door zowel de aanvaller als de legitieme client wordt gebruikt, zal een van hen een ongeldig Refresh Token presenteren, dat de autorisatie server op de hoogte stelt van de inbreuk. De autorisatie server moet ervoor zorgen dat Refresh Tokens niet door onbevoegde partijen kunnen worden gegenereerd, gewijzigd of geraden dat ze geldige Refresh Tokens produceren.
   
       \item Request Confidentiality: \\
       Access Tokens, Refresh Tokens, wachtwoorden voor resource-eigenaren en klantreferenties moeten niet openbaar worden verzonden. De parameters ``state'' en ``scope'' moeten geen gevoelige klant- of resource-eigenaarsinformatie in platte tekst bevatten, omdat deze via onveilige kanalen kunnen worden verzonden of onveilig kunnen worden opgeslagen.
@@ -179,8 +178,8 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
 
   \subsection{OAuth 2.0 voor Native Apps}%
   \label{subsec:oauth-2.0-voor-native-apps}
-  Een native app is een app die door de gebruiker op zijn apparaat wordt geïnstalleerd, in tegenstelling tot een webapp die alleen in de browser context wordt uitgevoerd. Apps die zijn geïmplementeerd met behulp van webgebaseerde technologie maar worden gedistribueerd als een native app, de zogenaamde ``hybride apps'', worden voor het doel van deze specificatie beschouwd als gelijkwaardig aan native apps.\autocite{Denniss2017}
-  OAuth 2.0-autorisatieverzoeken van native apps worden het best, en het liefst alleen, gedaan via externe user-agents, voornamelijk de browser van de gebruiker. Het andere alternatief is het gebruik van ingebedde user-agents. Deze aanpak heeft veel nadelen, waaronder het feit dat de host-app gebruikersgegevens en cookies kan kopiëren en dat de gebruiker zich in elke app helemaal opnieuw moet authenticeren. Autorisatieverzoeken voor native apps die de browser gebruiken, zijn veiliger en kunnen profiteren van de authenticatie status van de gebruiker. Door de bestaande authenticatie sessie in de browser te kunnen gebruiken, is eenmalige aanmelding (SSO) mogelijk, omdat gebruikers zich niet telkens opnieuw hoeven te authenticeren bij de autorisatie server wanneer ze een nieuwe app gebruiken.\autocite{Denniss2017}
+  Een native app is een app die door de gebruiker op zijn apparaat wordt geïnstalleerd, in tegenstelling tot een webapp die alleen in de browser context wordt uitgevoerd. Apps die zijn geïmplementeerd met behulp van webgebaseerde technologie maar worden gedistribueerd als een native app, de zogenaamde ``hybride apps'', worden voor het doel van deze specificatie beschouwd als gelijkwaardig aan native apps \autocite{Denniss2017}.
+  OAuth 2.0-autorisatieverzoeken van native apps worden het best, en het liefst alleen, gedaan via externe user-agents, voornamelijk de browser van de gebruiker. Het andere alternatief is het gebruik van ingebedde user-agents. Deze aanpak heeft veel nadelen, waaronder het feit dat de host-app gebruikersgegevens en cookies kan kopiëren en dat de gebruiker zich in elke app helemaal opnieuw moet authenticeren. Autorisatieverzoeken voor native apps die de browser gebruiken, zijn veiliger en kunnen profiteren van de authenticatie status van de gebruiker. Door de bestaande authenticatie sessie in de browser te kunnen gebruiken, is \gls{sso} mogelijk, omdat gebruikers zich niet telkens opnieuw hoeven te authenticeren bij de autorisatie server wanneer ze een nieuwe app gebruiken \autocite{Denniss2017}.
   Om deze best practices te ondersteunen, dienen bepaalde OAuth-server implementaties die vertrouwen op alle clients als vertrouwelijk (confidential) voor het web, openbare (public) native app-clients en hun bijbehorende soorten redirect-URI's te erkennen.
   \begin{figure}[h]
     \centering
@@ -192,9 +191,9 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
   Dit wordt bereikt door het autorisatieverzoek in de browser te openen en een redirect-URI te gebruiken die het autorisatie antwoord terugstuurt naar de native app.
   \\
   \\
-  Het ontvangen van de Autorisatiereactie in een Native App gebeurt ook via een redirect URI, er zijn verschillende opties:
+  Het ontvangen van de autorisatiereactie in een Native App gebeurt ook via een redirect URI, er zijn verschillende opties:
   \\\\
-  - \textbf{Omleiding van URI-schema voor privégebruik:} nadat de auth-server het verzoek heeft voltooid, wordt deze omgeleid naar de omleidings-URI van de client, com.example.app:/oauth2redirect/example-provider, dit resulteert erin dat het besturingssysteem de native app start en de URI als startparameter.
+  - \textbf{Omleiding van URI-schema voor privégebruik:} nadat de \gls{auth}-server het verzoek heeft voltooid, wordt deze omgeleid naar de omleidings-URI van de client, com.example.app:/oauth2redirect/example-provider, dit resulteert erin dat het besturingssysteem de native app start en de URI als startparameter.
   \\\\
   - \textbf{Geclaimde 'https'-schema-URI-omleiding:} https://app.example.com/oauth2redirect/example-provider, door de app geclaimde 'https'-schema-omleidings-URI's hebben enkele voordelen vergeleken met andere native app-omleidingsopties, omdat de identiteit van de bestemmings app wordt door het besturingssysteem gegarandeerd aan de autorisatie server. Om deze reden moeten native apps deze waar mogelijk boven de andere opties gebruiken.
   \\\\
@@ -203,40 +202,40 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
   
   \subsection{OAuth 2.0: Bearer Token gebruik}%
   \label{subsec:oauth-2.0-bearer-token-gebruik}
-  OAuth 2.0 bearer tokens kunnen worden gebruikt in HTTP-verzoeken om toegang te krijgen tot beveiligde bronnen \autocite[p.~{Section 1.0}]{Jones2012}.
+  OAuth 2.0 bearer tokens kunnen worden gebruikt in \gls{http}-verzoeken om toegang te krijgen tot beveiligde bronnen \autocite[p.~{Section 1.0}]{Jones2012}.
   Een bearer token is een token dat kan worden gebruikt door iedereen die eigenaar is van het token, zonder dat er bewijs nodig is van het bezit van cryptografisch materiaal \autocite[p.~{Section 1.2}]{Jones2012}.
   Er worden drie manieren beschreven om een bearer token in een aanvraag op te nemen: in de Authorization-header, als een formulier gecodeerde body-parameter of als een URI-queryparameter \autocite[p.~{Section 2.1}]{Jones2012}. Als een verzoek mislukt, moet de bronserver een 401-statuscode en een foutcode retourneren, zoals 'invalid\verb|_|request', 'invalid\verb|_|token' of 'insufficient\verb|_|scope' \autocite[p.~{Section 3.0}]{Jones2012}.
-  Het gebruik van TLS, het valideren van certificaten, het uitgeven van tokens voor de korte termijn en het niet opslaan van tokens in cookies zijn elk sterk aanbevolen \autocite[p.~{Section 5.0}]{Jones2012}.
+  Het gebruik van \gls{tls}, het valideren van certificaten, het uitgeven van tokens voor de korte termijn en het niet opslaan van tokens in cookies zijn elk sterk aanbevolen \autocite[p.~{Section 5.0}]{Jones2012}.
 
 
-  \subsection{JWT (JSON Web Tokens) huidige Best Practices}%
+  \subsection{\gls{jwts} huidige Best Practices}%
   \label{subsec:jwt-huidige-best-practices}
-  Deze sectie lijst de bekende en mogelijke problemen op met JWT-implementaties en -inzet. Elk probleem wordt gevolgd door verwijzingen naar een of meer maatregelen om deze problemen te verhelpen.
+  Deze sectie lijst de bekende en mogelijke problemen op met \gls{jwt}-implementaties en -inzet. Elk probleem wordt gevolgd door verwijzingen naar een of meer maatregelen om deze problemen te verhelpen.
   \begin{enumerate}[label=\textbf{-}]
-      \item Zwakke Handtekeningen en Onvoldoende Validatie van Handtekeningen
-      \item Zwakke Symmetrische Sleutels: Deze zijn even onveilig als makkelijk te onthouden wachtwoorden.
-      \item Onjuiste Samenstelling van Encryptie en Handtekening: Dit verwijst naar het proces waarbij sommige bibliotheken die een JWT decoderen die eerst is versleuteld (JWE) en vervolgens ondertekend (JWS), niet altijd de interne handtekening valideren nadat ze de JWT hebben ontcijferd. Dit kan leiden tot zwakke punten in de authenticatie en beveiliging van de JWT.
-      \item Plaintext lek door Analyse van Cijfer tekstlengte: Sommige encryptiealgoritmen lekken informatie over de lengte van de oorspronkelijke tekst tijdens het versleutelingsproces. Dit kan leiden tot beveiligingsproblemen, omdat het een aanvaller in staat stelt om informatie over de inhoud van de JWT te verkrijgen door de lengte van het versleutelde bericht te analyseren.
-      \item Onveilig Gebruik van Elliptische Curve-Encryptie: Dit verwijst naar het gebruik van elliptische curve-encryptie zonder de juiste veiligheidsmaatregelen toe te passen. Het onjuist implementeren of gebruiken van elliptische curve-encryptie kan leiden tot kwetsbaarheden en beveiligingsproblemen.
-      \item Veelvoud van JSON-coderingen: Dit verwijst naar het gebruik van meerdere coderingen van JSON-objecten in een JWT. Het kan leiden tot verwarring bij het verwerken van de JWT en potentiële beveiligingsproblemen als gevolg van inconsistenties in de codering.
-      \item Substitutie aanvallen: Dit zijn aanvallen waarbij een ontvanger een JWT krijgt die voor hem bedoeld was en probeert deze te gebruiken bij een andere ontvanger waarvoor die JWT niet bedoeld was. Het kan leiden tot ongeautoriseerde toegang en datalekken.
-      \item Kruis-JWT-verwarring: Dit verwijst naar gevallen waarin JWT-tokens die zijn uitgegeven voor een bepaald doel, worden ondermijnd en gebruikt voor een ander doel. Het kan leiden tot misbruik van JWT-tokens en het omzeilen van beveiligingscontroles.
-      \item Indirecte Aanvallen op de Server: Dit verwijst naar aanvallen waarbij de aanvaller indirect probeert toegang te krijgen tot de server door middel van manipulatie van JWT-tokens. Dit kan onder meer leiden tot datadiefstal, escalatie van privileges en verstoring van de normale werking van de server.
+      \item Zwakke handtekeningen en onvoldoende validatie van handtekeningen
+      \item Zwakke symmetrische sleutels: Deze zijn even onveilig als makkelijk te onthouden wachtwoorden.
+      \item Onjuiste samenstelling van encryptie en handtekening: Dit verwijst naar het proces waarbij sommige bibliotheken die een \gls{jwt} decoderen die eerst is versleuteld (\gls{jwe}) en vervolgens ondertekend (\gls{jws}), niet altijd de interne handtekening valideren nadat ze de \gls{jwt} hebben ontcijferd. Dit kan leiden tot zwakke punten in de authenticatie en beveiliging van de \gls{jwt}.
+      \item Plaintext lek door analyse van cijfer tekstlengte: Sommige encryptiealgoritmen lekken informatie over de lengte van de oorspronkelijke tekst tijdens het versleutelingsproces. Dit kan leiden tot beveiligingsproblemen, omdat het een aanvaller in staat stelt om informatie over de inhoud van de \gls{jwt} te verkrijgen door de lengte van het versleutelde bericht te analyseren.
+      \item Onveilig gebruik van elliptische curve-encryptie: Dit verwijst naar het gebruik van elliptische curve-encryptie zonder de juiste veiligheidsmaatregelen toe te passen. Het onjuist implementeren of gebruiken van elliptische curve-encryptie kan leiden tot kwetsbaarheden en beveiligingsproblemen.
+      \item Veelvoud van \gls{json}-coderingen: Dit verwijst naar het gebruik van meerdere coderingen van \gls{json}-objecten in een \gls{jwt}. Het kan leiden tot verwarring bij het verwerken van de \gls{jwt} en potentiële beveiligingsproblemen als gevolg van inconsistenties in de codering.
+      \item Substitutie aanvallen: Dit zijn aanvallen waarbij een ontvanger een \gls{jwt} krijgt die voor hem bedoeld was en probeert deze te gebruiken bij een andere ontvanger waarvoor die \gls{jwt} niet bedoeld was. Het kan leiden tot ongeautoriseerde toegang en datalekken.
+      \item Kruis-\gls{jwt}-verwarring: Dit verwijst naar gevallen waarin \gls{jwt} die zijn uitgegeven voor een bepaald doel, worden ondermijnd en gebruikt voor een ander doel. Het kan leiden tot misbruik van \gls{jwt} en het omzeilen van beveiligingscontroles.
+      \item Indirecte aanvallen op de server: Dit verwijst naar aanvallen waarbij de aanvaller indirect probeert toegang te krijgen tot de server door middel van manipulatie van \gls{jwt}. Dit kan onder meer leiden tot datadiefstal, escalatie van privileges en verstoring van de normale werking van de server.
   \end{enumerate}
   Best Practices
   \begin{enumerate}[label=\textbf{-}]
-    \item Voer algoritme verificatie uit: Zorg ervoor dat de algoritmen die worden gebruikt voor het ondertekenen en versleutelen van JWT's veilig zijn.
-    \item Gebruik geschikte algoritmen: Gebruik veilige algoritmen voor het ondertekenen en versleutelen van JWT's.
+    \item Voer algoritme verificatie uit: Zorg ervoor dat de algoritmen die worden gebruikt voor het ondertekenen en versleutelen van \gls{jwts} veilig zijn.
+    \item Gebruik geschikte algoritmen: Gebruik veilige algoritmen voor het ondertekenen en versleutelen van \gls{jwts}.
     \item Valideer alle cryptografische bewerkingen: Zorg ervoor dat alle cryptografische bewerkingen correct worden uitgevoerd.
     \item Valideer cryptografische invoer: Zorg ervoor dat alle invoer voor cryptografische bewerkingen correct is. Dit omvat het valideren van de lengte van de invoer, het controleren van de invoer op ongeldige tekens en het valideren van de invoer tegen een lijst met bekende sleutels.
     \item Zorg ervoor dat cryptografische sleutels voldoende entropie hebben: Entropie is een maat voor de onvoorspelbaarheid van een reeks gegevens.
     \item Vermijd compressie van coderingsinvoer: Compressie van coderingsinvoer kan leiden tot lekken van informatie over de oorspronkelijke tekst.
-    \item Gebruik UTF-8: Zorg ervoor dat alle tekst die wordt gebruikt in JWT's wordt gecodeerd in UTF-8.
+    \item Gebruik UTF-8: Zorg ervoor dat alle tekst die wordt gebruikt in \gls{jwts} wordt gecodeerd in UTF-8.
     \item Valideer de uitgever en het onderwerp: Issuer en Subject
     \item Gebruik en valideer doelgroep: Audience
     \item Vertrouw ontvangen claims niet
     \item Gebruik expliciet typen
-    \item Gebruik wederzijds exclusieve validatieregels voor verschillende soorten JWT's
+    \item Gebruik wederzijds exclusieve validatieregels voor verschillende soorten \gls{jwts}
   \end{enumerate}
   \autocite{Sheffer2020}
 
@@ -245,7 +244,7 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
   \label{subsec:openid-connect}
   OpenID Connect is een identiteitslaag bovenop OAuth 2.0, die wordt gebruikt voor authenticatie. Het is een identiteitslaag die bovenop 
   OAuth 2.0 is gebouwd en die de authenticatie van gebruikers mogelijk maakt. OpenID Connect biedt een manier om gebruikers te verifiëren 
-  en toegang te verlenen tot applicaties en services. Het maakt gebruik van JWT's om claims over gebruikers te verstrekken en om 
+  en toegang te verlenen tot applicaties en services. Het maakt gebruik van \gls{jwts} om claims over gebruikers te verstrekken en om 
   gebruikers te verifiëren. OpenID Connect is ontworpen om eenvoudig te implementeren en te gebruiken en biedt een veilige en betrouwbare manier om 
   gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
   \\
@@ -253,7 +252,7 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
   OpenID Connect biedt een aantal voordelen ten opzichte van traditionele authenticatie methoden, waaronder:
   \begin{enumerate}[label=\textbf{-}]
       \item Eenvoudige implementatie: OpenID Connect is eenvoudig te implementeren en te gebruiken en biedt een gestandaardiseerde manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
-      \item Veilige en betrouwbare authenticatie: OpenID Connect maakt gebruik van JWT's om claims over gebruikers te verstrekken en om gebruikers te verifiëren. Dit biedt een veilige en betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
+      \item Veilige en betrouwbare authenticatie: OpenID Connect maakt gebruik van \gls{jwts} om claims over gebruikers te verstrekken en om gebruikers te verifiëren. Dit biedt een veilige en betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
       \item Flexibiliteit: OpenID Connect biedt een flexibele manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services. Het ondersteunt verschillende authenticatie methoden en kan worden gebruikt in een breed scala van toepassingen.
       \item Schaalbaarheid: OpenID Connect is schaalbaar en kan worden gebruikt in grote en complexe omgevingen. Het biedt een betrouwbare manier om gebruikers te verifiëren en toegang te verlenen tot applicaties en services.
   \end{enumerate}
@@ -308,7 +307,7 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
     Hoewel biometrische authenticatie meer technisch van aard is met betrekking tot het interne proces, is het over het algemeen gemakkelijk en snel vanuit het oogpunt van de gebruiker. Door een vingerafdrukscanner te gebruiken om een account te ontgrendelen of gezichtsherkenning, vermindert u het aantal keren dat u moet inloggen met een lang wachtwoord dat meerdere speciale tekens bevat die u waarschijnlijk uiteindelijk zult vergeten.
   
     \item Fraudedetectie: \\
-    Biometrie is bijna onmogelijk te repliceren. Ze zijn moeilijk te repliceren en te stelen, en de kans is slechts ongeveer 1 op 64 miljard \autocite{Baker2021} \autocite{Lee2013} dat jouw vingerafdruk precies overeenkomt met die van iemand anders. Het is zeer onwaarschijnlijk dat een hacker toegang krijgt tot alles dat met biometrie is beveiligd.
+    Biometrie is bijna onmogelijk te repliceren. Ze zijn moeilijk te repliceren en te stelen, en de kans is slechts ongeveer 1 op 64 miljard \autocite{Baker2021} \autocite{Lee2013} dat een vingerafdruk precies overeenkomt met die van iemand anders. Het is zeer onwaarschijnlijk dat een hacker toegang krijgt tot alles dat met biometrie is beveiligd.
   \end{enumerate}
   
   \subsubsection{De nadelen van biometrische authenticatie}%
@@ -327,33 +326,33 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
 
   \subsection{WebAuthn}%
   \label{subsec:webauthn}
-  WebAuthn is een W3C-specificatie die een webstandaard biedt voor biometrische authenticatie. Het is bedoeld om een veilige en gebruiksvriendelijke manier te bieden om gebruikers te verifiëren zonder dat ze wachtwoorden hoeven te onthouden. WebAuthn maakt gebruik van openbare en privésleutels om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. Het maakt gebruik van biometrische gegevens zoals vingerafdrukken, gezichtsherkenning en irisscans om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. WebAuthn is ontworpen om de beveiliging van online accounts te verbeteren en gebruikers te beschermen tegen phishingaanvallen en andere vormen van cybercriminaliteit. Het is een open standaard die wordt ondersteund door alle grote webbrowsers en platformen en wordt gebruikt door bedrijven over de hele wereld om hun online accounts te beveiligen. WebAuthn is een belangrijke stap voorwaarts in de strijd tegen cybercriminaliteit en biedt een veilige en gebruiksvriendelijke manier om gebruikers te verifiëren en hun online accounts te beschermen.
+  WebAuthn is een \gls{w3c}-specificatie die een webstandaard biedt voor biometrische authenticatie. Het is bedoeld om een veilige en gebruiksvriendelijke manier te bieden om gebruikers te verifiëren zonder dat ze wachtwoorden hoeven te onthouden. WebAuthn maakt gebruik van openbare en privésleutels om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. Het maakt gebruik van biometrische gegevens zoals vingerafdrukken, gezichtsherkenning en irisscans om gebruikers te verifiëren en biedt een veilige manier om in te loggen op websites en applicaties. WebAuthn is ontworpen om de beveiliging van online accounts te verbeteren en gebruikers te beschermen tegen phishingaanvallen en andere vormen van cybercriminaliteit. Het is een open standaard die wordt ondersteund door alle grote webbrowsers en platformen en wordt gebruikt door bedrijven over de hele wereld om hun online accounts te beveiligen. WebAuthn is een belangrijke stap voorwaarts in de strijd tegen cybercriminaliteit en biedt een veilige en gebruiksvriendelijke manier om gebruikers te verifiëren en hun online accounts te beschermen.
   
   
   
-  \section{Auth aanbieders}%
+  \section{\gls{auth} aanbieders}%
   \label{sec:auth-aanbieders}
   In deze sectie worden enkele van de belangrijkste aanbieders van authenticatiediensten besproken, waaronder Auth0, TrustBuilder en meer. Deze aanbieders bieden een reeks diensten en tools om ontwikkelaars te helpen bij het implementeren van authenticatie en autorisatie in hun applicaties. Ze bieden ook ondersteuning voor verschillende authenticatie protocollen, waaronder OAuth 2.0 en OpenID Connect, en bieden een reeks functies om ontwikkelaars te helpen bij het beheren van gebruikers identiteiten en toegangscontrole.
-  De reden waarom we aanbieders bespreken en vergelijken is om inzicht te krijgen in wat er momenteel wordt aangeboden op de markt, zodat de must haves kunnen worden bepaald voor de ontwikkeling van een eigen authenticatie service of light weight instance (zie later).
+  De reden waarom we aanbieders bespreken en vergelijken is om inzicht te krijgen in wat er momenteel wordt aangeboden op de markt, zodat de must haves kunnen worden bepaald voor de ontwikkeling van een eigen authenticatie service of light weight instance (zie verder).
   
   
   \subsection{Auth0}%
   \label{subsec:auth0}
-  Auth0 is een populair Identity as a Service (IDaaS) platform dat authenticatie- en autorisatiediensten biedt. Het ondersteunt verschillende identity providers, sociale logins en multi-factor authenticatie. Auth0 biedt een reeks functies, waaronder gebruikersbeheer, eenmalige aanmelding en authenticatie zonder wachtwoord. Het biedt ook SDK's en API's voor het integreren van authenticatie in web- en mobiele applicaties. Auth0 wordt veel gebruikt door ontwikkelaars en organisaties om hun applicaties te beveiligen en gebruikers identiteiten te beschermen. Het staat bekend om zijn gebruiksgemak, schaalbaarheid en beveiligingsfuncties.
+  Auth0 is een populair \gls{idaas} platform dat authenticatie- en autorisatiediensten biedt. Het ondersteunt verschillende identity providers, sociale logins en multi-factor authenticatie. Auth0 biedt een reeks functies, waaronder gebruikersbeheer, eenmalige aanmelding en authenticatie zonder wachtwoord. Het biedt ook \gls{sdk} en \gls{api} voor het integreren van authenticatie in web- en mobiele applicaties. Auth0 wordt veel gebruikt door ontwikkelaars en organisaties om hun applicaties te beveiligen en gebruikers identiteiten te beschermen. Het staat bekend om zijn gebruiksgemak, schaalbaarheid en beveiligingsfuncties.
 
   \subsection{TrustBuilder}%
   \label{subsec:trustbuilder}
-  TrustBuilder is een Belgisch bedrijf dat gespecialiseerd is in Identity and Access Management (IAM) oplossingen. Het doel van TrustBuilder is om organisaties te helpen bij het beheren van de toegangscontrole tot hun digitale middelen, zoals applicaties, gegevens en systemen, op een veilige en efficiënte manier. Het biedt oplossingen voor authenticatie, autorisatie en het beheer van identiteiten, waardoor organisaties de beveiliging kunnen versterken en tegelijkertijd een naadloze gebruikerservaring kunnen bieden. TrustBuilder richt zich voornamelijk op bedrijven in verschillende sectoren, waaronder financiële dienstverlening, gezondheidszorg, overheid en retail.
+  TrustBuilder is een Belgisch bedrijf dat gespecialiseerd is in \gls{iam} oplossingen. Het doel van TrustBuilder is om organisaties te helpen bij het beheren van de toegangscontrole tot hun digitale middelen, zoals applicaties, gegevens en systemen, op een veilige en efficiënte manier. Het biedt oplossingen voor authenticatie, autorisatie en het beheer van identiteiten, waardoor organisaties de beveiliging kunnen versterken en tegelijkertijd een naadloze gebruikerservaring kunnen bieden. TrustBuilder richt zich voornamelijk op bedrijven in verschillende sectoren, waaronder financiële dienstverlening, gezondheidszorg, overheid en retail.
   
   
   \subsection{Andere}%
   \label{subsec:andere}
   Naast Auth0 en TrustBuilder zijn er nog andere aanbieders van authenticatiediensten, waaronder:
   \begin{enumerate}[label=\textbf{-}]
-    \item Okta: Okta is een toonaangevende aanbieder van Identity and Access Management (IAM) oplossingen. Het biedt een reeks diensten en tools om organisaties te helpen bij het beheren van gebruikers identiteiten en toegangscontrole. Het ondersteund Single Sign-On (SSO), Multi-Factor Authentication (MFA), adaptieve authenticatie, API-toegangsbeheer, lifesycle beheer van gebruikers en groepen en meer.
+    \item Okta: Okta is een toonaangevende aanbieder van \gls{iam} oplossingen. Het biedt een reeks diensten en tools om organisaties te helpen bij het beheren van gebruikers identiteiten en toegangscontrole. Het ondersteund \gls{sso}, \gls{mfa}, adaptieve authenticatie, \gls{api}-toegangsbeheer, lifesycle beheer van gebruikers en groepen en meer.
     \item Firebase Authentication: Firebase Authentication is een dienst van Google die ontwikkelaars helpt bij het implementeren van authenticatie in hun applicaties. Het biedt ondersteuning voor verschillende authenticatie methoden, waaronder e-mail en wachtwoord, telefoonnummer, Google, Facebook, Twitter en GitHub.
-    \item Amazon Cognito: Amazon Cognito is een dienst van Amazon Web Services (AWS) die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor gebruikersregistratie, inloggen, groepen, rollen en toegangsbeheer.
-    \item Microsoft Azure Active Directory: Azure Active Directory is een dienst van Microsoft die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor Single Sign-On (SSO), Multi-Factor Authentication (MFA), en kan worden geïntegreerd met verschillende toepassingen van Microsoft en derden.
+    \item Amazon Cognito: Amazon Cognito is een dienst van \gls{aws} die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor gebruikersregistratie, inloggen, groepen, rollen en toegangsbeheer.
+    \item Microsoft Azure Active Directory: Azure Active Directory is een dienst van Microsoft die ontwikkelaars helpt bij het implementeren van authenticatie en autorisatie in hun applicaties. Het biedt ondersteuning voor \gls{sso}, \gls{mfa}, en kan worden geïntegreerd met verschillende toepassingen van Microsoft en derden.
     \item Google Identity Platform: Google Identity Platform biedt authenticatie- en autorisatieservices. Het ondersteunt Google Sign-In, OAuth 2.0 en OpenID Connect voor integratie met de identiteitsservices van Google.
   \end{enumerate}
 
@@ -361,7 +360,7 @@ De autorisatie server verleent autorisatie aan de clienttoepassing en leidt de g
 
 \section{Light weight OAuth 2.0 Docker image}%
 \label{sec:light-weight-oauth-2.0-docker-image}
-Uit vorige onderzoeken en vaststellingen kan men concluderen dat auth al veel verder is geëvolueerd dan men had kunnen verwachten. Er zijn veel aanbieders die een breed scala aan diensten aanbieden, van authenticatie tot autorisatie en alles daartussenin. Het is duidelijk dat het implementeren van een eigen auth-service een enorme taak is en dat het waarschijnlijk niet de moeite waard is, maar dit zou wel een enorme leerervaring zijn.
+Uit vorige onderzoeken en vaststellingen kan men concluderen dat \gls{auth} al veel verder is geëvolueerd dan men had kunnen verwachten. Er zijn veel aanbieders die een breed scala aan diensten aanbieden, van authenticatie tot autorisatie en alles daartussenin. Het is duidelijk dat het implementeren van een eigen \gls{auth}-service een enorme taak is en dat het waarschijnlijk niet de moeite waard is, maar dit zou wel een enorme leerervaring zijn.
 \\
 \\
 Het volgende dat onderzocht werd was of er light weight instances bestaan, zoals bijvoorbeeld een Docker Image, die OAuth 2.0 implementeren. Dit zou een goede oplossing zijn voor een applicatie die geen behoefte heeft aan de uitgebreide diensten die Auth0 en TrustBuilder aanbieden. Het zou ook een goede oplossing zijn voor een ontwikkelaar die wil leren hoe OAuth 2.0 werkt en hoe het kan worden geïmplementeerd in hun eigen applicatie, zonder af te hangen van een derde partij.
