@@ -12,7 +12,6 @@
 %   explicit approval!), remove the option "dutch," or replace with "english".
 
 \usepackage{listings}
-\usepackage{lipsum} % For blind text, can be removed after adding actual content
 \usepackage{glossaries}
 
 %% Pictures to include in the text can be put in the graphics/ folder
@@ -71,7 +70,7 @@
 %% The bibliography (style and settings are  found in hogentthesis.cls)
 \addbibresource{bachproef.bib}            %% Bibliography file
 \addbibresource{../voorstel/voorstel.bib} %% Bibliography research proposal
-% \defbibheading{bibempty}{}
+\defbibheading{bibempty}{}
 
 %% Prevent empty pages for right-handed chapter starts in twoside mode
 \renewcommand{\cleardoublepage}{\clearpage}
@@ -142,7 +141,7 @@
 % If you included tables and/or source code listings, uncomment the appropriate
 % lines.
 \listoftables
-% \listoflistings
+\listoflistings
 
 % Als je een lijst van afkortingen of termen wil toevoegen, dan hoort die
 % hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
@@ -199,6 +198,7 @@ Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat 
 \backmatter{}
 
 \setlength\bibitemsep{2pt} %% Add Some space between the bibliograpy entries
-\printbibliography[heading=bibintoc]
+% \printbibliography[heading=bibintoc]
+\input{referenties}
 
 \end{document}
